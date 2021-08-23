@@ -1,0 +1,3 @@
+web: npm --prefix web/ run dev
+api: pipenv run ./manage.py runserver
+svc: docker-compose up

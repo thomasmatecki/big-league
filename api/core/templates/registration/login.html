@@ -1,0 +1,46 @@
+{% extends "core/base.html" %} {% load i18n static %}
+<!-- -->
+{% block body %}
+<body>
+<main>
+  <h2>Login</h2>
+  <form action="/auth/login/" method="POST">
+    {% csrf_token %}
+    <label for="username">Username</label>
+    <div>
+    <input 
+      type="text" 
+      placeholder="Enter Username" 
+      name="username" 
+      required />
+    </div>
+    <br />
+    <label for="password">Password</label>
+    <div>
+      <input
+        type="password"
+        placeholder="Enter Password"
+        name="password"
+        required />
+    </div
+    <br />
+  <input type="hidden" name="next" value="{{ next }}" />
+    <button type="submit">Login</button>
+  </form>
+  {% if form.errors and not form.non_field_errors %}
+  <p>
+    {% if form.errors.items|length == 1 %} 
+      {% translate "Please correct the error below." %} 
+    {% else %} 
+      {% translate "Please correct the errors below." %} 
+    {% endif %}
+
+  </p>
+  {% endif %} {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+      <p>{{ error }}</p>
+    {% endfor %} 
+  {% endif %}
+</main>
+</body>
+{% endblock %}
