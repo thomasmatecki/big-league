@@ -3,7 +3,6 @@
 {% block body %}
 <body>
 <main>
-  <h2>Login</h2>
   <form action="/auth/login/" method="POST">
     {% csrf_token %}
     <label for="username">Username</label>

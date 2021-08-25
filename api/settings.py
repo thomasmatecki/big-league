@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
     "oauth2_provider",
     "corsheaders",
     "api.core",
@@ -55,7 +56,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = "api.urls"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-X_FRAME_OPTIONS = "ALLOW"
 
 TEMPLATES = [
     {
@@ -114,9 +114,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = "/static/"
+
 LOGIN_URL = "/auth/login"
 LOGOUT_REDIRECT_URL = "http://localhost:3000/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 100,
+}
