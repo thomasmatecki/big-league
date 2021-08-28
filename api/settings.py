@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "oauth2_provider",
     "corsheaders",
     "api.core",
+    "api.leagues",
 ]
 
 MIDDLEWARE = (
@@ -123,6 +124,7 @@ LOGOUT_REDIRECT_URL = "http://localhost:3000/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "DEFAULT_PAGINATION_CLASS": "api.core.rest.DefaultPagination",
+    "DEFAULT_SCHEMA_CLASS": "api.core.rest.DefaultSchema",
     "PAGE_SIZE": 100,
 }

@@ -9,11 +9,14 @@ dj-database-url = "*"
 psycopg2 = "*"
 django-rest-framework = "*"
 uvicorn = "*"
+pyyaml = "*"
+uritemplate = "*"
 
 [dev-packages]
 black = "*"
 pylint = "*"
 mypy = "*"
+flake8 = "*"
 
 [requires]
 python_version = "3.9"
