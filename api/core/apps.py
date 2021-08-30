@@ -2,5 +2,8 @@ from django.apps import AppConfig
 
 
 class CoreConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
+    default_auto_field = "django.db.models.BigAutoField"
     name = "api.core"
+
+    def ready(self):
+        import api.core.signals  # pylint: disable=unused-import,import-outside-toplevel

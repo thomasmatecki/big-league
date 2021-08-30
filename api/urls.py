@@ -14,29 +14,29 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from rest_framework.schemas import get_schema_view
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
+from rest_framework.schemas import get_schema_view
 
-
-from api import  router
+from api import router
 from api.core.views import UserViewSet
+from api.leagues.views import LeagueViewSet, PlayerViewSet, SeasonViewSet, TeamViewSet
 
-router.register('users', UserViewSet)
+router.register("users", UserViewSet)
+router.register("players", PlayerViewSet)
+router.register("teams", TeamViewSet)
+router.register("seasons", SeasonViewSet)
+router.register("leagues", LeagueViewSet)
 
 
-schema_view = get_schema_view(
-    title='API',
-    url='http://localhost:8000/'
-)
-
+schema_view = get_schema_view(title="API", url="")
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("django.contrib.auth.urls")),
-    path('rest/', include((router.urls))),
-    path('schema/', schema_view),
+    path("rest/", include((router.urls))),
+    path("schema/", schema_view),
     path("o/", include("oauth2_provider.urls", namespace="oauth2_provider")),
 ]

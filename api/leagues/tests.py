@@ -1,3 +1,45 @@
-from django.test import TestCase
+import pytest
+from api.leagues.serializers import PlayerSerializer
+from rest_framework import exceptions
 
-# Create your tests here.
+
+def test_email_required():
+    serializer = PlayerSerializer(data={"first_name": "Thomas", "last_name": "Thomas"})
+    with pytest.raises(exceptions.ValidationError):
+        serializer.is_valid(raise_exception=True)
+
+
+def test_can_set_email():
+    serializer = PlayerSerializer(
+        data={
+            "first_name": "Thomas",
+            "last_name": "Thomas",
+            "email": "thomas@email.com",
+        }
+    )
+    assert serializer.is_valid(raise_exception=True)
+
+
+def test_cannot_update_email(player):
+    serializer = PlayerSerializer(
+        instance=player,
+        data={
+            "first_name": "Thomas",
+            "last_name": "Thomas",
+            "email": "something@email.com",
+        },
+        partial=True,
+    )
+    with pytest.raises(exceptions.ValidationError):
+        serializer.is_valid(raise_exception=True)
+
+
+def test_valid():
+    serializer = PlayerSerializer(
+        data={
+            "first_name": "Thomas",
+            "last_name": "Thomas",
+            "email": "thomas@matecki.email",
+        }
+    )
+    assert serializer.is_valid(raise_exception=True)

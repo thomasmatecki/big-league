@@ -32,8 +32,7 @@ class DefaultPagination(PageNumberPagination):
 class DefaultSchema(AutoSchema):
     def get_responses(self, path, method):
         """
-        Augment the paginated response with the scheme and hostname from the
-        request. Also replace the path.
+        Update the property example's with the path, host and scheme of the request.
         """
         responses = super().get_responses(path, method)
         if is_list_view(path, method, self.view):

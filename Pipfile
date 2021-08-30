@@ -11,12 +11,18 @@ django-rest-framework = "*"
 uvicorn = "*"
 pyyaml = "*"
 uritemplate = "*"
+ipython = "*"
 
 [dev-packages]
 black = "*"
 pylint = "*"
 mypy = "*"
 flake8 = "*"
+isort = "*"
+pytest = "*"
+pytest-django = "*"
+pytest-factoryboy = "*"
+pylint-django = "*"
 
 [requires]
 python_version = "3.9"
