@@ -58,7 +58,7 @@ class HyperLinkedPlayerSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class TeamSerializer(serializers.HyperlinkedModelSerializer):
-    players = HyperLinkedPlayerSerializer(many=True, read_only=True)
+    players = HyperLinkedPlayerSerializer(required=False, many=True, read_only=True)
     captain = HyperLinkedPlayerSerializer()
     season = HyperlinkedSeasonSerializer()
     league = LeagueSerializer(source="season.league")
@@ -93,7 +93,7 @@ class PlayerSerializer(HyperLinkedPlayerSerializer):
     )
     first_name = serializers.CharField(write_only=True, source="user.first_name")
     last_name = serializers.CharField(write_only=True, source="user.last_name")
-    teams = HyperLinkedTeamSerializer(required=False, many=True)
+    teams = HyperLinkedTeamSerializer(required=False, read_only=True, many=True)
     team_ids = serializers.PrimaryKeyRelatedField(
         many=True,
         write_only=True,

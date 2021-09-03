@@ -20,6 +20,7 @@ from django.urls.conf import include
 from rest_framework.schemas import get_schema_view
 
 from api import router
+from api.core.rest import DefaultSchemaGenerator
 from api.core.views import UserViewSet
 from api.leagues.views import LeagueViewSet, PlayerViewSet, SeasonViewSet, TeamViewSet
 
@@ -30,7 +31,11 @@ router.register("seasons", SeasonViewSet)
 router.register("leagues", LeagueViewSet)
 
 
-schema_view = get_schema_view(title="API", url="")
+schema_view = get_schema_view(
+    title="API", 
+    url="",
+    generator_class=DefaultSchemaGenerator
+)
 
 
 urlpatterns = [

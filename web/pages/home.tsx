@@ -1,8 +1,8 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+
+import { Box } from 'grommet';
 import { GetServerSidePropsContext } from "next";
 import { withSession, WithSessionRequest } from "../lib/session";
-interface HomeProps {}
+interface HomeProps { }
 
 export const getServerSideProps = withSession(
   async ({ req, res }: GetServerSidePropsContext & WithSessionRequest) => {
@@ -17,19 +17,33 @@ export const getServerSideProps = withSession(
       };
     }
 
-    const props: HomeProps = {};
+    const props: HomeProps = { };
     return { props: props };
+
   }
+);
+
+
+const AppBar = (props: any) => (
+  <Box
+    tag='header'
+    direction='row'
+    align='center'
+    justify='between'
+    background='light-2'
+    pad={{ vertical: 'small', horizontal: 'medium' }}
+    elevation='medium'
+    {...props}
+  />
 );
 
 const HomePage = () => {
   return (
-    <div>
-    <div>
-      <h1>Welcome Home</h1>
-    </div>
-    <a href="api/logout">Logout</a>
-    </div>
+    <AppBar>
+      Welcome Home
+      <Box direction='row'>
+      </Box>
+    </AppBar>
   );
 };
 
