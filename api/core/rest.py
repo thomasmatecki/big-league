@@ -35,10 +35,22 @@ class DefaultSchemaGenerator(SchemaGenerator):
     def _get_error_schemas(self):
         return {"FieldError": {"type": "array", "items": {"type": "string"}}}
 
+    def _get_security_schemes(self):
+        """
+        OpenAPI uses the term security scheme for authentication and authorization schemes.
+
+        see: https://swagger.io/docs/specification/authentication/
+
+        # TODO: This uses OAuth 2.0
+        """
+        return {"bearerAuth": {"type": "http", "scheme": "bearer"}}
+
     def get_schema(self, request=None, public=False):
         schema = super().get_schema(request, public)
         error_schemas = self._get_error_schemas()
         schema["components"]["schemas"].update(error_schemas)
+        schema["components"].update({"securitySchemes": self._get_security_schemes()})
+        schema["security"] = [{"bearerAuth": []}]
         return schema
 
 

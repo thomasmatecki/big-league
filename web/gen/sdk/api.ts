@@ -346,6 +346,31 @@ export interface PlayerTeams {
 /**
  * 
  * @export
+ * @interface Profile
+ */
+export interface Profile {
+    /**
+     * 
+     * @type {string}
+     * @memberof Profile
+     */
+    display_name: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Profile
+     */
+    first_name: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Profile
+     */
+    last_name: string;
+}
+/**
+ * 
+ * @export
  * @interface Season
  */
 export interface Season {
@@ -428,6 +453,50 @@ export interface SeasonError {
      * @memberof SeasonError
      */
     teams?: Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface Session
+ */
+export interface Session {
+    /**
+     * 
+     * @type {string}
+     * @memberof Session
+     */
+    username: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Session
+     */
+    password: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Session
+     */
+    expiry_date?: string;
+}
+/**
+ * 
+ * @export
+ * @interface SessionError
+ */
+export interface SessionError {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof SessionError
+     */
+    username?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof SessionError
+     */
+    password?: Array<string>;
 }
 /**
  * 
@@ -597,6 +666,196 @@ export interface User {
 }
 
 /**
+ * ProfileApi - axios parameter creator
+ * @export
+ */
+export const ProfileApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveProfile: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/profile/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Profile} [profile] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateProfile: async (profile?: Profile, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/profile/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(profile, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ProfileApi - functional programming interface
+ * @export
+ */
+export const ProfileApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ProfileApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async retrieveProfile(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Profile>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrieveProfile(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Profile} [profile] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateProfile(profile?: Profile, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Profile>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateProfile(profile, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * ProfileApi - factory interface
+ * @export
+ */
+export const ProfileApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ProfileApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveProfile(options?: any): AxiosPromise<Profile> {
+            return localVarFp.retrieveProfile(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Profile} [profile] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateProfile(profile?: Profile, options?: any): AxiosPromise<Profile> {
+            return localVarFp.updateProfile(profile, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ProfileApi - interface
+ * @export
+ * @interface ProfileApi
+ */
+export interface ProfileApiInterface {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProfileApiInterface
+     */
+    retrieveProfile(options?: any): AxiosPromise<Profile>;
+
+    /**
+     * 
+     * @param {Profile} [profile] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProfileApiInterface
+     */
+    updateProfile(profile?: Profile, options?: any): AxiosPromise<Profile>;
+
+}
+
+/**
+ * ProfileApi - object-oriented interface
+ * @export
+ * @class ProfileApi
+ * @extends {BaseAPI}
+ */
+export class ProfileApi extends BaseAPI implements ProfileApiInterface {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProfileApi
+     */
+    public retrieveProfile(options?: any) {
+        return ProfileApiFp(this.configuration).retrieveProfile(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Profile} [profile] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProfileApi
+     */
+    public updateProfile(profile?: Profile, options?: any) {
+        return ProfileApiFp(this.configuration).updateProfile(profile, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
  * RestApi - axios parameter creator
  * @export
  */
@@ -620,6 +879,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -654,6 +917,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -687,6 +954,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -695,6 +966,43 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(season, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Session} [session] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSession: async (session?: Session, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/sessions/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(session, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -719,6 +1027,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -756,6 +1068,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -788,6 +1104,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -822,6 +1142,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -855,6 +1179,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -884,6 +1212,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             if (page !== undefined) {
                 localVarQueryParameter['page'] = page;
@@ -919,6 +1251,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (page !== undefined) {
                 localVarQueryParameter['page'] = page;
             }
@@ -952,6 +1288,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             if (page !== undefined) {
                 localVarQueryParameter['page'] = page;
@@ -987,6 +1327,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (page !== undefined) {
                 localVarQueryParameter['page'] = page;
             }
@@ -1020,6 +1364,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             if (page !== undefined) {
                 localVarQueryParameter['page'] = page;
@@ -1059,6 +1407,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1095,6 +1447,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -1133,6 +1489,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1170,6 +1530,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1206,6 +1570,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -1238,6 +1606,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -1272,6 +1644,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -1304,6 +1680,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -1338,6 +1718,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -1371,6 +1755,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -1409,6 +1797,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1446,6 +1838,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1482,6 +1878,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -1535,6 +1935,16 @@ export const RestApiFp = function(configuration?: Configuration) {
          */
         async createSeason(season?: Season, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Season>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createSeason(season, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Session} [session] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createSession(session?: Session, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Session>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createSession(session, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1814,6 +2224,15 @@ export const RestApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @param {Session} [session] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSession(session?: Session, options?: any): AxiosPromise<Session> {
+            return localVarFp.createSession(session, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {Team} [team] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2062,6 +2481,15 @@ export interface RestApiInterface {
      * @memberof RestApiInterface
      */
     createSeason(season?: Season, options?: any): AxiosPromise<Season>;
+
+    /**
+     * 
+     * @param {Session} [session] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    createSession(session?: Session, options?: any): AxiosPromise<Session>;
 
     /**
      * 
@@ -2318,6 +2746,17 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      */
     public createSeason(season?: Season, options?: any) {
         return RestApiFp(this.configuration).createSeason(season, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Session} [session] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public createSession(session?: Session, options?: any) {
+        return RestApiFp(this.configuration).createSession(session, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

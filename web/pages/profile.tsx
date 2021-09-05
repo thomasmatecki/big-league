@@ -1,16 +1,16 @@
-import { Box, Anchor, Header, Button, Nav, Avatar } from "../components/lib";
 import { GetServerSidePropsContext } from "next";
 import { WithAPISession, HasAPISessionRequest } from "../lib/session";
-import { Profile } from "../gen/sdk";
 import UserLayout from "../components/UserLayout";
+import { Profile } from "../gen/sdk";
 
-interface HomeProps {
+interface ProfileProps {
   profile: Profile;
 }
 
 export const getServerSideProps = WithAPISession(
   async ({ req }: HasAPISessionRequest<GetServerSidePropsContext>) => {
     const { data: profile } = await req.profileApi.retrieveProfile();
+    debugger;
 
     return {
       props: {
@@ -20,10 +20,12 @@ export const getServerSideProps = WithAPISession(
   }
 );
 
-const HomePage = (props: HomeProps) => (
-  <UserLayout>
-    <h3>Home</h3>
-  </UserLayout>
-);
+const ProfilePage = (props: ProfileProps) => {
+  return (
+    <UserLayout>
+      <h3>Profile</h3>
+    </UserLayout>
+  );
+};
 
-export default HomePage;
+export default ProfilePage;

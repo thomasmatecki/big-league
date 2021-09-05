@@ -1,5 +1,5 @@
 from api.leagues import models
-from django.contrib.auth import get_user_model, hashers
+from django.contrib.auth import get_user_model
 from rest_framework import exceptions, serializers, validators
 
 
@@ -111,7 +111,7 @@ class PlayerSerializer(HyperLinkedPlayerSerializer):
 
         User = get_user_model()
 
-        # Incase a user exists that is not yet associated with a player.
+        # In case a user exists that is not yet associated with a player.
         user = User.objects.filter(email=["email"]).first() or User.objects.create_user(
             username=user_data["email"], **user_data
         )
@@ -133,3 +133,9 @@ class PlayerSerializer(HyperLinkedPlayerSerializer):
             "teams",
             "team_ids",
         ]
+
+
+class ProfileSerializer(serializers.Serializer):
+    display_name = serializers.CharField(source="player.display_name")
+    first_name = serializers.CharField(source="user.first_name")
+    last_name = serializers.CharField(source="user.last_name")

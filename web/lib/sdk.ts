@@ -1,5 +1,7 @@
-import { Configuration, RestApi } from "../gen/sdk";
 import config from "../config";
+import * as _sdk from "../gen/sdk";
 
-const restConfig = new Configuration({ basePath: config.api_host });
-export default new RestApi(restConfig);
+const apiConfig = new _sdk.Configuration({ basePath: config.api_host });
+
+export const restApi = new _sdk.RestApi(apiConfig);
+export const profileApi = new _sdk.ProfileApi(apiConfig);

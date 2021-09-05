@@ -1,3 +1,4 @@
 web: npm --prefix web/ run dev
 api: pipenv run ./manage.py runserver
 svc: docker-compose up
+schema: pipenv run ./manage.py liveschema --file web/openapi-schema.yaml --generator_class=api.core.rest.DefaultSchemaGenerator

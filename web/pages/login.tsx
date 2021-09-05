@@ -1,10 +1,12 @@
+import { Box } from "../components/lib";
+import LoginForm from "../components/LoginForm";
 
 function LoginPage() {
   return (
-    <div>
-      <h1>hello Public</h1>
-      <a href="/api/login">Login</a>
-    </div>
+    <Box fill align="center" justify="center">
+      <LoginForm></LoginForm>
+    </Box>
   );
 }
+
 export default LoginPage;

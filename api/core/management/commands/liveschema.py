@@ -1,16 +1,8 @@
-from datetime import date
-from random import randint
-
-from api.leagues import factories, models
-from django.core.management.base import BaseCommand, CommandError
 from django.utils import autoreload
+from rest_framework.management.commands import generateschema
 
 
-def foo():
-    print("hi")
-
-class Command(BaseCommand):
-
+class Command(generateschema.Command):
     def handle(self, *args, **options):
-        pass
-        # TODO: autoreload.run_with_reloader(foo, args=None, kwargs=None)
+        # self.stdout("This command auto reloads. No need to restart...")
+        autoreload.run_with_reloader(super().handle, *args, **options)

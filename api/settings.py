@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
+
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,7 +43,9 @@ INSTALLED_APPS = [
     "api.leagues",
 ]
 
+
 MIDDLEWARE = (
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -50,10 +53,11 @@ MIDDLEWARE = (
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
 )
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
 
 ROOT_URLCONF = "api.urls"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
@@ -116,15 +120,24 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-LOGIN_URL = "/auth/login"
+LOGIN_URL = "http://localhost:3000/login"
+# LOGIN_URL = "http://localhost:8000/auth/login"
 LOGOUT_REDIRECT_URL = "http://localhost:3000/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "api.core.rest.DefaultPagination",
     "DEFAULT_SCHEMA_CLASS": "api.core.rest.DefaultSchema",
     "PAGE_SIZE": 100,
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "oauth2_provider.contrib.rest_framework.OAuth2Authentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
 }

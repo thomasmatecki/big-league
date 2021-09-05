@@ -14,6 +14,7 @@ def test_can_set_email():
         data={
             "first_name": "Thomas",
             "last_name": "Thomas",
+            "password": "wab2bb2bb",
             "email": "thomas@email.com",
         }
     )
@@ -39,6 +40,7 @@ def test_valid():
         data={
             "first_name": "Thomas",
             "last_name": "Thomas",
+            "password": "wab2bb2bb",
             "email": "thomas@matecki.email",
         }
     )

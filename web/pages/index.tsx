@@ -1,15 +1,15 @@
 import Router from "next/router";
+import { Anchor, Box, Spinner } from "../components/lib";
 import { useEffect } from "react";
 import { GetServerSidePropsContext } from "next";
-
-import { withSession, WithSessionRequest } from "../lib/session";
-
+import Link from "next/link";
+import { withSession, HasSessionRequest } from "../lib/session";
 interface PageProps {
   loggedIn: boolean;
 }
 
 export const getServerSideProps = withSession(
-  async ({ req }: GetServerSidePropsContext & WithSessionRequest) => {
+  async ({ req }: GetServerSidePropsContext) => {
     const auth = req.session.get("auth");
 
     const props: PageProps = {
@@ -21,17 +21,32 @@ export const getServerSideProps = withSession(
 );
 
 function IndexPage({ loggedIn }: PageProps) {
-  useEffect(() => {
-    if (loggedIn) {
+  if (loggedIn) {
+    useEffect(() => {
       Router.push("/home");
-    }
-  });
-
-  return (
-    <div>
-      <h1>hello Public</h1>
-      <a href="/api/login">Login</a>
-    </div>
-  );
+    });
+    return (
+      <Box
+        animation="fadeOut"
+        fill="vertical"
+        overflow="auto"
+        align="center"
+        flex="grow"
+        justify="center"
+        direction="column"
+      >
+        <Spinner size="xlarge"></Spinner>
+      </Box>
+    );
+  } else {
+    return (
+      <div>
+        <h1>hello Public</h1>
+        <Link href="/login">
+          <Anchor>Login</Anchor>
+        </Link>
+      </div>
+    );
+  }
 }
 export default IndexPage;

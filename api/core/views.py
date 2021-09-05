@@ -1,8 +1,19 @@
-from api.core.serializers import UserSerializer
+from api.core import serializers
 from django.contrib.auth.models import User
-from rest_framework.viewsets import ReadOnlyModelViewSet
+from django.contrib.sessions.models import Session
+from rest_framework import mixins, viewsets
 
 
-class UserViewSet(ReadOnlyModelViewSet):
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = serializers.UserSerializer
+
+
+class SessionViewSet(
+    mixins.CreateModelMixin,
+    viewsets.GenericViewSet,
+):
+    permission_classes = []
+    authentication_classes = []
+    queryset = Session.objects.all()
+    serializer_class = serializers.SessionSerializer

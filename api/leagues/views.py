@@ -1,7 +1,9 @@
-from api.leagues import models, serializers
-from rest_framework import viewsets
+from dataclasses import dataclass
+from typing import Union
 
-# Create your views here.
+from api.leagues import models, serializers
+from django.contrib.auth.models import AbstractBaseUser, AnonymousUser
+from rest_framework import generics, viewsets
 
 
 class PlayerViewSet(viewsets.ModelViewSet):
@@ -22,3 +24,17 @@ class SeasonViewSet(viewsets.ModelViewSet):
 class LeagueViewSet(viewsets.ModelViewSet):
     queryset = models.League.objects.all()
     serializer_class = serializers.LeagueSerializer
+
+
+@dataclass
+class Profile:
+    user: Union[AbstractBaseUser, AnonymousUser]
+    player: models.Player
+
+
+class ProfileViewSet(generics.RetrieveUpdateAPIView, viewsets.GenericViewSet):
+    def get_object(self):
+        player = models.Player.objects.get(user=self.request.user)
+        return Profile(user=self.request.user, player=player)
+
+    serializer_class = serializers.ProfileSerializer

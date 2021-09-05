@@ -713,6 +713,75 @@ paths:
           description: ''
       tags:
       - rest
+  /profile/:
+    get:
+      operationId: retrieveProfile
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: ''
+      tags:
+      - profile
+    put:
+      operationId: updateProfile
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Profile'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Profile'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Profile'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: ''
+      tags:
+      - profile
+  /rest/sessions/:
+    post:
+      operationId: createSession
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Session'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Session'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Session'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionError'
+          description: ''
+      tags:
+      - rest
 components:
   schemas:
     User:
@@ -941,6 +1010,19 @@ components:
           maxLength: 100
       required:
       - name
+    Profile:
+      type: object
+      properties:
+        display_name:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+      required:
+      - display_name
+      - first_name
+      - last_name
     PlayerError:
       type: object
       properties:
@@ -985,7 +1067,36 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/FieldError'
+    Session:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        expiry_date:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - username
+      - password
+    SessionError:
+      type: object
+      properties:
+        username:
+          $ref: '#/components/schemas/FieldError'
+        password:
+          $ref: '#/components/schemas/FieldError'
     FieldError:
       type: array
       items:
         type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+security:
+- bearerAuth: []

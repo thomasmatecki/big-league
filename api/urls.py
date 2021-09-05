@@ -21,20 +21,26 @@ from rest_framework.schemas import get_schema_view
 
 from api import router
 from api.core.rest import DefaultSchemaGenerator
-from api.core.views import UserViewSet
-from api.leagues.views import LeagueViewSet, PlayerViewSet, SeasonViewSet, TeamViewSet
+from api.core.views import SessionViewSet, UserViewSet
+from api.leagues.views import (
+    LeagueViewSet,
+    PlayerViewSet,
+    ProfileViewSet,
+    SeasonViewSet,
+    TeamViewSet,
+)
 
 router.register("users", UserViewSet)
 router.register("players", PlayerViewSet)
 router.register("teams", TeamViewSet)
 router.register("seasons", SeasonViewSet)
 router.register("leagues", LeagueViewSet)
+router.register("sessions", SessionViewSet)
+# router.register("profile", ProfileViewSet, basename="profile")
 
 
 schema_view = get_schema_view(
-    title="API", 
-    url="",
-    generator_class=DefaultSchemaGenerator
+    title="API", url="", generator_class=DefaultSchemaGenerator
 )
 
 
@@ -42,6 +48,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("django.contrib.auth.urls")),
     path("rest/", include((router.urls))),
+    path("profile/", ProfileViewSet.as_view({"get": "retrieve", "put": "update"})),
     path("schema/", schema_view),
     path("o/", include("oauth2_provider.urls", namespace="oauth2_provider")),
 ]

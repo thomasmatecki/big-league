@@ -1,7 +1,15 @@
-import { Box, Form, FormField, TextInput, Text, Button } from "grommet";
+import {
+  Box,
+  Form,
+  FormField,
+  TextInput,
+  Text,
+  Button,
+} from "../components/lib";
 import { useState } from "react";
-import api from "../lib/sdk";
+import { restApi } from "../lib/sdk";
 import { head, map } from "ramda";
+import router from "next/router";
 
 const RegistrationPage = () => {
   const [value, setValue] = useState({
@@ -44,9 +52,11 @@ const RegistrationPage = () => {
           errors={errors}
           onChange={(nextValue) => setValue(nextValue)}
           onSubmit={({ value }) => {
-            api
+            restApi
               .createPlayer(value)
-              .then((resp) => console.log(resp))
+              .then((_ok) => {
+                router.push("/home");
+              })
               .catch(({ response }) => {
                 const singleErrors = map(head, response.data);
                 setErrors(singleErrors);
