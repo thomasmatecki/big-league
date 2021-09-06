@@ -1,6 +1,7 @@
-import { Box, Anchor, Header, Nav, Avatar } from "grommet";
-import Link from "next/link";
+import { Home, Logout, Plan, User } from "grommet-icons";
 import Head from "next/head";
+import Link from "next/link";
+import { Anchor, Avatar, Box, Header, Nav } from "../components/lib";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -12,21 +13,18 @@ const AppBar = () => (
       <Avatar
         src="//s.gravatar.com/avatar/b7fb138d53ba0f573212ccce38a7c43b?s=80"
         round="small"
-        align="center"
-        flex={false}
-        justify="center"
       />
       <Link href="/home">
-        <Anchor>Home</Anchor>
+        <Anchor label="Home" icon={<Home></Home>} />
       </Link>
       <Link href="/profile">
-        <Anchor>Profile</Anchor>
+        <Anchor label="Profile" icon={<User></User>} />
       </Link>
       <Link href="/schedule">
-        <Anchor>Schedule</Anchor>
+        <Anchor label="Schedule" icon={<Plan></Plan>} />
       </Link>
     </Nav>
-    <Anchor href="/api/logout" label="Logout"></Anchor>
+    <Anchor href="/api/logout" label="Logout" icon={<Logout></Logout>} />
   </Header>
 );
 

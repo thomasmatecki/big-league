@@ -1,7 +1,6 @@
-import config from "../config";
-
-import querystring from "querystring";
 import axios from "axios";
+import querystring from "querystring";
+import config from "../config";
 
 interface Auth {
   access_token: string;

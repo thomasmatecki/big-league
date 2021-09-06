@@ -6,12 +6,11 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-
 * {
   box-sizing: border-box;
 }
 
 iframe {
-    display: block;
-    border-style:none;
+  display: block;
+  border-style: none;
 }

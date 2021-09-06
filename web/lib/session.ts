@@ -1,9 +1,5 @@
-import { Handler } from "next-iron-session";
+import { Session, withIronSession } from "next-iron-session";
 import config from "../config";
-
-import type { NextApiRequest, NextApiResponse } from "next";
-import { withIronSession, Session } from "next-iron-session";
-
 import { Configuration, ProfileApi, RestApi } from "../gen/sdk";
 
 // TODO:  ALL the types here is wrong.
@@ -43,7 +39,6 @@ export function WithAPISession<T>(handler: any) {
     const handlerType = args[0] && args[1] ? "api" : "ssr";
     const req = handlerType === "api" ? args[0] : args[0].req;
     const res = handlerType === "api" ? args[1] : args[0].res;
-    debugger;
 
     const auth = await req.session.get("auth");
 

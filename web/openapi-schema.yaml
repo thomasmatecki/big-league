@@ -1,21 +1,21 @@
 openapi: 3.0.2
 info:
-  title: ''
-  version: ''
+  title: ""
+  version: ""
 paths:
   /rest/users/:
     get:
       operationId: listUsers
-      description: ''
+      description: ""
       parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -37,43 +37,43 @@ paths:
                   results:
                     type: array
                     items:
-                      $ref: '#/components/schemas/User'
-          description: ''
+                      $ref: "#/components/schemas/User"
+          description: ""
       tags:
-      - rest
+        - rest
   /rest/users/{id}/:
     get:
       operationId: retrieveUser
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this user.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this user.
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-          description: ''
+                $ref: "#/components/schemas/User"
+          description: ""
       tags:
-      - rest
+        - rest
   /rest/players/:
     get:
       operationId: listPlayers
-      description: ''
+      description: ""
       parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -95,148 +95,148 @@ paths:
                   results:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Player'
-          description: ''
+                      $ref: "#/components/schemas/Player"
+          description: ""
       tags:
-      - rest
+        - rest
     post:
       operationId: createPlayer
-      description: ''
+      description: ""
       parameters: []
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Player'
+              $ref: "#/components/schemas/Player"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Player'
+              $ref: "#/components/schemas/Player"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Player'
+              $ref: "#/components/schemas/Player"
       responses:
-        '201':
+        "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Player'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/Player"
+          description: ""
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PlayerError'
-          description: ''
+                $ref: "#/components/schemas/PlayerError"
+          description: ""
       tags:
-      - rest
+        - rest
   /rest/players/{id}/:
     get:
       operationId: retrievePlayer
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this player.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this player.
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Player'
-          description: ''
+                $ref: "#/components/schemas/Player"
+          description: ""
       tags:
-      - rest
+        - rest
     put:
       operationId: updatePlayer
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this player.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this player.
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Player'
+              $ref: "#/components/schemas/Player"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Player'
+              $ref: "#/components/schemas/Player"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Player'
+              $ref: "#/components/schemas/Player"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Player'
-          description: ''
+                $ref: "#/components/schemas/Player"
+          description: ""
       tags:
-      - rest
+        - rest
     patch:
       operationId: partialUpdatePlayer
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this player.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this player.
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Player'
+              $ref: "#/components/schemas/Player"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Player'
+              $ref: "#/components/schemas/Player"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Player'
+              $ref: "#/components/schemas/Player"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Player'
-          description: ''
+                $ref: "#/components/schemas/Player"
+          description: ""
       tags:
-      - rest
+        - rest
     delete:
       operationId: destroyPlayer
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this player.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this player.
+          schema:
+            type: string
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
-      - rest
+        - rest
   /rest/teams/:
     get:
       operationId: listTeams
-      description: ''
+      description: ""
       parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -258,148 +258,148 @@ paths:
                   results:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Team'
-          description: ''
+                      $ref: "#/components/schemas/Team"
+          description: ""
       tags:
-      - rest
+        - rest
     post:
       operationId: createTeam
-      description: ''
+      description: ""
       parameters: []
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Team'
+              $ref: "#/components/schemas/Team"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Team'
+              $ref: "#/components/schemas/Team"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Team'
+              $ref: "#/components/schemas/Team"
       responses:
-        '201':
+        "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Team'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/Team"
+          description: ""
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TeamError'
-          description: ''
+                $ref: "#/components/schemas/TeamError"
+          description: ""
       tags:
-      - rest
+        - rest
   /rest/teams/{id}/:
     get:
       operationId: retrieveTeam
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this team.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this team.
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Team'
-          description: ''
+                $ref: "#/components/schemas/Team"
+          description: ""
       tags:
-      - rest
+        - rest
     put:
       operationId: updateTeam
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this team.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this team.
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Team'
+              $ref: "#/components/schemas/Team"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Team'
+              $ref: "#/components/schemas/Team"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Team'
+              $ref: "#/components/schemas/Team"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Team'
-          description: ''
+                $ref: "#/components/schemas/Team"
+          description: ""
       tags:
-      - rest
+        - rest
     patch:
       operationId: partialUpdateTeam
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this team.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this team.
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Team'
+              $ref: "#/components/schemas/Team"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Team'
+              $ref: "#/components/schemas/Team"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Team'
+              $ref: "#/components/schemas/Team"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Team'
-          description: ''
+                $ref: "#/components/schemas/Team"
+          description: ""
       tags:
-      - rest
+        - rest
     delete:
       operationId: destroyTeam
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this team.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this team.
+          schema:
+            type: string
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
-      - rest
+        - rest
   /rest/seasons/:
     get:
       operationId: listSeasons
-      description: ''
+      description: ""
       parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -421,148 +421,148 @@ paths:
                   results:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Season'
-          description: ''
+                      $ref: "#/components/schemas/Season"
+          description: ""
       tags:
-      - rest
+        - rest
     post:
       operationId: createSeason
-      description: ''
+      description: ""
       parameters: []
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Season'
+              $ref: "#/components/schemas/Season"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Season'
+              $ref: "#/components/schemas/Season"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Season'
+              $ref: "#/components/schemas/Season"
       responses:
-        '201':
+        "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Season'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/Season"
+          description: ""
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SeasonError'
-          description: ''
+                $ref: "#/components/schemas/SeasonError"
+          description: ""
       tags:
-      - rest
+        - rest
   /rest/seasons/{id}/:
     get:
       operationId: retrieveSeason
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this season.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this season.
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Season'
-          description: ''
+                $ref: "#/components/schemas/Season"
+          description: ""
       tags:
-      - rest
+        - rest
     put:
       operationId: updateSeason
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this season.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this season.
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Season'
+              $ref: "#/components/schemas/Season"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Season'
+              $ref: "#/components/schemas/Season"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Season'
+              $ref: "#/components/schemas/Season"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Season'
-          description: ''
+                $ref: "#/components/schemas/Season"
+          description: ""
       tags:
-      - rest
+        - rest
     patch:
       operationId: partialUpdateSeason
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this season.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this season.
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Season'
+              $ref: "#/components/schemas/Season"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Season'
+              $ref: "#/components/schemas/Season"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Season'
+              $ref: "#/components/schemas/Season"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Season'
-          description: ''
+                $ref: "#/components/schemas/Season"
+          description: ""
       tags:
-      - rest
+        - rest
     delete:
       operationId: destroySeason
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this season.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this season.
+          schema:
+            type: string
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
-      - rest
+        - rest
   /rest/leagues/:
     get:
       operationId: listLeagues
-      description: ''
+      description: ""
       parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -584,204 +584,204 @@ paths:
                   results:
                     type: array
                     items:
-                      $ref: '#/components/schemas/League'
-          description: ''
+                      $ref: "#/components/schemas/League"
+          description: ""
       tags:
-      - rest
+        - rest
     post:
       operationId: createLeague
-      description: ''
+      description: ""
       parameters: []
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/League'
+              $ref: "#/components/schemas/League"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/League'
+              $ref: "#/components/schemas/League"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/League'
+              $ref: "#/components/schemas/League"
       responses:
-        '201':
+        "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/League'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/League"
+          description: ""
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeagueError'
-          description: ''
+                $ref: "#/components/schemas/LeagueError"
+          description: ""
       tags:
-      - rest
+        - rest
   /rest/leagues/{id}/:
     get:
       operationId: retrieveLeague
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this league.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this league.
+          schema:
+            type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/League'
-          description: ''
+                $ref: "#/components/schemas/League"
+          description: ""
       tags:
-      - rest
+        - rest
     put:
       operationId: updateLeague
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this league.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this league.
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/League'
+              $ref: "#/components/schemas/League"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/League'
+              $ref: "#/components/schemas/League"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/League'
+              $ref: "#/components/schemas/League"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/League'
-          description: ''
+                $ref: "#/components/schemas/League"
+          description: ""
       tags:
-      - rest
+        - rest
     patch:
       operationId: partialUpdateLeague
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this league.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this league.
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/League'
+              $ref: "#/components/schemas/League"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/League'
+              $ref: "#/components/schemas/League"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/League'
+              $ref: "#/components/schemas/League"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/League'
-          description: ''
+                $ref: "#/components/schemas/League"
+          description: ""
       tags:
-      - rest
+        - rest
     delete:
       operationId: destroyLeague
-      description: ''
+      description: ""
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this league.
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          description: A unique integer value identifying this league.
+          schema:
+            type: string
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
-      - rest
+        - rest
   /profile/:
     get:
       operationId: retrieveProfile
-      description: ''
+      description: ""
       parameters: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Profile'
-          description: ''
+                $ref: "#/components/schemas/Profile"
+          description: ""
       tags:
-      - profile
+        - profile
     put:
       operationId: updateProfile
-      description: ''
+      description: ""
       parameters: []
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Profile'
+              $ref: "#/components/schemas/Profile"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Profile'
+              $ref: "#/components/schemas/Profile"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Profile'
+              $ref: "#/components/schemas/Profile"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Profile'
-          description: ''
+                $ref: "#/components/schemas/Profile"
+          description: ""
       tags:
-      - profile
+        - profile
   /rest/sessions/:
     post:
       operationId: createSession
-      description: ''
+      description: ""
       parameters: []
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Session'
+              $ref: "#/components/schemas/Session"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Session'
+              $ref: "#/components/schemas/Session"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Session'
+              $ref: "#/components/schemas/Session"
       responses:
-        '201':
+        "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Session'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/Session"
+          description: ""
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SessionError'
-          description: ''
+                $ref: "#/components/schemas/SessionError"
+          description: ""
       tags:
-      - rest
+        - rest
 components:
   schemas:
     User:
@@ -796,7 +796,8 @@ components:
           maxLength: 254
         username:
           type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+          description:
+            Required. 150 characters or fewer. Letters, digits and @/./+/-/_
             only.
           pattern: ^[\w.@+-]+\z
           maxLength: 150
@@ -814,14 +815,16 @@ components:
           description: Designates whether the user can log into this admin site.
         is_superuser:
           type: boolean
-          description: Designates that this user has all permissions without explicitly
+          description:
+            Designates that this user has all permissions without explicitly
             assigning them.
         is_active:
           type: boolean
-          description: Designates whether this user should be treated as active. Unselect
+          description:
+            Designates whether this user should be treated as active. Unselect
             this instead of deleting accounts.
       required:
-      - username
+        - username
     Player:
       type: object
       properties:
@@ -834,7 +837,7 @@ components:
         email:
           type: string
           format: email
-          default: ''
+          default: ""
         password:
           type: string
           writeOnly: true
@@ -861,7 +864,7 @@ components:
                 type: string
                 maxLength: 100
             required:
-            - name
+              - name
           readOnly: true
         team_ids:
           type: array
@@ -869,9 +872,9 @@ components:
             type: integer
           writeOnly: true
       required:
-      - password
-      - last_name
-      - first_name
+        - password
+        - last_name
+        - first_name
     Team:
       type: object
       properties:
@@ -897,7 +900,7 @@ components:
               type: string
               maxLength: 100
           required:
-          - name
+            - name
         season:
           type: object
           properties:
@@ -911,7 +914,7 @@ components:
               type: string
               maxLength: 100
           required:
-          - name
+            - name
         captain:
           type: object
           properties:
@@ -938,10 +941,10 @@ components:
                 type: string
           readOnly: true
       required:
-      - name
-      - league
-      - season
-      - captain
+        - name
+        - league
+        - season
+        - captain
     Season:
       type: object
       properties:
@@ -967,7 +970,7 @@ components:
               type: string
               maxLength: 100
           required:
-          - name
+            - name
         start_date:
           type: string
           format: date
@@ -989,13 +992,13 @@ components:
                 type: string
                 maxLength: 100
             required:
-            - name
+              - name
       required:
-      - name
-      - league
-      - start_date
-      - end_date
-      - teams
+        - name
+        - league
+        - start_date
+        - end_date
+        - teams
     League:
       type: object
       properties:
@@ -1009,7 +1012,7 @@ components:
           type: string
           maxLength: 100
       required:
-      - name
+        - name
     Profile:
       type: object
       properties:
@@ -1020,53 +1023,53 @@ components:
         last_name:
           type: string
       required:
-      - display_name
-      - first_name
-      - last_name
+        - display_name
+        - first_name
+        - last_name
     PlayerError:
       type: object
       properties:
         email:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
         password:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
         last_name:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
         first_name:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
         display_name:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
         team_ids:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
     TeamError:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
         league:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
         season:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
         captain:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
     SeasonError:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
         league:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
         start_date:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
         end_date:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
         teams:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
     LeagueError:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
     Session:
       type: object
       properties:
@@ -1081,15 +1084,15 @@ components:
           format: date-time
           readOnly: true
       required:
-      - username
-      - password
+        - username
+        - password
     SessionError:
       type: object
       properties:
         username:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
         password:
-          $ref: '#/components/schemas/FieldError'
+          $ref: "#/components/schemas/FieldError"
     FieldError:
       type: array
       items:
@@ -1099,4 +1102,4 @@ components:
       type: http
       scheme: bearer
 security:
-- bearerAuth: []
+  - bearerAuth: []

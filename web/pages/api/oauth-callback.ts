@@ -1,10 +1,9 @@
+import Cors from "cors";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Session } from "next-iron-session";
-import { withSession } from "../../lib/session";
-import oauth from "../../lib/oauth";
 import middleware from "../../lib/middleware";
-
-import Cors from "cors";
+import oauth from "../../lib/oauth";
+import { withSession } from "../../lib/session";
 
 type NextIronRequest = NextApiRequest & { session: Session };
 

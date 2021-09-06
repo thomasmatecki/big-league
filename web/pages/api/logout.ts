@@ -1,11 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Session } from "next-iron-session";
-import { withSession } from "../../lib/session";
-import  oauth from "../../lib/oauth";
 import config from "../../config";
+import oauth from "../../lib/oauth";
+import { withSession } from "../../lib/session";
 
 type NextIronRequest = NextApiRequest & { session: Session };
-
 
 async function handler(
   req: NextIronRequest,
@@ -14,7 +13,7 @@ async function handler(
   const auth = req.session.get("auth");
 
   oauth.revoke(auth);
-  
+
   req.session.unset("auth");
 
   await req.session.save();

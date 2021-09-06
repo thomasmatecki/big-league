@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
-import { Grommet } from "../components/lib";
 import Head from "next/head";
+import { Grommet } from "../components/lib";
 import theme from "../theme";
 
 function App({ Component, pageProps }: AppProps) {

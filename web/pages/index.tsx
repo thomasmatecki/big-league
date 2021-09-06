@@ -1,9 +1,9 @@
-import Router from "next/router";
-import { Anchor, Box, Spinner } from "../components/lib";
-import { useEffect } from "react";
 import { GetServerSidePropsContext } from "next";
 import Link from "next/link";
-import { withSession, HasSessionRequest } from "../lib/session";
+import Router from "next/router";
+import { useEffect } from "react";
+import { Anchor, Box, Spinner } from "../components/lib";
+import { withSession } from "../lib/session";
 interface PageProps {
   loggedIn: boolean;
 }

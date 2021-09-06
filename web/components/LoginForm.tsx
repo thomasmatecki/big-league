@@ -1,13 +1,11 @@
-import { Form, FormField, TextInput, Button, Box, Text } from "./lib";
-import { useState } from "react";
 import axios from "axios";
-
-import { restApi } from "../lib/sdk";
-import oauth from "../lib/oauth";
-
-import { map, head, propOr } from "ramda";
 import router from "next/router";
+import { head, map, propOr } from "ramda";
+import { useState } from "react";
 import { Session } from "../gen/sdk";
+import oauth from "../lib/oauth";
+import { restApi } from "../lib/sdk";
+import { Box, Button, Form, FormField, Text, TextInput } from "./lib";
 
 const LoginForm = () => {
   const [value, setValue] = useState<Session>({
@@ -21,10 +19,10 @@ const LoginForm = () => {
 
   return (
     <Box width="medium">
-      <Form
+      <Form<Session>
         value={value}
         errors={fieldErrors}
-        onChange={(nextValue) => setValue(nextValue)}
+        onChange={setValue}
         onSubmit={({ value }) => {
           setBlocked(true);
 

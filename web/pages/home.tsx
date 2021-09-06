@@ -1,8 +1,7 @@
-import { Box, Anchor, Header, Button, Nav, Avatar } from "../components/lib";
 import { GetServerSidePropsContext } from "next";
-import { WithAPISession, HasAPISessionRequest } from "../lib/session";
-import { Profile } from "../gen/sdk";
 import UserLayout from "../components/UserLayout";
+import { Profile } from "../gen/sdk";
+import { HasAPISessionRequest, WithAPISession } from "../lib/session";
 
 interface HomeProps {
   profile: Profile;

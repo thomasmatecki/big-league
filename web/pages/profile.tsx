@@ -1,7 +1,9 @@
+import { Box } from "grommet";
 import { GetServerSidePropsContext } from "next";
-import { WithAPISession, HasAPISessionRequest } from "../lib/session";
+import ProfileForm from "../components/ProfileForm";
 import UserLayout from "../components/UserLayout";
 import { Profile } from "../gen/sdk";
+import { HasAPISessionRequest, WithAPISession } from "../lib/session";
 
 interface ProfileProps {
   profile: Profile;
@@ -10,7 +12,6 @@ interface ProfileProps {
 export const getServerSideProps = WithAPISession(
   async ({ req }: HasAPISessionRequest<GetServerSidePropsContext>) => {
     const { data: profile } = await req.profileApi.retrieveProfile();
-    debugger;
 
     return {
       props: {
@@ -23,7 +24,9 @@ export const getServerSideProps = WithAPISession(
 const ProfilePage = (props: ProfileProps) => {
   return (
     <UserLayout>
-      <h3>Profile</h3>
+      <Box align="center" justify="center" pad="large">
+        <ProfileForm profile={props.profile}></ProfileForm>
+      </Box>
     </UserLayout>
   );
 };
