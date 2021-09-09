@@ -17,18 +17,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
+from rest_framework.routers import DefaultRouter
 from rest_framework.schemas import get_schema_view
 
-from api import router
 from api.core.rest import DefaultSchemaGenerator
 from api.core.views import SessionViewSet, UserViewSet
 from api.leagues.views import (
     LeagueViewSet,
+    MatchViewSet,
     PlayerViewSet,
     ProfileViewSet,
+    ScheduleViewSet,
     SeasonViewSet,
     TeamViewSet,
 )
+
+router = DefaultRouter()
 
 router.register("users", UserViewSet)
 router.register("players", PlayerViewSet)
@@ -36,8 +40,7 @@ router.register("teams", TeamViewSet)
 router.register("seasons", SeasonViewSet)
 router.register("leagues", LeagueViewSet)
 router.register("sessions", SessionViewSet)
-# router.register("profile", ProfileViewSet, basename="profile")
-
+router.register("matches", MatchViewSet)
 
 schema_view = get_schema_view(
     title="API", url="", generator_class=DefaultSchemaGenerator
@@ -48,7 +51,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("django.contrib.auth.urls")),
     path("rest/", include((router.urls))),
-    path("profile/", ProfileViewSet.as_view({"get": "retrieve", "put": "update"})),
+    path("user/profile/", ProfileViewSet.as_view({"get": "retrieve", "put": "update"})),
+    path("user/schedule/", ScheduleViewSet.as_view({"get": "list"})),
     path("schema/", schema_view),
     path("o/", include("oauth2_provider.urls", namespace="oauth2_provider")),
 ]

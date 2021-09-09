@@ -38,3 +38,18 @@ class ProfileViewSet(generics.RetrieveUpdateAPIView, viewsets.GenericViewSet):
         return Profile(user=self.request.user, player=player)
 
     serializer_class = serializers.ProfileSerializer
+
+
+class MatchViewSet(viewsets.ModelViewSet):
+    queryset = models.Match.objects.all()
+    serializer_class = serializers.MatchSerializer
+
+
+class ScheduleViewSet(viewsets.ModelViewSet):
+    # TODO: Filter to requesting user
+    queryset = (
+        models.Schedule.objects.select_related("team", "match", "match__location")
+        .prefetch_related("match__teams")
+        .all()
+    )
+    serializer_class = serializers.ScheduleSerializer

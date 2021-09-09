@@ -1,6 +1,7 @@
+import { GetServerSideProps } from "next";
 import { Session, withIronSession } from "next-iron-session";
 import config from "../config";
-import { Configuration, ProfileApi, RestApi } from "../gen/sdk";
+import { Configuration, UserApi } from "../gen/sdk";
 
 // TODO:  ALL the types here is wrong.
 type SessionRequest<R> = R & {
@@ -20,27 +21,14 @@ export function withSession(handler: any): any {
   return withIronSession(handler, config.session_cookie);
 }
 
-export type APISessionRequest<T> = SessionRequest<T> & {
-  profileApi: ProfileApi;
-  restApi: RestApi;
-};
-
-export type HasAPISessionRequest<T> = {
-  req: APISessionRequest<T>;
-};
-
 /**
  *
  * @param handler
  * @returns
  */
-export function WithAPISession<T>(handler: any) {
-  const _withAPI = async function withApi(...args: any) {
-    const handlerType = args[0] && args[1] ? "api" : "ssr";
-    const req = handlerType === "api" ? args[0] : args[0].req;
-    const res = handlerType === "api" ? args[1] : args[0].res;
-
-    const auth = await req.session.get("auth");
+export function withUserApi(getServerSideProps: any): GetServerSideProps {
+  const _withAPI = async function withApi(context: any) {
+    const auth = await context.req.session.get("auth");
 
     if (!auth) {
       return {
@@ -56,9 +44,10 @@ export function WithAPISession<T>(handler: any) {
       accessToken: auth.access_token,
     });
 
-    req.profileApi = new ProfileApi(apiConfig);
+    const userApi = new UserApi(apiConfig);
+    context = { ...context, userApi };
 
-    return handler(...args);
+    return getServerSideProps(context);
   };
 
   return withSession(_withAPI);

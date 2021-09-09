@@ -1,8 +1,8 @@
-from datetime import date
+from datetime import date, datetime
 from random import randint
 
 from api.leagues import factories, models
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
@@ -17,7 +17,16 @@ class Command(BaseCommand):
             start_date=date(2022, 8, 1),
             end_date=date(2022, 9, 30),
         )
+        teams = []
 
-        for _ in range(13):
+        for team in range(13):
             players = [factories.PlayerFactory() for _ in range(randint(9, 15))]
-            factories.TeamFactory(season=season, players=players)
+            teams.append(factories.TeamFactory(season=season, players=players))
+
+        location = models.Location.objects.create(name="Long Branch Park")
+        match = models.Match.objects.create(
+            season=season, location=location, datetime=datetime(2022, 8, 1, hour=11)
+        )
+
+        models.Schedule.objects.create(match=match, away=True, team=teams[0])
+        models.Schedule.objects.create(match=match, away=False, team=teams[1])

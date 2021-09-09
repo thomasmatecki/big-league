@@ -51,24 +51,30 @@ class Location(models.Model):
 
 
 class Schedule(models.Model):
-    game = models.ForeignKey(to="leagues.Game", on_delete=models.CASCADE)
     team = models.ForeignKey(to="leagues.Team", on_delete=models.CASCADE)
+    match = models.ForeignKey(to="leagues.Match", on_delete=models.CASCADE)
     away = models.BooleanField()
+
+    @property
+    def opponent(self):
+        if self.pk:
+            # TODO: Is this executing add'l SQL even in prefetching in the view?
+            return self.match.teams.exclude(pk=self.pk).first()
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["game", "away"],
+                fields=["match", "away"],
                 name="home_or_away",
             ),
             models.UniqueConstraint(
-                fields=["game", "team"],
+                fields=["match", "team"],
                 name="vs_other_team",
             ),
         ]
 
 
-class Game(models.Model):
+class Match(models.Model):
     datetime = models.DateTimeField()
     season = models.ForeignKey(to="leagues.Season", on_delete=models.DO_NOTHING)
     teams = models.ManyToManyField(to="leagues.Team", through="leagues.Schedule")

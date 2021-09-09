@@ -20,6 +20,7 @@ const ProfileForm = (props: Props) => {
         errors={fieldErrors}
         onChange={setValue}
         onSubmit={({ value }) => {
+          // TODO: Save the profile
           setBlocked(true);
         }}
       >
@@ -41,7 +42,7 @@ const ProfileForm = (props: Props) => {
             <FormField label="Interest">
               <Select
                 id="interest-select-id"
-                name="interest-select"
+                name="interest"
                 placeholder="Why do you do it?"
                 value={value}
                 options={["Social", "Fitness", "Competition"]}

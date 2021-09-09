@@ -1,15 +1,14 @@
-import { GetServerSidePropsContext } from "next";
 import UserLayout from "../components/UserLayout";
-import { Profile } from "../gen/sdk";
-import { HasAPISessionRequest, WithAPISession } from "../lib/session";
+import { Profile, UserApi } from "../gen/sdk";
+import { withUserApi } from "../lib/session";
 
 interface HomeProps {
   profile: Profile;
 }
 
-export const getServerSideProps = WithAPISession(
-  async ({ req }: HasAPISessionRequest<GetServerSidePropsContext>) => {
-    const { data: profile } = await req.profileApi.retrieveProfile();
+export const getServerSideProps = withUserApi(
+  async ({ userApi }: { userApi: UserApi }) => {
+    const { data: profile } = await userApi.retrieveProfile();
 
     return {
       props: {

@@ -1,5 +1,4 @@
 import { Home, Logout, Plan, User } from "grommet-icons";
-import Head from "next/head";
 import Link from "next/link";
 import { Anchor, Avatar, Box, Header, Nav } from "../components/lib";
 
@@ -30,12 +29,9 @@ const AppBar = () => (
 
 const UserLayout = ({ children }: LayoutProps): JSX.Element => {
   return (
-    <Box>
-      <Head>
-        <meta property="og:title" content="My new title" key="title" />
-      </Head>
+    <Box fill border={{ color: "neutral-4" }}>
       <AppBar></AppBar>
-      <main>{children}</main>
+      {children}
     </Box>
   );
 };

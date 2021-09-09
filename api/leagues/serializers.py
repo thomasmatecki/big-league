@@ -1,21 +1,7 @@
+from api.core.rest import CreateOnlyValidator
 from api.leagues import models
 from django.contrib.auth import get_user_model
 from rest_framework import exceptions, serializers, validators
-
-
-class CreateOnlyValidator:
-    requires_context = True
-
-    def __init__(self, required=True):
-        self.required = required
-
-    def __call__(self, value, serializer_field):
-        instance = serializer_field.parent.instance
-        is_update = instance is not None
-        if is_update and serializer_field.get_attribute(instance) != value:
-            raise exceptions.ValidationError(
-                f"Updates to {serializer_field.field_name} are not allowed."
-            )
 
 
 class LeagueSerializer(serializers.HyperlinkedModelSerializer):
@@ -57,7 +43,18 @@ class HyperLinkedPlayerSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class TeamSerializer(serializers.HyperlinkedModelSerializer):
+class HyperlinkedTeamSerializer(serializers.HyperlinkedModelSerializer):
+    players = HyperLinkedPlayerSerializer(required=False, many=True, read_only=True)
+    captain = HyperLinkedPlayerSerializer()
+    season = HyperlinkedSeasonSerializer()
+    league = LeagueSerializer(source="season.league")
+
+    class Meta:
+        model = models.Team
+        fields = ["id", "url", "name"]
+
+
+class TeamSerializer(HyperLinkedTeamSerializer):
     players = HyperLinkedPlayerSerializer(required=False, many=True, read_only=True)
     captain = HyperLinkedPlayerSerializer()
     season = HyperlinkedSeasonSerializer()
@@ -137,5 +134,20 @@ class PlayerSerializer(HyperLinkedPlayerSerializer):
 
 class ProfileSerializer(serializers.Serializer):
     display_name = serializers.CharField(source="player.display_name")
-    first_name = serializers.CharField(source="user.first_name")
-    last_name = serializers.CharField(source="user.last_name")
+
+
+class MatchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Match
+        exclude = []
+
+
+class ScheduleSerializer(serializers.ModelSerializer):
+    team = HyperLinkedTeamSerializer()
+    opponent = HyperLinkedTeamSerializer()
+    datetime = serializers.DateTimeField(source="match.datetime")
+    location = serializers.CharField(source="match.location.name")
+
+    class Meta:
+        model = models.Schedule
+        exclude = ["match"]

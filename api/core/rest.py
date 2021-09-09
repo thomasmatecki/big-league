@@ -1,8 +1,7 @@
-from rest_framework import serializers
+from rest_framework import exceptions, serializers
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.schemas.openapi import AutoSchema, SchemaGenerator
 from rest_framework.schemas.utils import is_list_view
-from urllib3 import Retry
 
 
 class DefaultPagination(PageNumberPagination):
@@ -32,6 +31,10 @@ class DefaultPagination(PageNumberPagination):
 
 
 class DefaultSchemaGenerator(SchemaGenerator):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("version", "0.1")
+        super().__init__(*args, **kwargs)
+
     def _get_error_schemas(self):
         return {"FieldError": {"type": "array", "items": {"type": "string"}}}
 
@@ -134,3 +137,14 @@ class DefaultSchema(AutoSchema):
         _property_attrs[keys[-1]] = _property_attrs[keys[-1]].format(
             path=path, host=host, scheme=scheme
         )
+
+class CreateOnlyValidator:
+    requires_context = True
+
+    def __call__(self, value, serializer_field):
+        instance = serializer_field.parent.instance
+        is_update = instance is not None
+        if is_update and serializer_field.get_attribute(instance) != value:
+            raise exceptions.ValidationError(
+                f"Updates to {serializer_field.field_name} are not allowed."
+            )
