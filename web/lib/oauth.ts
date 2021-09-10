@@ -6,8 +6,22 @@ interface Auth {
   access_token: string;
 }
 
+export type OAuth = {
+  access_token: string;
+  expires_in: number;
+  token_type: string;
+  scope: string;
+  refresh_token: string;
+  expires_at: number;
+};
+
 class OAuthClient {
   constructor(private api_host: string) {}
+
+  _setExpiresAt({ data: authData }: any): OAuth {
+    authData.expires_at = Math.round(Date.now() / 1000) + authData.expires_in;
+    return authData;
+  }
 
   async post(path: string, data: any) {
     return axios({
@@ -26,7 +40,7 @@ class OAuthClient {
       grant_type: "authorization_code",
       client_id: config.oauth.client_id,
       client_secret: config.oauth.client_secret,
-    }).then(({ data, status, statusText, ...rest }) => data);
+    }).then(this._setExpiresAt);
   }
 
   async revoke(auth: Auth) {
@@ -35,6 +49,15 @@ class OAuthClient {
       client_id: config.oauth.client_id,
       client_secret: config.oauth.client_secret,
     });
+  }
+
+  async refresh(auth: OAuth): Promise<OAuth> {
+    return this.post("o/token/", {
+      grant_type: "refresh_token",
+      client_id: config.oauth.client_id,
+      client_secret: config.oauth.client_secret,
+      refresh_token: auth.refresh_token,
+    }).then(this._setExpiresAt);
   }
 
   get authorize_url(): string {

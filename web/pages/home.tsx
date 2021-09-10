@@ -8,13 +8,22 @@ interface HomeProps {
 
 export const getServerSideProps = withUserApi(
   async ({ userApi }: { userApi: UserApi }) => {
-    const { data: profile } = await userApi.retrieveProfile();
+    try {
+      const { data: profile } = await userApi.retrieveProfile();
 
-    return {
-      props: {
+      const props = {
         profile: profile,
-      },
-    };
+      };
+
+      return { props };
+    } catch (e) {
+      return {
+        redirect: {
+          destination: "/login",
+          permanent: false,
+        },
+      };
+    }
   }
 );
 

@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 import { Session, withIronSession } from "next-iron-session";
 import config from "../config";
 import { Configuration, UserApi } from "../gen/sdk";
+import oauth, { OAuth } from "../lib/oauth";
 
 // TODO:  ALL the types here is wrong.
 type SessionRequest<R> = R & {
@@ -21,6 +22,24 @@ export function withSession(handler: any): any {
   return withIronSession(handler, config.session_cookie);
 }
 
+const getAuth = async (session: Session): Promise<OAuth | null> => {
+  const authData: OAuth | undefined = await session.get("auth");
+
+  if (!authData) {
+    return null;
+  }
+
+  // 10 Seconds before it expires
+  if (authData.expires_at < Math.round(Date.now() / 1000) - 10) {
+    const freshAuthData: OAuth = await oauth.refresh(authData);
+    session.set("auth", freshAuthData);
+    await session.save();
+    return freshAuthData;
+  }
+
+  return authData;
+};
+
 /**
  *
  * @param handler
@@ -28,7 +47,7 @@ export function withSession(handler: any): any {
  */
 export function withUserApi(getServerSideProps: any): GetServerSideProps {
   const _withAPI = async function withApi(context: any) {
-    const auth = await context.req.session.get("auth");
+    const auth = await getAuth(context.req.session);
 
     if (!auth) {
       return {

@@ -23,6 +23,7 @@ pytest = "*"
 pytest-django = "*"
 pytest-factoryboy = "*"
 pylint-django = "*"
+debugpy = "*"
 
 [requires]
 python_version = "3.9"

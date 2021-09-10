@@ -11,7 +11,7 @@ const cors = middleware.init(
   // Config options : https://github.com/expressjs/cors#configuration-options
   Cors({
     // Only allow requests with GET, POST and OPTIONS
-    methods: ["GET", "POST", "OPTIONS"],
+    methods: ["GET"],
     origin: true,
     credentials: true,
   })
@@ -24,9 +24,10 @@ async function handler(
   //
   await cors(req, res);
 
-  const data = await oauth.auth(req.query);
+  const authData = await oauth.auth(req.query);
+  authData.expires_at = Math.round(Date.now() / 1000) + authData.expires_in;
 
-  req.session.set("auth", data);
+  req.session.set("auth", authData);
 
   await req.session.save();
 
