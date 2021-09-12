@@ -64,6 +64,7 @@ class OAuthClient {
     const query = querystring.stringify({
       client_id: config.oauth.client_id,
       response_type: "code",
+      redirect_uri: config.oauth.redirect_uri,
     });
     return `${this.api_host}/o/authorize/?${query}`;
   }

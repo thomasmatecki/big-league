@@ -1,8 +1,9 @@
 from datetime import date, datetime
 from random import randint
 
-from api.leagues import factories, models
 from django.core.management.base import BaseCommand
+
+from api.leagues import factories, models
 
 
 class Command(BaseCommand):

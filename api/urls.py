@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.routers import DefaultRouter
 from rest_framework.schemas import get_schema_view
 
@@ -39,7 +40,7 @@ router.register("players", PlayerViewSet)
 router.register("teams", TeamViewSet)
 router.register("seasons", SeasonViewSet)
 router.register("leagues", LeagueViewSet)
-router.register("sessions", SessionViewSet)
+# router.register("sessions", SessionViewSet)
 router.register("matches", MatchViewSet)
 
 schema_view = get_schema_view(
@@ -51,8 +52,19 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("django.contrib.auth.urls")),
     path("rest/", include((router.urls))),
-    path("user/profile/", ProfileViewSet.as_view({"get": "retrieve", "put": "update"})),
+    path(
+        "user/profile/",
+        ProfileViewSet.as_view(
+            {
+                "get": "retrieve",
+                "put": "update",
+                "patch": "partial_update",
+                "post": "create",
+            }
+        ),
+    ),
     path("user/schedule/", ScheduleViewSet.as_view({"get": "list"})),
+    path("user/session/", SessionViewSet.as_view({"get": "retrieve", "put": "update"})),
     path("schema/", schema_view),
     path("o/", include("oauth2_provider.urls", namespace="oauth2_provider")),
 ]

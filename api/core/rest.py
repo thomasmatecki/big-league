@@ -1,5 +1,6 @@
 from rest_framework import exceptions, serializers
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import SAFE_METHODS, BasePermission
 from rest_framework.schemas.openapi import AutoSchema, SchemaGenerator
 from rest_framework.schemas.utils import is_list_view
 
@@ -138,6 +139,7 @@ class DefaultSchema(AutoSchema):
             path=path, host=host, scheme=scheme
         )
 
+
 class CreateOnlyValidator:
     requires_context = True
 
@@ -148,3 +150,11 @@ class CreateOnlyValidator:
             raise exceptions.ValidationError(
                 f"Updates to {serializer_field.field_name} are not allowed."
             )
+
+
+class IsAuthenticatedOrCreateOnly(BasePermission):
+    def has_permission(self, request, view):
+        if request.method == "POST":
+            return True
+
+        return bool(request.user and request.user.is_authenticated)

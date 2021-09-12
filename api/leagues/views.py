@@ -1,8 +1,9 @@
 from dataclasses import dataclass
-from typing import Union
+from datetime import date
 
+from api.core.rest import IsAuthenticatedOrCreateOnly
 from api.leagues import models, serializers
-from django.contrib.auth.models import AbstractBaseUser, AnonymousUser
+from django.contrib.auth.models import AbstractBaseUser
 from rest_framework import generics, viewsets
 
 
@@ -26,18 +27,19 @@ class LeagueViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.LeagueSerializer
 
 
-@dataclass
-class Profile:
-    user: Union[AbstractBaseUser, AnonymousUser]
-    player: models.Player
-
-
-class ProfileViewSet(generics.RetrieveUpdateAPIView, viewsets.GenericViewSet):
-    def get_object(self):
-        player = models.Player.objects.get(user=self.request.user)
-        return Profile(user=self.request.user, player=player)
+class ProfileViewSet(
+    generics.RetrieveUpdateAPIView, generics.CreateAPIView, viewsets.GenericViewSet
+):
 
     serializer_class = serializers.ProfileSerializer
+    permission_classes = [IsAuthenticatedOrCreateOnly]
+
+    def get_object(self):
+        player = models.Player.objects.get(user=self.request.user)
+        date_joined = player.user.date_joined.date()
+        return serializers.Profile(
+            pk=player.pk, date_joined=date_joined, player=player, user=player.user
+        )
 
 
 class MatchViewSet(viewsets.ModelViewSet):

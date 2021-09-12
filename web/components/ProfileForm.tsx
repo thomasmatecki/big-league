@@ -1,6 +1,7 @@
 import { Avatar, FileInput, Select, TextArea } from "grommet";
 import { useState } from "react";
 import { Profile } from "../gen/sdk";
+import { userApi } from "../lib/sdk";
 import { Box, Button, Form, FormField, Text, TextInput } from "./lib";
 
 type Props = {
@@ -20,8 +21,10 @@ const ProfileForm = (props: Props) => {
         errors={fieldErrors}
         onChange={setValue}
         onSubmit={({ value }) => {
-          // TODO: Save the profile
           setBlocked(true);
+          userApi
+            .partialUpdateProfile(value, { withCredentials: true })
+            .then(({}) => setBlocked(false));
         }}
       >
         <Box direction="row-responsive" gap="small">

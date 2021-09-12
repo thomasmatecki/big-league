@@ -24,14 +24,21 @@ async function handler(
   //
   await cors(req, res);
 
-  const authData = await oauth.auth(req.query);
+  const { next: _next, ...authQuery } = req.query;
+  const next = typeof _next == "object" ? _next[0] : _next;
+
+  const authData = await oauth.auth(authQuery);
   authData.expires_at = Math.round(Date.now() / 1000) + authData.expires_in;
 
   req.session.set("auth", authData);
+  debugger;
 
   await req.session.save();
-
-  res.json({ message: "Ok" });
+  if (next) {
+    res.redirect(next as string);
+  } else {
+    res.json(authData);
+  }
 }
 
 export default withSession(handler);

@@ -9,7 +9,7 @@ import {
   Text,
   TextInput,
 } from "../components/lib";
-import { restApi } from "../lib/sdk";
+import { userApi } from "../lib/sdk";
 
 const RegistrationFrom = () => {
   const [value, setValue] = useState({
@@ -44,8 +44,8 @@ const RegistrationFrom = () => {
         errors={errors}
         onChange={(nextValue) => setValue(nextValue)}
         onSubmit={({ value }) => {
-          restApi
-            .createPlayer(value)
+          userApi
+            .createProfile(value)
             .then((_ok) => {
               router.push("/home");
             })

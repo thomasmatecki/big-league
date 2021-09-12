@@ -890,8 +890,62 @@ paths:
           description: ''
       tags:
       - user
+    post:
+      operationId: createProfile
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Profile'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Profile'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Profile'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileError'
+          description: ''
+      tags:
+      - user
     put:
       operationId: updateProfile
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Profile'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Profile'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Profile'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+          description: ''
+      tags:
+      - user
+    patch:
+      operationId: partialUpdateProfile
       description: ''
       parameters: []
       requestBody:
@@ -952,9 +1006,22 @@ paths:
           description: ''
       tags:
       - user
-  /rest/sessions/:
-    post:
-      operationId: createSession
+  /user/session/:
+    get:
+      operationId: retrieveSession
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+          description: ''
+      tags:
+      - user
+    put:
+      operationId: updateSession
       description: ''
       parameters: []
       requestBody:
@@ -969,20 +1036,14 @@ paths:
             schema:
               $ref: '#/components/schemas/Session'
       responses:
-        '201':
+        '200':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Session'
           description: ''
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SessionError'
-          description: ''
       tags:
-      - rest
+      - user
 components:
   schemas:
     User:
@@ -1035,10 +1096,8 @@ components:
         email:
           type: string
           format: email
-          default: ''
-        password:
-          type: string
           writeOnly: true
+          default: ''
         last_name:
           type: string
           writeOnly: true
@@ -1047,6 +1106,7 @@ components:
           writeOnly: true
         display_name:
           type: string
+          maxLength: 100
         teams:
           type: array
           items:
@@ -1070,9 +1130,9 @@ components:
             type: integer
           writeOnly: true
       required:
-      - password
       - last_name
       - first_name
+      - display_name
     Team:
       type: object
       properties:
@@ -1122,8 +1182,11 @@ components:
             url:
               type: string
               readOnly: true
-            display_name:
+            name:
               type: string
+              maxLength: 100
+          required:
+          - name
         players:
           type: array
           items:
@@ -1135,8 +1198,11 @@ components:
               url:
                 type: string
                 readOnly: true
-              display_name:
+              name:
                 type: string
+                maxLength: 100
+            required:
+            - name
           readOnly: true
       required:
       - name
@@ -1217,6 +1283,22 @@ components:
         id:
           type: integer
           readOnly: true
+        teams:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                readOnly: true
+              url:
+                type: string
+                readOnly: true
+              name:
+                type: string
+                maxLength: 100
+            required:
+            - name
         datetime:
           type: string
           format: date-time
@@ -1224,22 +1306,41 @@ components:
           type: integer
         location:
           type: integer
-        teams:
-          type: array
-          items:
-            type: string
-          readOnly: true
       required:
+      - teams
       - datetime
       - season
       - location
     Profile:
       type: object
       properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+          default: ''
+        password:
+          type: string
+          writeOnly: true
         display_name:
           type: string
+        biography:
+          type: string
+        date_joined:
+          type: string
+          format: date
+          readOnly: true
+        image:
+          type: string
+          format: binary
+          nullable: true
       required:
-      - display_name
+      - first_name
+      - last_name
+      - password
     Schedule:
       type: object
       properties:
@@ -1287,12 +1388,28 @@ components:
       - datetime
       - location
       - away
+    Session:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          writeOnly: true
+        csrf_token:
+          type: string
+          readOnly: true
+        expiry_date:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - username
+      - password
     PlayerError:
       type: object
       properties:
         email:
-          $ref: '#/components/schemas/FieldError'
-        password:
           $ref: '#/components/schemas/FieldError'
         last_name:
           $ref: '#/components/schemas/FieldError'
@@ -1331,37 +1448,33 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/FieldError'
-    Session:
-      type: object
-      properties:
-        username:
-          type: string
-          writeOnly: true
-        password:
-          type: string
-          writeOnly: true
-        expiry_date:
-          type: string
-          format: date-time
-          readOnly: true
-      required:
-      - username
-      - password
-    SessionError:
-      type: object
-      properties:
-        username:
-          $ref: '#/components/schemas/FieldError'
-        password:
-          $ref: '#/components/schemas/FieldError'
     MatchError:
       type: object
       properties:
+        teams:
+          $ref: '#/components/schemas/FieldError'
         datetime:
           $ref: '#/components/schemas/FieldError'
         season:
           $ref: '#/components/schemas/FieldError'
         location:
+          $ref: '#/components/schemas/FieldError'
+    ProfileError:
+      type: object
+      properties:
+        first_name:
+          $ref: '#/components/schemas/FieldError'
+        last_name:
+          $ref: '#/components/schemas/FieldError'
+        email:
+          $ref: '#/components/schemas/FieldError'
+        password:
+          $ref: '#/components/schemas/FieldError'
+        display_name:
+          $ref: '#/components/schemas/FieldError'
+        biography:
+          $ref: '#/components/schemas/FieldError'
+        image:
           $ref: '#/components/schemas/FieldError'
     FieldError:
       type: array

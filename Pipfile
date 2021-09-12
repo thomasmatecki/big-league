@@ -12,6 +12,7 @@ uvicorn = "*"
 pyyaml = "*"
 uritemplate = "*"
 ipython = "*"
+pillow = "*"
 
 [dev-packages]
 black = "*"

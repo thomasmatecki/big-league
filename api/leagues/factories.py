@@ -1,7 +1,8 @@
 import factory
+from factory.django import DjangoModelFactory
+
 from api.core.factories import UserFactory
 from api.leagues import models
-from factory.django import DjangoModelFactory
 
 
 class PlayerFactory(DjangoModelFactory):

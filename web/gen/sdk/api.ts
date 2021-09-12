@@ -290,6 +290,12 @@ export interface Match {
     id?: number;
     /**
      * 
+     * @type {Array<PlayerTeams>}
+     * @memberof Match
+     */
+    teams: Array<PlayerTeams>;
+    /**
+     * 
      * @type {string}
      * @memberof Match
      */
@@ -306,12 +312,6 @@ export interface Match {
      * @memberof Match
      */
     location: number;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof Match
-     */
-    teams?: Array<string>;
 }
 /**
  * 
@@ -319,6 +319,12 @@ export interface Match {
  * @interface MatchError
  */
 export interface MatchError {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof MatchError
+     */
+    teams?: Array<string>;
     /**
      * 
      * @type {Array<string>}
@@ -367,12 +373,6 @@ export interface Player {
      * @type {string}
      * @memberof Player
      */
-    password: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Player
-     */
     last_name: string;
     /**
      * 
@@ -385,7 +385,7 @@ export interface Player {
      * @type {string}
      * @memberof Player
      */
-    display_name?: string;
+    display_name: string;
     /**
      * 
      * @type {Array<PlayerTeams>}
@@ -411,12 +411,6 @@ export interface PlayerError {
      * @memberof PlayerError
      */
     email?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof PlayerError
-     */
-    password?: Array<string>;
     /**
      * 
      * @type {Array<string>}
@@ -478,7 +472,98 @@ export interface Profile {
      * @type {string}
      * @memberof Profile
      */
-    display_name: string;
+    first_name: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Profile
+     */
+    last_name: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Profile
+     */
+    email?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Profile
+     */
+    password: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Profile
+     */
+    display_name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Profile
+     */
+    biography?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Profile
+     */
+    date_joined?: string;
+    /**
+     * 
+     * @type {any}
+     * @memberof Profile
+     */
+    image?: any | null;
+}
+/**
+ * 
+ * @export
+ * @interface ProfileError
+ */
+export interface ProfileError {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ProfileError
+     */
+    first_name?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ProfileError
+     */
+    last_name?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ProfileError
+     */
+    email?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ProfileError
+     */
+    password?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ProfileError
+     */
+    display_name?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ProfileError
+     */
+    biography?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ProfileError
+     */
+    image?: Array<string>;
 }
 /**
  * 
@@ -632,26 +717,13 @@ export interface Session {
      * @type {string}
      * @memberof Session
      */
+    csrf_token?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Session
+     */
     expiry_date?: string;
-}
-/**
- * 
- * @export
- * @interface SessionError
- */
-export interface SessionError {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof SessionError
-     */
-    username?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof SessionError
-     */
-    password?: Array<string>;
 }
 /**
  * 
@@ -691,41 +763,16 @@ export interface Team {
     season: PlayerTeams;
     /**
      * 
-     * @type {TeamCaptain}
+     * @type {PlayerTeams}
      * @memberof Team
      */
-    captain: TeamCaptain;
+    captain: PlayerTeams;
     /**
      * 
-     * @type {Array<TeamCaptain>}
+     * @type {Array<PlayerTeams>}
      * @memberof Team
      */
-    players?: Array<TeamCaptain>;
-}
-/**
- * 
- * @export
- * @interface TeamCaptain
- */
-export interface TeamCaptain {
-    /**
-     * 
-     * @type {number}
-     * @memberof TeamCaptain
-     */
-    id?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof TeamCaptain
-     */
-    url?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TeamCaptain
-     */
-    display_name?: string;
+    players?: Array<PlayerTeams>;
 }
 /**
  * 
@@ -968,43 +1015,6 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(season, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {Session} [session] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createSession: async (session?: Session, options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/rest/sessions/`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(session, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2145,16 +2155,6 @@ export const RestApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {Session} [session] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createSession(session?: Session, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Session>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createSession(session, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @param {Team} [team] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2491,15 +2491,6 @@ export const RestApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
-         * @param {Session} [session] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createSession(session?: Session, options?: any): AxiosPromise<Session> {
-            return localVarFp.createSession(session, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {Team} [team] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2804,15 +2795,6 @@ export interface RestApiInterface {
      * @memberof RestApiInterface
      */
     createSeason(season?: Season, options?: any): AxiosPromise<Season>;
-
-    /**
-     * 
-     * @param {Session} [session] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RestApiInterface
-     */
-    createSession(session?: Session, options?: any): AxiosPromise<Session>;
 
     /**
      * 
@@ -3127,17 +3109,6 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      */
     public createSeason(season?: Season, options?: any) {
         return RestApiFp(this.configuration).createSeason(season, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {Session} [session] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RestApi
-     */
-    public createSession(session?: Session, options?: any) {
-        return RestApiFp(this.configuration).createSession(session, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3468,6 +3439,43 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
     return {
         /**
          * 
+         * @param {Profile} [profile] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createProfile: async (profile?: Profile, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/user/profile/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(profile, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {number} [page] A page number within the paginated result set.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3506,11 +3514,81 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @param {Profile} [profile] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        partialUpdateProfile: async (profile?: Profile, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/user/profile/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(profile, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         retrieveProfile: async (options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/user/profile/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveSession: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/user/session/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -3574,6 +3652,43 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {Session} [session] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSession: async (session?: Session, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/user/session/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(session, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -3586,12 +3701,32 @@ export const UserApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {Profile} [profile] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createProfile(profile?: Profile, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Profile>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createProfile(profile, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {number} [page] A page number within the paginated result set.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async listSchedules(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2006>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listSchedules(page, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Profile} [profile] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async partialUpdateProfile(profile?: Profile, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Profile>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.partialUpdateProfile(profile, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -3605,12 +3740,31 @@ export const UserApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async retrieveSession(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Session>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrieveSession(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {Profile} [profile] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async updateProfile(profile?: Profile, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Profile>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateProfile(profile, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Session} [session] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateSession(session?: Session, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Session>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateSession(session, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -3625,12 +3779,30 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
     return {
         /**
          * 
+         * @param {Profile} [profile] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createProfile(profile?: Profile, options?: any): AxiosPromise<Profile> {
+            return localVarFp.createProfile(profile, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {number} [page] A page number within the paginated result set.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         listSchedules(page?: number, options?: any): AxiosPromise<InlineResponse2006> {
             return localVarFp.listSchedules(page, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Profile} [profile] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        partialUpdateProfile(profile?: Profile, options?: any): AxiosPromise<Profile> {
+            return localVarFp.partialUpdateProfile(profile, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3642,12 +3814,29 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveSession(options?: any): AxiosPromise<Session> {
+            return localVarFp.retrieveSession(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {Profile} [profile] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         updateProfile(profile?: Profile, options?: any): AxiosPromise<Profile> {
             return localVarFp.updateProfile(profile, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Session} [session] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSession(session?: Session, options?: any): AxiosPromise<Session> {
+            return localVarFp.updateSession(session, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -3660,12 +3849,30 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
 export interface UserApiInterface {
     /**
      * 
+     * @param {Profile} [profile] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApiInterface
+     */
+    createProfile(profile?: Profile, options?: any): AxiosPromise<Profile>;
+
+    /**
+     * 
      * @param {number} [page] A page number within the paginated result set.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApiInterface
      */
     listSchedules(page?: number, options?: any): AxiosPromise<InlineResponse2006>;
+
+    /**
+     * 
+     * @param {Profile} [profile] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApiInterface
+     */
+    partialUpdateProfile(profile?: Profile, options?: any): AxiosPromise<Profile>;
 
     /**
      * 
@@ -3677,12 +3884,29 @@ export interface UserApiInterface {
 
     /**
      * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApiInterface
+     */
+    retrieveSession(options?: any): AxiosPromise<Session>;
+
+    /**
+     * 
      * @param {Profile} [profile] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApiInterface
      */
     updateProfile(profile?: Profile, options?: any): AxiosPromise<Profile>;
+
+    /**
+     * 
+     * @param {Session} [session] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApiInterface
+     */
+    updateSession(session?: Session, options?: any): AxiosPromise<Session>;
 
 }
 
@@ -3695,6 +3919,17 @@ export interface UserApiInterface {
 export class UserApi extends BaseAPI implements UserApiInterface {
     /**
      * 
+     * @param {Profile} [profile] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public createProfile(profile?: Profile, options?: any) {
+        return UserApiFp(this.configuration).createProfile(profile, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {number} [page] A page number within the paginated result set.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3702,6 +3937,17 @@ export class UserApi extends BaseAPI implements UserApiInterface {
      */
     public listSchedules(page?: number, options?: any) {
         return UserApiFp(this.configuration).listSchedules(page, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Profile} [profile] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public partialUpdateProfile(profile?: Profile, options?: any) {
+        return UserApiFp(this.configuration).partialUpdateProfile(profile, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3716,6 +3962,16 @@ export class UserApi extends BaseAPI implements UserApiInterface {
 
     /**
      * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public retrieveSession(options?: any) {
+        return UserApiFp(this.configuration).retrieveSession(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {Profile} [profile] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3723,6 +3979,17 @@ export class UserApi extends BaseAPI implements UserApiInterface {
      */
     public updateProfile(profile?: Profile, options?: any) {
         return UserApiFp(this.configuration).updateProfile(profile, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Session} [session] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public updateSession(session?: Session, options?: any) {
+        return UserApiFp(this.configuration).updateSession(session, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

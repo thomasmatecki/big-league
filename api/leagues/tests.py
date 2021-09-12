@@ -1,6 +1,7 @@
 import pytest
-from api.leagues.serializers import PlayerSerializer
 from rest_framework import exceptions
+
+from api.leagues.serializers import PlayerSerializer
 
 
 def test_email_required():

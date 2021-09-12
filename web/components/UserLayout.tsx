@@ -1,4 +1,4 @@
-import { Home, Logout, Plan, User } from "grommet-icons";
+import { Achievement, Home, Logout, Plan, User } from "grommet-icons";
 import Link from "next/link";
 import { Anchor, Avatar, Box, Header, Nav } from "../components/lib";
 
@@ -22,6 +22,9 @@ const AppBar = () => (
       <Link href="/schedule">
         <Anchor label="Schedule" icon={<Plan></Plan>} />
       </Link>
+      <Link href="/standings">
+        <Anchor label="Standings" icon={<Achievement></Achievement>} />
+      </Link>
     </Nav>
     <Anchor href="/api/logout" label="Logout" icon={<Logout></Logout>} />
   </Header>
@@ -29,7 +32,7 @@ const AppBar = () => (
 
 const UserLayout = ({ children }: LayoutProps): JSX.Element => {
   return (
-    <Box fill border={{ color: "neutral-4" }}>
+    <Box fill>
       <AppBar></AppBar>
       {children}
     </Box>

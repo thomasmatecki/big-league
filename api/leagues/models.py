@@ -21,6 +21,8 @@ class Player(models.Model):
     display_name = models.CharField(max_length=100)
     user = models.OneToOneField(null=True, to="auth.User", on_delete=models.DO_NOTHING)
     email_confirmed = models.BooleanField(default=False)
+    biography = models.TextField(default="")
+    image = models.ImageField(null=True)
 
     class Manager(models.Manager):
         def get_queryset(self):

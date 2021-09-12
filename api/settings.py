@@ -128,7 +128,6 @@ LOGOUT_REDIRECT_URL = "http://localhost:3000/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "api.core.rest.DefaultPagination",
     "DEFAULT_SCHEMA_CLASS": "api.core.rest.DefaultSchema",

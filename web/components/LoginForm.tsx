@@ -1,10 +1,9 @@
-import axios from "axios";
 import router from "next/router";
 import { head, map, propOr } from "ramda";
 import { useState } from "react";
 import { Session } from "../gen/sdk";
 import oauth from "../lib/oauth";
-import { restApi } from "../lib/sdk";
+import { userApi } from "../lib/sdk";
 import { Box, Button, Form, FormField, Text, TextInput } from "./lib";
 
 const LoginForm = () => {
@@ -26,10 +25,10 @@ const LoginForm = () => {
         onSubmit={({ value }) => {
           setBlocked(true);
 
-          restApi
-            .createSession(value, { withCredentials: true })
-            .then((_ok) => {
-              axios.get(oauth.authorize_url, { withCredentials: true });
+          userApi
+            .updateSession(value, {
+              withCredentials: true,
+              params: { next: oauth.authorize_url },
             })
             .then((_ok) => {
               router.push("/home");
