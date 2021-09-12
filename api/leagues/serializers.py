@@ -161,6 +161,20 @@ class ProfileSerializer(serializers.Serializer):
     )
 
     def update(self, instance, validated_data):
+
+        user_data = validated_data.pop("user", {})
+
+        for attr, value in user_data.items():
+            setattr(instance.user, attr, value)
+
+        player_data = validated_data.pop("player", {})
+
+        for attr, value in player_data.items():
+            setattr(instance.player, attr, value)
+
+        instance.player.save()
+        instance.user.save()
+
         return instance
 
     def create(self, validated_data):

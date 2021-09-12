@@ -25,6 +25,7 @@ pytest-django = "*"
 pytest-factoryboy = "*"
 pylint-django = "*"
 debugpy = "*"
+vulture = "*"
 
 [requires]
 python_version = "3.9"

@@ -47,13 +47,14 @@ const ProfileForm = (props: Props) => {
                 id="interest-select-id"
                 name="interest"
                 placeholder="Why do you do it?"
-                value={value}
                 options={["Social", "Fitness", "Competition"]}
                 onChange={({ option }) => setValue(option)}
               />
             </FormField>
             <FormField name="biography" label="Bio">
               <TextArea
+                id="biograpy-text-id"
+                name="biography"
                 placeholder="Say something about yourself"
                 resize={false}
               ></TextArea>
