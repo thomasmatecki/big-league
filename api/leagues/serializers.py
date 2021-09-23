@@ -199,6 +199,10 @@ class ProfileSerializer(serializers.Serializer):
 class MatchSerializer(serializers.ModelSerializer):
 
     teams = HyperLinkedObjectSerializer(model=models.Team, many=True)
+    season = HyperLinkedObjectSerializer(model=models.Season)
+    #    location = HyperLinkedObjectSerializer(
+    #        model=models.Location,
+    #    )
 
     class Meta:
         model = models.Match
@@ -208,9 +212,10 @@ class MatchSerializer(serializers.ModelSerializer):
 class ScheduleSerializer(serializers.ModelSerializer):
     team = HyperLinkedObjectSerializer(model=models.Team)
     opponent = HyperLinkedObjectSerializer(model=models.Team)
+    match = HyperLinkedObjectSerializer(model=models.Match)
     datetime = serializers.DateTimeField(source="match.datetime")
     location = serializers.CharField(source="match.location.name")
 
     class Meta:
         model = models.Schedule
-        exclude = ["match"]
+        exclude = []

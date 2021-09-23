@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from rest_framework import exceptions, serializers
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import SAFE_METHODS, BasePermission
@@ -55,10 +57,18 @@ class DefaultSchemaGenerator(SchemaGenerator):
         schema["components"]["schemas"].update(error_schemas)
         schema["components"].update({"securitySchemes": self._get_security_schemes()})
         schema["security"] = [{"bearerAuth": []}]
+
+        schema["components"]["schemas"] = OrderedDict(
+            sorted(schema["components"]["schemas"].items())
+        )
+
         return schema
 
 
 class DefaultSchema(AutoSchema):
+
+    path_component_schemas = {}
+
     def _map_serializer_to_error(self, serializer):
         properties = {}
 
@@ -74,15 +84,46 @@ class DefaultSchema(AutoSchema):
 
         return result
 
+    def _map_serializer_to_ref_list(self, serializer):
+        response_schema = {
+            "type": "array",
+            "items": {
+                "$ref": f"#/components/schemas/{self.get_component_name(serializer)}"
+            },
+        }
+
+        paginator = self.get_paginator()
+        if paginator:
+            response_schema = paginator.get_paginated_response_schema(response_schema)
+
+        return response_schema
+
     def get_error_component_name(self, serializer):
         return f"{self.get_component_name(serializer)}Error"
 
+    def get_list_component_name(self, serializer):
+        return f"{self.get_component_name(serializer)}List"
+
     def get_components(self, path, method):
         components = super().get_components(path, method)
+
+        serializer = self.get_serializer(path, method)
+
         if method == "POST":
-            serializer = self.get_serializer(path, method)
             error_component_name = self.get_error_component_name(serializer)
             components[error_component_name] = self._map_serializer_to_error(serializer)
+        if is_list_view(path, method, self.view):
+            list_component_name = self.get_list_component_name(serializer)
+            components[list_component_name] = (
+                self.path_component_schemas.pop(
+                    # This should be set in a previous call to get_operation >> get_responses
+                    list_component_name,
+                    None,
+                )
+                # Fall back to rebuilding the list component.
+                or self._map_serializer_to_ref_list(serializer)
+            )
+
         return components
 
     def _get_error_reference(self, serializer):
@@ -92,7 +133,7 @@ class DefaultSchema(AutoSchema):
             )
         }
 
-    def _get_error_response(self, path, method, request_response):
+    def _get_error_response(self, path, method, _request_response):
 
         response_media_types = [media_type for media_type in self.response_media_types]
         serializer = self.get_serializer(path, method)
@@ -106,9 +147,11 @@ class DefaultSchema(AutoSchema):
 
     def get_responses(self, path, method):
         """
-        Update the property example's with the path, host and scheme of the request.
+        Update the property example's with the path, host and scheme of the
+        request.
         """
         responses = super().get_responses(path, method)
+        # Update the links in place
         if is_list_view(path, method, self.view):
 
             for response_properties in [
@@ -119,8 +162,27 @@ class DefaultSchema(AutoSchema):
                 self._update_link(path, response_properties, "previous", "example")
                 self._update_link(path, response_properties, "next", "example")
 
+            for _, content in [
+                content_item
+                for response in responses.values()
+                for content_item in response["content"].items()  # type: ignore
+            ]:
+                serializer = self.get_serializer(path, method)
+                list_component_name = self.get_list_component_name(serializer)
+                list_component_schema = content["schema"]
+                # Capture List Component
+                self.path_component_schemas[list_component_name] = list_component_schema
+                # Set Schema as ref to List Component
+                content["schema"] = {
+                    "$ref": f"#/components/schemas/{list_component_name}"
+                }
+
         if method == "POST":
             responses["400"] = self._get_error_response(path, method, responses["201"])
+
+        # TODO: populate "Links"
+        # if method == "GET":
+        #    responses["200"]["links"] = {"ReportRelDate": {"operationId": "getReport"}}
 
         return responses
 

@@ -1,9 +1,5 @@
-from dataclasses import dataclass
-from datetime import date
-
 from api.core.rest import IsAuthenticatedOrCreateOnly
-from api.leagues import models, serializers
-from django.contrib.auth.models import AbstractBaseUser
+from api.leagues import filters, models, serializers
 from rest_framework import generics, viewsets
 
 
@@ -15,6 +11,7 @@ class PlayerViewSet(viewsets.ModelViewSet):
 class TeamViewSet(viewsets.ModelViewSet):
     queryset = models.Team.objects.all()
     serializer_class = serializers.TeamSerializer
+    filterset_class = filters.F
 
 
 class SeasonViewSet(viewsets.ModelViewSet):
@@ -34,8 +31,13 @@ class ProfileViewSet(
     serializer_class = serializers.ProfileSerializer
     permission_classes = [IsAuthenticatedOrCreateOnly]
 
+    def get_queryset(self):
+        if self.request:
+            return models.Player.objects.filter(user=self.request.user)
+        return models.Player.objects.none()
+
     def get_object(self):
-        player = models.Player.objects.get(user=self.request.user)
+        player = super().get_object()
         date_joined = player.user.date_joined.date()
         return serializers.Profile(
             pk=player.pk, date_joined=date_joined, player=player, user=player.user

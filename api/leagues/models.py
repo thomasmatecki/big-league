@@ -1,6 +1,6 @@
-from django.db import models
+from __future__ import annotations
 
-# Create your models here.
+from django.db import models
 
 
 class League(models.Model):
@@ -58,7 +58,7 @@ class Schedule(models.Model):
     away = models.BooleanField()
 
     @property
-    def opponent(self):
+    def opponent(self) -> Team | None:
         if self.pk:
             # TODO: Is this executing add'l SQL even in prefetching in the view?
             return self.match.teams.exclude(pk=self.pk).first()
@@ -81,3 +81,7 @@ class Match(models.Model):
     season = models.ForeignKey(to="leagues.Season", on_delete=models.DO_NOTHING)
     teams = models.ManyToManyField(to="leagues.Team", through="leagues.Schedule")
     location = models.ForeignKey(to="leagues.Location", on_delete=models.DO_NOTHING)
+
+    @property
+    def name(self) -> str:
+        return "{0} vs {1}".format(*self.teams.values_list("name", flat=True))
