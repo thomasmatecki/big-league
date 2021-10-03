@@ -14,11 +14,10 @@
 
 
 import { Configuration } from "./configuration";
-import { RequiredError,　RequestArgs } from "./base";
+import { RequiredError, RequestArgs } from "./base";
 import { AxiosInstance } from 'axios';
 
 /**
- *
  * @export
  */
 export const DUMMY_BASE_URL = 'https://example.com'
@@ -127,7 +126,7 @@ export const toPathString = function (url: URL) {
 }
 
 /**
- *
+ * 
  * @export
  */
 export const createRequestFunction = function (axiosArgs: RequestArgs, globalAxios: AxiosInstance, BASE_PATH: string, configuration?: Configuration) {

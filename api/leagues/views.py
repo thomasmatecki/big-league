@@ -1,5 +1,6 @@
 from api.core.rest import IsAuthenticatedOrCreateOnly
 from api.leagues import filters, models, serializers
+from django.shortcuts import get_object_or_404
 from rest_framework import generics, viewsets
 
 
@@ -37,7 +38,11 @@ class ProfileViewSet(
         return models.Player.objects.none()
 
     def get_object(self):
-        player = super().get_object()
+        queryset = self.get_queryset()
+        player = get_object_or_404(queryset)
+        # May raise a permission denied
+        self.check_object_permissions(self.request, player)
+
         date_joined = player.user.date_joined.date()
         return serializers.Profile(
             pk=player.pk, date_joined=date_joined, player=player, user=player.user

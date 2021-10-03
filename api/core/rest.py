@@ -58,7 +58,7 @@ class DefaultSchemaGenerator(SchemaGenerator):
         schema["components"].update({"securitySchemes": self._get_security_schemes()})
         schema["security"] = [{"bearerAuth": []}]
 
-        schema["components"]["schemas"] = OrderedDict(
+        schema["components"]["schemas"] = dict(
             sorted(schema["components"]["schemas"].items())
         )
 

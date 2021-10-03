@@ -1,7 +1,21 @@
+import { AxiosResponse } from "axios";
 import { format } from "date-fns";
-import { Box, Grid, List, Text } from "grommet";
+import {
+  Box,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Grid,
+  List,
+  Text,
+} from "grommet";
+import R, { assoc, indexBy, lens, lensProp, path, prop, set, view } from "ramda";
+import React, { useState } from "react";
+import { useQuery, UseQueryResult } from "react-query";
 import UserLayout from "../components/UserLayout";
-import { Schedule, UserApi } from "../gen/sdk";
+import { Schedule, Team, TeamList, UserApi } from "../gen/sdk";
+import { restApi } from "../lib/sdk";
 import { withUserApi } from "../lib/session";
 
 type ScheduleResult = {
@@ -30,7 +44,13 @@ const ScheduleItem = ({ item }: { item: Schedule }) => {
   const date = new Date(item.datetime);
   return (
     <Box fill="horizontal" direction="row" gap="small">
-      <Box border={{ side: "left", color: "background-contrast" }} pad="medium">
+      <Box
+        border={{
+          side: "left",
+          color: "background-contrast",
+        }}
+        pad="medium"
+      >
         <Box>
           <Text weight="bold">{format(date, "dd")}</Text>
         </Box>
@@ -60,7 +80,76 @@ const ScheduleItem = ({ item }: { item: Schedule }) => {
   );
 };
 
+const MatchBox = ({ scheduleItem }: { scheduleItem: Schedule }) => {
+  const teamIds = [scheduleItem.team.id, scheduleItem.opponent.id];
+
+  // Retrieve the teams for the user and their opponent
+  const queryResult: UseQueryResult<AxiosResponse<TeamList>> = useQuery(
+    ["teams", teamIds],
+    async (): Promise<AxiosResponse<TeamList>> =>
+      await restApi.listTeams(1, teamIds?.join(","))
+  );
+
+  const { data, isSuccess }: UseQueryResult<AxiosResponse<TeamList>> = queryResult;
+
+  if (isSuccess) {
+    const teamsById = indexBy(prop('id'), (data as AxiosResponse<TeamList>).data.results);
+  }
+
+  return (
+    <Card background="light-1">
+      <CardHeader pad="medium" background="white">
+        <Grid
+          fill
+          columns={["flex", "xsmall", "medium", "xsmall", "flex"]}
+          rows={["flex"]}
+          areas={[
+            ["team", "team-logo", "faceoff", "opponent-logo", "opponent"],
+          ]}
+          gap="small"
+        >
+          <Box gridArea="team" align="end">
+            eam
+          </Box>
+
+          <Box gridArea="team-logo" align="end">
+            team-logo
+          </Box>
+
+          <Box gridArea="faceoff" align="center">
+            <Text weight="bold">Long Branch Park -- Field 1</Text>
+            <Text>Monday, August 1</Text>
+          </Box>
+          <Box gridArea="opponent-logo" align="start">
+            opplogo
+          </Box>
+
+          <Box gridArea="opponent" align="start">
+            Opp
+          </Box>
+        </Grid>
+      </CardHeader>
+
+      <CardBody pad="medium">
+        <Grid
+          fill
+          columns={["1/3", "1/3", "1/3"]}
+          rows={["flex"]}
+          areas={[["team-roster", "opponent-roster", "location"]]}
+          gap="small"
+        ></Grid>
+      </CardBody>
+
+      <CardFooter pad={{ horizontal: "small" }} background="white">
+        Game {scheduleItem?.match.id}
+      </CardFooter>
+    </Card>
+  );
+};
+
 const SchedulePage = (props: Props) => {
+  const [selectedItem, setSelected] = useState(props.schedule.results[0]);
+
   return (
     <UserLayout>
       <Box fill as="main">
@@ -73,24 +162,31 @@ const SchedulePage = (props: Props) => {
             ["sidebar", "main"],
             ["footer", "footer"],
           ]}
-          gap="small"
         >
           <Box background="brand" gridArea="header">
             Filter/Search
           </Box>
 
           <Box background="light-1" gridArea="sidebar">
-            <List data={props.schedule.results}>
+            <List
+              data={props.schedule.results}
+              pad="none"
+              border={{ color: "background-contrast" }}
+            >
               {
                 // TODO: implement onMore
                 (item: Schedule, idx: number) => (
                   <Box
                     key={idx}
                     height="xsmall"
-                    margin="medium"
                     direction="row"
                     justify="start"
                     align="center"
+                    pad="none"
+                    background={{
+                      color: selectedItem.id === item.id ? "white" : "light-1",
+                    }}
+                    onClick={() => setSelected(item)}
                   >
                     <ScheduleItem item={item} />
                   </Box>
@@ -99,8 +195,8 @@ const SchedulePage = (props: Props) => {
             </List>
           </Box>
 
-          <Box background="light-2" gridArea="main">
-            Main
+          <Box gridArea="main" margin="small">
+            <MatchBox scheduleItem={selectedItem}></MatchBox>
           </Box>
 
           <Box background="brand" gridArea="footer"></Box>

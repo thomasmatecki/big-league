@@ -19,25 +19,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                    example: 123
-                  next:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://localhost.test/rest/users/?page=3
-                  previous:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://localhost.test/rest/users/?page=1
-                  results:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/UserList'
           description: ''
       tags:
       - rest
@@ -77,25 +59,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                    example: 123
-                  next:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://localhost.test/rest/players/?page=3
-                  previous:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://localhost.test/rest/players/?page=1
-                  results:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Player'
+                $ref: '#/components/schemas/PlayerList'
           description: ''
       tags:
       - rest
@@ -106,12 +70,6 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/Player'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Player'
-          multipart/form-data:
             schema:
               $ref: '#/components/schemas/Player'
       responses:
@@ -164,12 +122,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Player'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Player'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Player'
       responses:
         '200':
           content:
@@ -192,12 +144,6 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/Player'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Player'
-          multipart/form-data:
             schema:
               $ref: '#/components/schemas/Player'
       responses:
@@ -235,30 +181,18 @@ paths:
         description: A page number within the paginated result set.
         schema:
           type: integer
+      - name: id
+        required: false
+        in: query
+        description: id
+        schema:
+          type: string
       responses:
         '200':
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                    example: 123
-                  next:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://localhost.test/rest/teams/?page=3
-                  previous:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://localhost.test/rest/teams/?page=1
-                  results:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Team'
+                $ref: '#/components/schemas/TeamList'
           description: ''
       tags:
       - rest
@@ -269,12 +203,6 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/Team'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Team'
-          multipart/form-data:
             schema:
               $ref: '#/components/schemas/Team'
       responses:
@@ -303,6 +231,12 @@ paths:
         description: A unique integer value identifying this team.
         schema:
           type: string
+      - name: id
+        required: false
+        in: query
+        description: id
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -322,15 +256,15 @@ paths:
         description: A unique integer value identifying this team.
         schema:
           type: string
+      - name: id
+        required: false
+        in: query
+        description: id
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/Team'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Team'
-          multipart/form-data:
             schema:
               $ref: '#/components/schemas/Team'
       responses:
@@ -352,15 +286,15 @@ paths:
         description: A unique integer value identifying this team.
         schema:
           type: string
+      - name: id
+        required: false
+        in: query
+        description: id
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/Team'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Team'
-          multipart/form-data:
             schema:
               $ref: '#/components/schemas/Team'
       responses:
@@ -380,6 +314,12 @@ paths:
         in: path
         required: true
         description: A unique integer value identifying this team.
+        schema:
+          type: string
+      - name: id
+        required: false
+        in: query
+        description: id
         schema:
           type: string
       responses:
@@ -403,25 +343,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                    example: 123
-                  next:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://localhost.test/rest/seasons/?page=3
-                  previous:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://localhost.test/rest/seasons/?page=1
-                  results:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Season'
+                $ref: '#/components/schemas/SeasonList'
           description: ''
       tags:
       - rest
@@ -432,12 +354,6 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/Season'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Season'
-          multipart/form-data:
             schema:
               $ref: '#/components/schemas/Season'
       responses:
@@ -490,12 +406,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Season'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Season'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Season'
       responses:
         '200':
           content:
@@ -518,12 +428,6 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/Season'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Season'
-          multipart/form-data:
             schema:
               $ref: '#/components/schemas/Season'
       responses:
@@ -566,25 +470,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                    example: 123
-                  next:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://localhost.test/rest/leagues/?page=3
-                  previous:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://localhost.test/rest/leagues/?page=1
-                  results:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/League'
+                $ref: '#/components/schemas/LeagueList'
           description: ''
       tags:
       - rest
@@ -595,12 +481,6 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/League'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/League'
-          multipart/form-data:
             schema:
               $ref: '#/components/schemas/League'
       responses:
@@ -653,12 +533,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/League'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/League'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/League'
       responses:
         '200':
           content:
@@ -681,12 +555,6 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/League'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/League'
-          multipart/form-data:
             schema:
               $ref: '#/components/schemas/League'
       responses:
@@ -729,25 +597,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                    example: 123
-                  next:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://localhost.test/rest/matches/?page=3
-                  previous:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://localhost.test/rest/matches/?page=1
-                  results:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Match'
+                $ref: '#/components/schemas/MatchList'
           description: ''
       tags:
       - rest
@@ -758,12 +608,6 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/Match'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Match'
-          multipart/form-data:
             schema:
               $ref: '#/components/schemas/Match'
       responses:
@@ -816,12 +660,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Match'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Match'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Match'
       responses:
         '200':
           content:
@@ -844,12 +682,6 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/Match'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Match'
-          multipart/form-data:
             schema:
               $ref: '#/components/schemas/Match'
       responses:
@@ -899,12 +731,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Profile'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Profile'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Profile'
       responses:
         '201':
           content:
@@ -929,12 +755,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Profile'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Profile'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Profile'
       responses:
         '200':
           content:
@@ -951,12 +771,6 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/Profile'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Profile'
-          multipart/form-data:
             schema:
               $ref: '#/components/schemas/Profile'
       responses:
@@ -984,25 +798,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                    example: 123
-                  next:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://localhost.test/user/schedule/?page=3
-                  previous:
-                    type: string
-                    nullable: true
-                    format: uri
-                    example: http://localhost.test/user/schedule/?page=1
-                  results:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Schedule'
+                $ref: '#/components/schemas/ScheduleList'
           description: ''
       tags:
       - user
@@ -1029,12 +825,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Session'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Session'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Session'
       responses:
         '200':
           content:
@@ -1046,44 +836,126 @@ paths:
       - user
 components:
   schemas:
-    User:
+    FieldError:
+      type: array
+      items:
+        type: string
+    League:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
-        email:
+        url:
           type: string
-          format: email
-          maxLength: 254
-        username:
+          readOnly: true
+        name:
           type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
-            only.
-          pattern: ^[\w.@+-]+\z
-          maxLength: 150
-        first_name:
+          maxLength: 100
+      required:
+      - name
+    LeagueError:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/FieldError'
+    LeagueList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
           type: string
-          maxLength: 150
-        last_name:
+          nullable: true
+          format: uri
+          example: http://localhost.test/rest/leagues/?page=3
+        previous:
           type: string
-          maxLength: 150
-        date_joined:
+          nullable: true
+          format: uri
+          example: http://localhost.test/rest/leagues/?page=1
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/League'
+    Match:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        teams:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                readOnly: true
+              url:
+                type: string
+                readOnly: true
+              name:
+                type: string
+                maxLength: 100
+            required:
+            - name
+        season:
+          type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            url:
+              type: string
+              readOnly: true
+            name:
+              type: string
+              maxLength: 100
+          required:
+          - name
+        datetime:
           type: string
           format: date-time
-        is_staff:
-          type: boolean
-          description: Designates whether the user can log into this admin site.
-        is_superuser:
-          type: boolean
-          description: Designates that this user has all permissions without explicitly
-            assigning them.
-        is_active:
-          type: boolean
-          description: Designates whether this user should be treated as active. Unselect
-            this instead of deleting accounts.
+        location:
+          type: integer
       required:
-      - username
+      - teams
+      - season
+      - datetime
+      - location
+    MatchError:
+      type: object
+      properties:
+        teams:
+          $ref: '#/components/schemas/FieldError'
+        season:
+          $ref: '#/components/schemas/FieldError'
+        datetime:
+          $ref: '#/components/schemas/FieldError'
+        location:
+          $ref: '#/components/schemas/FieldError'
+    MatchList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://localhost.test/rest/matches/?page=3
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://localhost.test/rest/matches/?page=1
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Match'
     Player:
       type: object
       properties:
@@ -1133,6 +1005,271 @@ components:
       - last_name
       - first_name
       - display_name
+    PlayerError:
+      type: object
+      properties:
+        email:
+          $ref: '#/components/schemas/FieldError'
+        last_name:
+          $ref: '#/components/schemas/FieldError'
+        first_name:
+          $ref: '#/components/schemas/FieldError'
+        display_name:
+          $ref: '#/components/schemas/FieldError'
+        team_ids:
+          $ref: '#/components/schemas/FieldError'
+    PlayerList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://localhost.test/rest/players/?page=3
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://localhost.test/rest/players/?page=1
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+    Profile:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+          default: ''
+        password:
+          type: string
+          writeOnly: true
+        display_name:
+          type: string
+        biography:
+          type: string
+        date_joined:
+          type: string
+          format: date
+          readOnly: true
+        image:
+          type: string
+          format: binary
+          nullable: true
+      required:
+      - first_name
+      - last_name
+      - password
+    ProfileError:
+      type: object
+      properties:
+        first_name:
+          $ref: '#/components/schemas/FieldError'
+        last_name:
+          $ref: '#/components/schemas/FieldError'
+        email:
+          $ref: '#/components/schemas/FieldError'
+        password:
+          $ref: '#/components/schemas/FieldError'
+        display_name:
+          $ref: '#/components/schemas/FieldError'
+        biography:
+          $ref: '#/components/schemas/FieldError'
+        image:
+          $ref: '#/components/schemas/FieldError'
+    Schedule:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        team:
+          type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            url:
+              type: string
+              readOnly: true
+            name:
+              type: string
+              maxLength: 100
+          required:
+          - name
+        opponent:
+          type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            url:
+              type: string
+              readOnly: true
+            name:
+              type: string
+              maxLength: 100
+          required:
+          - name
+        match:
+          type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            url:
+              type: string
+              readOnly: true
+            name:
+              type: string
+              readOnly: true
+        datetime:
+          type: string
+          format: date-time
+        location:
+          type: string
+        away:
+          type: boolean
+      required:
+      - team
+      - opponent
+      - match
+      - datetime
+      - location
+      - away
+    ScheduleList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://localhost.test/user/schedule/?page=3
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://localhost.test/user/schedule/?page=1
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Schedule'
+    Season:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        url:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        league:
+          type: object
+          properties:
+            id:
+              type: integer
+              readOnly: true
+            url:
+              type: string
+              readOnly: true
+            name:
+              type: string
+              maxLength: 100
+          required:
+          - name
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        teams:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                readOnly: true
+              url:
+                type: string
+                readOnly: true
+              name:
+                type: string
+                maxLength: 100
+            required:
+            - name
+      required:
+      - name
+      - league
+      - start_date
+      - end_date
+      - teams
+    SeasonError:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/FieldError'
+        league:
+          $ref: '#/components/schemas/FieldError'
+        start_date:
+          $ref: '#/components/schemas/FieldError'
+        end_date:
+          $ref: '#/components/schemas/FieldError'
+        teams:
+          $ref: '#/components/schemas/FieldError'
+    SeasonList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://localhost.test/rest/seasons/?page=3
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://localhost.test/rest/seasons/?page=1
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Season'
+    Session:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          writeOnly: true
+        csrf_token:
+          type: string
+          readOnly: true
+        expiry_date:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - username
+      - password
     Team:
       type: object
       properties:
@@ -1209,216 +1346,6 @@ components:
       - league
       - season
       - captain
-    Season:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        url:
-          type: string
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        league:
-          type: object
-          properties:
-            id:
-              type: integer
-              readOnly: true
-            url:
-              type: string
-              readOnly: true
-            name:
-              type: string
-              maxLength: 100
-          required:
-          - name
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-        teams:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-                readOnly: true
-              url:
-                type: string
-                readOnly: true
-              name:
-                type: string
-                maxLength: 100
-            required:
-            - name
-      required:
-      - name
-      - league
-      - start_date
-      - end_date
-      - teams
-    League:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        url:
-          type: string
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-      required:
-      - name
-    Match:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        teams:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-                readOnly: true
-              url:
-                type: string
-                readOnly: true
-              name:
-                type: string
-                maxLength: 100
-            required:
-            - name
-        datetime:
-          type: string
-          format: date-time
-        season:
-          type: integer
-        location:
-          type: integer
-      required:
-      - teams
-      - datetime
-      - season
-      - location
-    Profile:
-      type: object
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-          format: email
-          default: ''
-        password:
-          type: string
-          writeOnly: true
-        display_name:
-          type: string
-        biography:
-          type: string
-        date_joined:
-          type: string
-          format: date
-          readOnly: true
-        image:
-          type: string
-          format: binary
-          nullable: true
-      required:
-      - first_name
-      - last_name
-      - password
-    Schedule:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        team:
-          type: object
-          properties:
-            id:
-              type: integer
-              readOnly: true
-            url:
-              type: string
-              readOnly: true
-            name:
-              type: string
-              maxLength: 100
-          required:
-          - name
-        opponent:
-          type: object
-          properties:
-            id:
-              type: integer
-              readOnly: true
-            url:
-              type: string
-              readOnly: true
-            name:
-              type: string
-              maxLength: 100
-          required:
-          - name
-        datetime:
-          type: string
-          format: date-time
-        location:
-          type: string
-        away:
-          type: boolean
-      required:
-      - team
-      - opponent
-      - datetime
-      - location
-      - away
-    Session:
-      type: object
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-          writeOnly: true
-        csrf_token:
-          type: string
-          readOnly: true
-        expiry_date:
-          type: string
-          format: date-time
-          readOnly: true
-      required:
-      - username
-      - password
-    PlayerError:
-      type: object
-      properties:
-        email:
-          $ref: '#/components/schemas/FieldError'
-        last_name:
-          $ref: '#/components/schemas/FieldError'
-        first_name:
-          $ref: '#/components/schemas/FieldError'
-        display_name:
-          $ref: '#/components/schemas/FieldError'
-        team_ids:
-          $ref: '#/components/schemas/FieldError'
     TeamError:
       type: object
       properties:
@@ -1430,56 +1357,84 @@ components:
           $ref: '#/components/schemas/FieldError'
         captain:
           $ref: '#/components/schemas/FieldError'
-    SeasonError:
+    TeamList:
       type: object
       properties:
-        name:
-          $ref: '#/components/schemas/FieldError'
-        league:
-          $ref: '#/components/schemas/FieldError'
-        start_date:
-          $ref: '#/components/schemas/FieldError'
-        end_date:
-          $ref: '#/components/schemas/FieldError'
-        teams:
-          $ref: '#/components/schemas/FieldError'
-    LeagueError:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://localhost.test/rest/teams/?page=3
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://localhost.test/rest/teams/?page=1
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
+    User:
       type: object
       properties:
-        name:
-          $ref: '#/components/schemas/FieldError'
-    MatchError:
-      type: object
-      properties:
-        teams:
-          $ref: '#/components/schemas/FieldError'
-        datetime:
-          $ref: '#/components/schemas/FieldError'
-        season:
-          $ref: '#/components/schemas/FieldError'
-        location:
-          $ref: '#/components/schemas/FieldError'
-    ProfileError:
-      type: object
-      properties:
-        first_name:
-          $ref: '#/components/schemas/FieldError'
-        last_name:
-          $ref: '#/components/schemas/FieldError'
+        id:
+          type: integer
+          readOnly: true
         email:
-          $ref: '#/components/schemas/FieldError'
-        password:
-          $ref: '#/components/schemas/FieldError'
-        display_name:
-          $ref: '#/components/schemas/FieldError'
-        biography:
-          $ref: '#/components/schemas/FieldError'
-        image:
-          $ref: '#/components/schemas/FieldError'
-    FieldError:
-      type: array
-      items:
-        type: string
+          type: string
+          format: email
+          maxLength: 254
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+\z
+          maxLength: 150
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        date_joined:
+          type: string
+          format: date-time
+        is_staff:
+          type: boolean
+          description: Designates whether the user can log into this admin site.
+        is_superuser:
+          type: boolean
+          description: Designates that this user has all permissions without explicitly
+            assigning them.
+        is_active:
+          type: boolean
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+      required:
+      - username
+    UserList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://localhost.test/rest/users/?page=3
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://localhost.test/rest/users/?page=1
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
   securitySchemes:
     bearerAuth:
       type: http

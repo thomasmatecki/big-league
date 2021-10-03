@@ -23,227 +23,9 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 
 /**
  * 
- * @export
- * @interface InlineResponse200
+ * @interface ILeague
  */
-export interface InlineResponse200 {
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse200
-     */
-    count?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200
-     */
-    next?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse200
-     */
-    previous?: string | null;
-    /**
-     * 
-     * @type {Array<User>}
-     * @memberof InlineResponse200
-     */
-    results?: Array<User>;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2001
- */
-export interface InlineResponse2001 {
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2001
-     */
-    count?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2001
-     */
-    next?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2001
-     */
-    previous?: string | null;
-    /**
-     * 
-     * @type {Array<Player>}
-     * @memberof InlineResponse2001
-     */
-    results?: Array<Player>;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2002
- */
-export interface InlineResponse2002 {
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2002
-     */
-    count?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002
-     */
-    next?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2002
-     */
-    previous?: string | null;
-    /**
-     * 
-     * @type {Array<Team>}
-     * @memberof InlineResponse2002
-     */
-    results?: Array<Team>;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2003
- */
-export interface InlineResponse2003 {
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2003
-     */
-    count?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2003
-     */
-    next?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2003
-     */
-    previous?: string | null;
-    /**
-     * 
-     * @type {Array<Season>}
-     * @memberof InlineResponse2003
-     */
-    results?: Array<Season>;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2004
- */
-export interface InlineResponse2004 {
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2004
-     */
-    count?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004
-     */
-    next?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2004
-     */
-    previous?: string | null;
-    /**
-     * 
-     * @type {Array<League>}
-     * @memberof InlineResponse2004
-     */
-    results?: Array<League>;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2005
- */
-export interface InlineResponse2005 {
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2005
-     */
-    count?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2005
-     */
-    next?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2005
-     */
-    previous?: string | null;
-    /**
-     * 
-     * @type {Array<Match>}
-     * @memberof InlineResponse2005
-     */
-    results?: Array<Match>;
-}
-/**
- * 
- * @export
- * @interface InlineResponse2006
- */
-export interface InlineResponse2006 {
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2006
-     */
-    count?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2006
-     */
-    next?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2006
-     */
-    previous?: string | null;
-    /**
-     * 
-     * @type {Array<Schedule>}
-     * @memberof InlineResponse2006
-     */
-    results?: Array<Schedule>;
-}
-/**
- * 
- * @export
- * @interface League
- */
-export interface League {
+export interface ILeague {
     /**
      * 
      * @type {number}
@@ -263,12 +45,35 @@ export interface League {
      */
     name: string;
 }
+
 /**
  * 
- * @export
- * @interface LeagueError
+ * @class League
  */
-export interface LeagueError {
+export class League implements ILeague{
+        /**
+         * @type {number}
+         * @memberof League
+         */
+        id: number;
+        /**
+         * @type {string}
+         * @memberof League
+         */
+        url: string;
+        /**
+         * @type {string}
+         * @memberof League
+         */
+        name: string;
+}
+
+
+/**
+ * 
+ * @interface ILeagueError
+ */
+export interface ILeagueError {
     /**
      * 
      * @type {Array<string>}
@@ -276,12 +81,84 @@ export interface LeagueError {
      */
     name?: Array<string>;
 }
+
 /**
  * 
- * @export
- * @interface Match
+ * @class LeagueError
  */
-export interface Match {
+export class LeagueError implements ILeagueError{
+        /**
+         * @type {Array<string>}
+         * @memberof LeagueError
+         */
+        name: Array<string>;
+}
+
+
+/**
+ * 
+ * @interface ILeagueList
+ */
+export interface ILeagueList {
+    /**
+     * 
+     * @type {number}
+     * @memberof LeagueList
+     */
+    count?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LeagueList
+     */
+    next?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LeagueList
+     */
+    previous?: string | null;
+    /**
+     * 
+     * @type {Array<League>}
+     * @memberof LeagueList
+     */
+    results?: Array<League>;
+}
+
+/**
+ * 
+ * @class LeagueList
+ */
+export class LeagueList implements ILeagueList{
+        /**
+         * @type {number}
+         * @memberof LeagueList
+         */
+        count: number;
+        /**
+         * @type {string}
+         * @memberof LeagueList
+         */
+        next: string | null;
+        /**
+         * @type {string}
+         * @memberof LeagueList
+         */
+        previous: string | null;
+        /**
+         * @type {Array<League>}
+         * @memberof LeagueList
+         */
+        results: Array<League>;
+}
+
+
+/**
+ * 
+ * @interface IMatch
+ */
+export interface IMatch {
     /**
      * 
      * @type {number}
@@ -290,10 +167,16 @@ export interface Match {
     id?: number;
     /**
      * 
-     * @type {Array<PlayerTeams>}
+     * @type {Array<MatchTeams>}
      * @memberof Match
      */
-    teams: Array<PlayerTeams>;
+    teams: Array<MatchTeams>;
+    /**
+     * 
+     * @type {MatchTeams}
+     * @memberof Match
+     */
+    season: MatchTeams;
     /**
      * 
      * @type {string}
@@ -305,20 +188,47 @@ export interface Match {
      * @type {number}
      * @memberof Match
      */
-    season: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof Match
-     */
     location: number;
 }
+
 /**
  * 
- * @export
- * @interface MatchError
+ * @class Match
  */
-export interface MatchError {
+export class Match implements IMatch{
+        /**
+         * @type {number}
+         * @memberof Match
+         */
+        id: number;
+        /**
+         * @type {Array<MatchTeams>}
+         * @memberof Match
+         */
+        teams: Array<MatchTeams>;
+        /**
+         * @type {MatchTeams}
+         * @memberof Match
+         */
+        season: MatchTeams;
+        /**
+         * @type {string}
+         * @memberof Match
+         */
+        datetime: string;
+        /**
+         * @type {number}
+         * @memberof Match
+         */
+        location: number;
+}
+
+
+/**
+ * 
+ * @interface IMatchError
+ */
+export interface IMatchError {
     /**
      * 
      * @type {Array<string>}
@@ -330,13 +240,13 @@ export interface MatchError {
      * @type {Array<string>}
      * @memberof MatchError
      */
-    datetime?: Array<string>;
+    season?: Array<string>;
     /**
      * 
      * @type {Array<string>}
      * @memberof MatchError
      */
-    season?: Array<string>;
+    datetime?: Array<string>;
     /**
      * 
      * @type {Array<string>}
@@ -344,12 +254,147 @@ export interface MatchError {
      */
     location?: Array<string>;
 }
+
 /**
  * 
- * @export
- * @interface Player
+ * @class MatchError
  */
-export interface Player {
+export class MatchError implements IMatchError{
+        /**
+         * @type {Array<string>}
+         * @memberof MatchError
+         */
+        teams: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof MatchError
+         */
+        season: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof MatchError
+         */
+        datetime: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof MatchError
+         */
+        location: Array<string>;
+}
+
+
+/**
+ * 
+ * @interface IMatchList
+ */
+export interface IMatchList {
+    /**
+     * 
+     * @type {number}
+     * @memberof MatchList
+     */
+    count?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof MatchList
+     */
+    next?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof MatchList
+     */
+    previous?: string | null;
+    /**
+     * 
+     * @type {Array<Match>}
+     * @memberof MatchList
+     */
+    results?: Array<Match>;
+}
+
+/**
+ * 
+ * @class MatchList
+ */
+export class MatchList implements IMatchList{
+        /**
+         * @type {number}
+         * @memberof MatchList
+         */
+        count: number;
+        /**
+         * @type {string}
+         * @memberof MatchList
+         */
+        next: string | null;
+        /**
+         * @type {string}
+         * @memberof MatchList
+         */
+        previous: string | null;
+        /**
+         * @type {Array<Match>}
+         * @memberof MatchList
+         */
+        results: Array<Match>;
+}
+
+
+/**
+ * 
+ * @interface IMatchTeams
+ */
+export interface IMatchTeams {
+    /**
+     * 
+     * @type {number}
+     * @memberof MatchTeams
+     */
+    id?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof MatchTeams
+     */
+    url?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MatchTeams
+     */
+    name: string;
+}
+
+/**
+ * 
+ * @class MatchTeams
+ */
+export class MatchTeams implements IMatchTeams{
+        /**
+         * @type {number}
+         * @memberof MatchTeams
+         */
+        id: number;
+        /**
+         * @type {string}
+         * @memberof MatchTeams
+         */
+        url: string;
+        /**
+         * @type {string}
+         * @memberof MatchTeams
+         */
+        name: string;
+}
+
+
+/**
+ * 
+ * @interface IPlayer
+ */
+export interface IPlayer {
     /**
      * 
      * @type {number}
@@ -388,10 +433,10 @@ export interface Player {
     display_name: string;
     /**
      * 
-     * @type {Array<PlayerTeams>}
+     * @type {Array<MatchTeams>}
      * @memberof Player
      */
-    teams?: Array<PlayerTeams>;
+    teams?: Array<MatchTeams>;
     /**
      * 
      * @type {Array<number>}
@@ -399,12 +444,60 @@ export interface Player {
      */
     team_ids?: Array<number>;
 }
+
 /**
  * 
- * @export
- * @interface PlayerError
+ * @class Player
  */
-export interface PlayerError {
+export class Player implements IPlayer{
+        /**
+         * @type {number}
+         * @memberof Player
+         */
+        id: number;
+        /**
+         * @type {string}
+         * @memberof Player
+         */
+        url: string;
+        /**
+         * @type {string}
+         * @memberof Player
+         */
+        email: string;
+        /**
+         * @type {string}
+         * @memberof Player
+         */
+        last_name: string;
+        /**
+         * @type {string}
+         * @memberof Player
+         */
+        first_name: string;
+        /**
+         * @type {string}
+         * @memberof Player
+         */
+        display_name: string;
+        /**
+         * @type {Array<MatchTeams>}
+         * @memberof Player
+         */
+        teams: Array<MatchTeams>;
+        /**
+         * @type {Array<number>}
+         * @memberof Player
+         */
+        team_ids: Array<number>;
+}
+
+
+/**
+ * 
+ * @interface IPlayerError
+ */
+export interface IPlayerError {
     /**
      * 
      * @type {Array<string>}
@@ -436,37 +529,104 @@ export interface PlayerError {
      */
     team_ids?: Array<string>;
 }
+
 /**
  * 
- * @export
- * @interface PlayerTeams
+ * @class PlayerError
  */
-export interface PlayerTeams {
+export class PlayerError implements IPlayerError{
+        /**
+         * @type {Array<string>}
+         * @memberof PlayerError
+         */
+        email: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof PlayerError
+         */
+        last_name: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof PlayerError
+         */
+        first_name: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof PlayerError
+         */
+        display_name: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof PlayerError
+         */
+        team_ids: Array<string>;
+}
+
+
+/**
+ * 
+ * @interface IPlayerList
+ */
+export interface IPlayerList {
     /**
      * 
      * @type {number}
-     * @memberof PlayerTeams
+     * @memberof PlayerList
      */
-    id?: number;
+    count?: number;
     /**
      * 
      * @type {string}
-     * @memberof PlayerTeams
+     * @memberof PlayerList
      */
-    url?: string;
+    next?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PlayerTeams
+     * @memberof PlayerList
      */
-    name: string;
+    previous?: string | null;
+    /**
+     * 
+     * @type {Array<Player>}
+     * @memberof PlayerList
+     */
+    results?: Array<Player>;
 }
+
 /**
  * 
- * @export
- * @interface Profile
+ * @class PlayerList
  */
-export interface Profile {
+export class PlayerList implements IPlayerList{
+        /**
+         * @type {number}
+         * @memberof PlayerList
+         */
+        count: number;
+        /**
+         * @type {string}
+         * @memberof PlayerList
+         */
+        next: string | null;
+        /**
+         * @type {string}
+         * @memberof PlayerList
+         */
+        previous: string | null;
+        /**
+         * @type {Array<Player>}
+         * @memberof PlayerList
+         */
+        results: Array<Player>;
+}
+
+
+/**
+ * 
+ * @interface IProfile
+ */
+export interface IProfile {
     /**
      * 
      * @type {string}
@@ -516,12 +676,60 @@ export interface Profile {
      */
     image?: any | null;
 }
+
 /**
  * 
- * @export
- * @interface ProfileError
+ * @class Profile
  */
-export interface ProfileError {
+export class Profile implements IProfile{
+        /**
+         * @type {string}
+         * @memberof Profile
+         */
+        first_name: string;
+        /**
+         * @type {string}
+         * @memberof Profile
+         */
+        last_name: string;
+        /**
+         * @type {string}
+         * @memberof Profile
+         */
+        email: string;
+        /**
+         * @type {string}
+         * @memberof Profile
+         */
+        password: string;
+        /**
+         * @type {string}
+         * @memberof Profile
+         */
+        display_name: string;
+        /**
+         * @type {string}
+         * @memberof Profile
+         */
+        biography: string;
+        /**
+         * @type {string}
+         * @memberof Profile
+         */
+        date_joined: string;
+        /**
+         * @type {any}
+         * @memberof Profile
+         */
+        image: any | null;
+}
+
+
+/**
+ * 
+ * @interface IProfileError
+ */
+export interface IProfileError {
     /**
      * 
      * @type {Array<string>}
@@ -565,12 +773,55 @@ export interface ProfileError {
      */
     image?: Array<string>;
 }
+
 /**
  * 
- * @export
- * @interface Schedule
+ * @class ProfileError
  */
-export interface Schedule {
+export class ProfileError implements IProfileError{
+        /**
+         * @type {Array<string>}
+         * @memberof ProfileError
+         */
+        first_name: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof ProfileError
+         */
+        last_name: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof ProfileError
+         */
+        email: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof ProfileError
+         */
+        password: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof ProfileError
+         */
+        display_name: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof ProfileError
+         */
+        biography: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof ProfileError
+         */
+        image: Array<string>;
+}
+
+
+/**
+ * 
+ * @interface ISchedule
+ */
+export interface ISchedule {
     /**
      * 
      * @type {number}
@@ -579,16 +830,22 @@ export interface Schedule {
     id?: number;
     /**
      * 
-     * @type {PlayerTeams}
+     * @type {MatchTeams}
      * @memberof Schedule
      */
-    team: PlayerTeams;
+    team: MatchTeams;
     /**
      * 
-     * @type {PlayerTeams}
+     * @type {MatchTeams}
      * @memberof Schedule
      */
-    opponent: PlayerTeams;
+    opponent: MatchTeams;
+    /**
+     * 
+     * @type {ScheduleMatch}
+     * @memberof Schedule
+     */
+    match: ScheduleMatch;
     /**
      * 
      * @type {string}
@@ -608,12 +865,162 @@ export interface Schedule {
      */
     away: boolean;
 }
+
 /**
  * 
- * @export
- * @interface Season
+ * @class Schedule
  */
-export interface Season {
+export class Schedule implements ISchedule{
+        /**
+         * @type {number}
+         * @memberof Schedule
+         */
+        id: number;
+        /**
+         * @type {MatchTeams}
+         * @memberof Schedule
+         */
+        team: MatchTeams;
+        /**
+         * @type {MatchTeams}
+         * @memberof Schedule
+         */
+        opponent: MatchTeams;
+        /**
+         * @type {ScheduleMatch}
+         * @memberof Schedule
+         */
+        match: ScheduleMatch;
+        /**
+         * @type {string}
+         * @memberof Schedule
+         */
+        datetime: string;
+        /**
+         * @type {string}
+         * @memberof Schedule
+         */
+        location: string;
+        /**
+         * @type {boolean}
+         * @memberof Schedule
+         */
+        away: boolean;
+}
+
+
+/**
+ * 
+ * @interface IScheduleList
+ */
+export interface IScheduleList {
+    /**
+     * 
+     * @type {number}
+     * @memberof ScheduleList
+     */
+    count?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScheduleList
+     */
+    next?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScheduleList
+     */
+    previous?: string | null;
+    /**
+     * 
+     * @type {Array<Schedule>}
+     * @memberof ScheduleList
+     */
+    results?: Array<Schedule>;
+}
+
+/**
+ * 
+ * @class ScheduleList
+ */
+export class ScheduleList implements IScheduleList{
+        /**
+         * @type {number}
+         * @memberof ScheduleList
+         */
+        count: number;
+        /**
+         * @type {string}
+         * @memberof ScheduleList
+         */
+        next: string | null;
+        /**
+         * @type {string}
+         * @memberof ScheduleList
+         */
+        previous: string | null;
+        /**
+         * @type {Array<Schedule>}
+         * @memberof ScheduleList
+         */
+        results: Array<Schedule>;
+}
+
+
+/**
+ * 
+ * @interface IScheduleMatch
+ */
+export interface IScheduleMatch {
+    /**
+     * 
+     * @type {number}
+     * @memberof ScheduleMatch
+     */
+    id?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScheduleMatch
+     */
+    url?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScheduleMatch
+     */
+    name?: string;
+}
+
+/**
+ * 
+ * @class ScheduleMatch
+ */
+export class ScheduleMatch implements IScheduleMatch{
+        /**
+         * @type {number}
+         * @memberof ScheduleMatch
+         */
+        id: number;
+        /**
+         * @type {string}
+         * @memberof ScheduleMatch
+         */
+        url: string;
+        /**
+         * @type {string}
+         * @memberof ScheduleMatch
+         */
+        name: string;
+}
+
+
+/**
+ * 
+ * @interface ISeason
+ */
+export interface ISeason {
     /**
      * 
      * @type {number}
@@ -634,10 +1041,10 @@ export interface Season {
     name: string;
     /**
      * 
-     * @type {PlayerTeams}
+     * @type {MatchTeams}
      * @memberof Season
      */
-    league: PlayerTeams;
+    league: MatchTeams;
     /**
      * 
      * @type {string}
@@ -652,17 +1059,60 @@ export interface Season {
     end_date: string;
     /**
      * 
-     * @type {Array<PlayerTeams>}
+     * @type {Array<MatchTeams>}
      * @memberof Season
      */
-    teams: Array<PlayerTeams>;
+    teams: Array<MatchTeams>;
 }
+
 /**
  * 
- * @export
- * @interface SeasonError
+ * @class Season
  */
-export interface SeasonError {
+export class Season implements ISeason{
+        /**
+         * @type {number}
+         * @memberof Season
+         */
+        id: number;
+        /**
+         * @type {string}
+         * @memberof Season
+         */
+        url: string;
+        /**
+         * @type {string}
+         * @memberof Season
+         */
+        name: string;
+        /**
+         * @type {MatchTeams}
+         * @memberof Season
+         */
+        league: MatchTeams;
+        /**
+         * @type {string}
+         * @memberof Season
+         */
+        start_date: string;
+        /**
+         * @type {string}
+         * @memberof Season
+         */
+        end_date: string;
+        /**
+         * @type {Array<MatchTeams>}
+         * @memberof Season
+         */
+        teams: Array<MatchTeams>;
+}
+
+
+/**
+ * 
+ * @interface ISeasonError
+ */
+export interface ISeasonError {
     /**
      * 
      * @type {Array<string>}
@@ -694,12 +1144,104 @@ export interface SeasonError {
      */
     teams?: Array<string>;
 }
+
 /**
  * 
- * @export
- * @interface Session
+ * @class SeasonError
  */
-export interface Session {
+export class SeasonError implements ISeasonError{
+        /**
+         * @type {Array<string>}
+         * @memberof SeasonError
+         */
+        name: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof SeasonError
+         */
+        league: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof SeasonError
+         */
+        start_date: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof SeasonError
+         */
+        end_date: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof SeasonError
+         */
+        teams: Array<string>;
+}
+
+
+/**
+ * 
+ * @interface ISeasonList
+ */
+export interface ISeasonList {
+    /**
+     * 
+     * @type {number}
+     * @memberof SeasonList
+     */
+    count?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof SeasonList
+     */
+    next?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SeasonList
+     */
+    previous?: string | null;
+    /**
+     * 
+     * @type {Array<Season>}
+     * @memberof SeasonList
+     */
+    results?: Array<Season>;
+}
+
+/**
+ * 
+ * @class SeasonList
+ */
+export class SeasonList implements ISeasonList{
+        /**
+         * @type {number}
+         * @memberof SeasonList
+         */
+        count: number;
+        /**
+         * @type {string}
+         * @memberof SeasonList
+         */
+        next: string | null;
+        /**
+         * @type {string}
+         * @memberof SeasonList
+         */
+        previous: string | null;
+        /**
+         * @type {Array<Season>}
+         * @memberof SeasonList
+         */
+        results: Array<Season>;
+}
+
+
+/**
+ * 
+ * @interface ISession
+ */
+export interface ISession {
     /**
      * 
      * @type {string}
@@ -725,12 +1267,40 @@ export interface Session {
      */
     expiry_date?: string;
 }
+
 /**
  * 
- * @export
- * @interface Team
+ * @class Session
  */
-export interface Team {
+export class Session implements ISession{
+        /**
+         * @type {string}
+         * @memberof Session
+         */
+        username: string;
+        /**
+         * @type {string}
+         * @memberof Session
+         */
+        password: string;
+        /**
+         * @type {string}
+         * @memberof Session
+         */
+        csrf_token: string;
+        /**
+         * @type {string}
+         * @memberof Session
+         */
+        expiry_date: string;
+}
+
+
+/**
+ * 
+ * @interface ITeam
+ */
+export interface ITeam {
     /**
      * 
      * @type {number}
@@ -751,35 +1321,78 @@ export interface Team {
     name: string;
     /**
      * 
-     * @type {PlayerTeams}
+     * @type {MatchTeams}
      * @memberof Team
      */
-    league: PlayerTeams;
+    league: MatchTeams;
     /**
      * 
-     * @type {PlayerTeams}
+     * @type {MatchTeams}
      * @memberof Team
      */
-    season: PlayerTeams;
+    season: MatchTeams;
     /**
      * 
-     * @type {PlayerTeams}
+     * @type {MatchTeams}
      * @memberof Team
      */
-    captain: PlayerTeams;
+    captain: MatchTeams;
     /**
      * 
-     * @type {Array<PlayerTeams>}
+     * @type {Array<MatchTeams>}
      * @memberof Team
      */
-    players?: Array<PlayerTeams>;
+    players?: Array<MatchTeams>;
 }
+
 /**
  * 
- * @export
- * @interface TeamError
+ * @class Team
  */
-export interface TeamError {
+export class Team implements ITeam{
+        /**
+         * @type {number}
+         * @memberof Team
+         */
+        id: number;
+        /**
+         * @type {string}
+         * @memberof Team
+         */
+        url: string;
+        /**
+         * @type {string}
+         * @memberof Team
+         */
+        name: string;
+        /**
+         * @type {MatchTeams}
+         * @memberof Team
+         */
+        league: MatchTeams;
+        /**
+         * @type {MatchTeams}
+         * @memberof Team
+         */
+        season: MatchTeams;
+        /**
+         * @type {MatchTeams}
+         * @memberof Team
+         */
+        captain: MatchTeams;
+        /**
+         * @type {Array<MatchTeams>}
+         * @memberof Team
+         */
+        players: Array<MatchTeams>;
+}
+
+
+/**
+ * 
+ * @interface ITeamError
+ */
+export interface ITeamError {
     /**
      * 
      * @type {Array<string>}
@@ -805,12 +1418,99 @@ export interface TeamError {
      */
     captain?: Array<string>;
 }
+
 /**
  * 
- * @export
- * @interface User
+ * @class TeamError
  */
-export interface User {
+export class TeamError implements ITeamError{
+        /**
+         * @type {Array<string>}
+         * @memberof TeamError
+         */
+        name: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof TeamError
+         */
+        league: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof TeamError
+         */
+        season: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof TeamError
+         */
+        captain: Array<string>;
+}
+
+
+/**
+ * 
+ * @interface ITeamList
+ */
+export interface ITeamList {
+    /**
+     * 
+     * @type {number}
+     * @memberof TeamList
+     */
+    count?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TeamList
+     */
+    next?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof TeamList
+     */
+    previous?: string | null;
+    /**
+     * 
+     * @type {Array<Team>}
+     * @memberof TeamList
+     */
+    results?: Array<Team>;
+}
+
+/**
+ * 
+ * @class TeamList
+ */
+export class TeamList implements ITeamList{
+        /**
+         * @type {number}
+         * @memberof TeamList
+         */
+        count: number;
+        /**
+         * @type {string}
+         * @memberof TeamList
+         */
+        next: string | null;
+        /**
+         * @type {string}
+         * @memberof TeamList
+         */
+        previous: string | null;
+        /**
+         * @type {Array<Team>}
+         * @memberof TeamList
+         */
+        results: Array<Team>;
+}
+
+
+/**
+ * 
+ * @interface IUser
+ */
+export interface IUser {
     /**
      * 
      * @type {number}
@@ -866,6 +1566,119 @@ export interface User {
      */
     is_active?: boolean;
 }
+
+/**
+ * 
+ * @class User
+ */
+export class User implements IUser{
+        /**
+         * @type {number}
+         * @memberof User
+         */
+        id: number;
+        /**
+         * @type {string}
+         * @memberof User
+         */
+        email: string;
+        /**
+         * @type {string}
+         * @memberof User
+         */
+        username: string;
+        /**
+         * @type {string}
+         * @memberof User
+         */
+        first_name: string;
+        /**
+         * @type {string}
+         * @memberof User
+         */
+        last_name: string;
+        /**
+         * @type {string}
+         * @memberof User
+         */
+        date_joined: string;
+        /**
+         * @type {boolean}
+         * @memberof User
+         */
+        is_staff: boolean;
+        /**
+         * @type {boolean}
+         * @memberof User
+         */
+        is_superuser: boolean;
+        /**
+         * @type {boolean}
+         * @memberof User
+         */
+        is_active: boolean;
+}
+
+
+/**
+ * 
+ * @interface IUserList
+ */
+export interface IUserList {
+    /**
+     * 
+     * @type {number}
+     * @memberof UserList
+     */
+    count?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserList
+     */
+    next?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserList
+     */
+    previous?: string | null;
+    /**
+     * 
+     * @type {Array<User>}
+     * @memberof UserList
+     */
+    results?: Array<User>;
+}
+
+/**
+ * 
+ * @class UserList
+ */
+export class UserList implements IUserList{
+        /**
+         * @type {number}
+         * @memberof UserList
+         */
+        count: number;
+        /**
+         * @type {string}
+         * @memberof UserList
+         */
+        next: string | null;
+        /**
+         * @type {string}
+         * @memberof UserList
+         */
+        previous: string | null;
+        /**
+         * @type {Array<User>}
+         * @memberof UserList
+         */
+        results: Array<User>;
+}
+
+
 
 /**
  * RestApi - axios parameter creator
@@ -1209,10 +2022,11 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * 
          * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        destroyTeam: async (id: string, options: any = {}): Promise<RequestArgs> => {
+        destroyTeam: async (id: string, id2?: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('destroyTeam', 'id', id)
             const localVarPath = `/rest/teams/{id}/`
@@ -1231,6 +2045,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication bearerAuth required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (id2 !== undefined) {
+                localVarQueryParameter['id'] = id2;
+            }
 
 
     
@@ -1398,10 +2216,11 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * 
          * @param {number} [page] A page number within the paginated result set.
+         * @param {string} [id] id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTeams: async (page?: number, options: any = {}): Promise<RequestArgs> => {
+        listTeams: async (page?: number, id?: string, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/rest/teams/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1420,6 +2239,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
 
             if (page !== undefined) {
                 localVarQueryParameter['page'] = page;
+            }
+
+            if (id !== undefined) {
+                localVarQueryParameter['id'] = id;
             }
 
 
@@ -1638,11 +2461,12 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * 
          * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
          * @param {Team} [team] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        partialUpdateTeam: async (id: string, team?: Team, options: any = {}): Promise<RequestArgs> => {
+        partialUpdateTeam: async (id: string, id2?: string, team?: Team, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('partialUpdateTeam', 'id', id)
             const localVarPath = `/rest/teams/{id}/`
@@ -1661,6 +2485,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication bearerAuth required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (id2 !== undefined) {
+                localVarQueryParameter['id'] = id2;
+            }
 
 
     
@@ -1827,10 +2655,11 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * 
          * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        retrieveTeam: async (id: string, options: any = {}): Promise<RequestArgs> => {
+        retrieveTeam: async (id: string, id2?: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('retrieveTeam', 'id', id)
             const localVarPath = `/rest/teams/{id}/`
@@ -1849,6 +2678,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication bearerAuth required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (id2 !== undefined) {
+                localVarQueryParameter['id'] = id2;
+            }
 
 
     
@@ -2065,11 +2898,12 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * 
          * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
          * @param {Team} [team] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateTeam: async (id: string, team?: Team, options: any = {}): Promise<RequestArgs> => {
+        updateTeam: async (id: string, id2?: string, team?: Team, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('updateTeam', 'id', id)
             const localVarPath = `/rest/teams/{id}/`
@@ -2088,6 +2922,10 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication bearerAuth required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (id2 !== undefined) {
+                localVarQueryParameter['id'] = id2;
+            }
 
 
     
@@ -2206,11 +3044,12 @@ export const RestApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async destroyTeam(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.destroyTeam(id, options);
+        async destroyTeam(id: string, id2?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.destroyTeam(id, id2, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2219,7 +3058,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listLeagues(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004>> {
+        async listLeagues(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LeagueList>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listLeagues(page, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2229,7 +3068,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listMatchs(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2005>> {
+        async listMatchs(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MatchList>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listMatchs(page, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2239,7 +3078,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listPlayers(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2001>> {
+        async listPlayers(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlayerList>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listPlayers(page, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2249,18 +3088,19 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listSeasons(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2003>> {
+        async listSeasons(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SeasonList>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listSeasons(page, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {number} [page] A page number within the paginated result set.
+         * @param {string} [id] id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listTeams(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listTeams(page, options);
+        async listTeams(page?: number, id?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TeamList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listTeams(page, id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2269,7 +3109,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listUsers(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
+        async listUsers(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserList>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listUsers(page, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2320,12 +3160,13 @@ export const RestApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
          * @param {Team} [team] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async partialUpdateTeam(id: string, team?: Team, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.partialUpdateTeam(id, team, options);
+        async partialUpdateTeam(id: string, id2?: string, team?: Team, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.partialUpdateTeam(id, id2, team, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2371,11 +3212,12 @@ export const RestApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async retrieveTeam(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.retrieveTeam(id, options);
+        async retrieveTeam(id: string, id2?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrieveTeam(id, id2, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2435,12 +3277,13 @@ export const RestApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
          * @param {Team} [team] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateTeam(id: string, team?: Team, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateTeam(id, team, options);
+        async updateTeam(id: string, id2?: string, team?: Team, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateTeam(id, id2, team, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -2537,11 +3380,12 @@ export const RestApiFactory = function (configuration?: Configuration, basePath?
         /**
          * 
          * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        destroyTeam(id: string, options?: any): AxiosPromise<void> {
-            return localVarFp.destroyTeam(id, options).then((request) => request(axios, basePath));
+        destroyTeam(id: string, id2?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.destroyTeam(id, id2, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2549,7 +3393,7 @@ export const RestApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listLeagues(page?: number, options?: any): AxiosPromise<InlineResponse2004> {
+        listLeagues(page?: number, options?: any): AxiosPromise<LeagueList> {
             return localVarFp.listLeagues(page, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2558,7 +3402,7 @@ export const RestApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listMatchs(page?: number, options?: any): AxiosPromise<InlineResponse2005> {
+        listMatchs(page?: number, options?: any): AxiosPromise<MatchList> {
             return localVarFp.listMatchs(page, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2567,7 +3411,7 @@ export const RestApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listPlayers(page?: number, options?: any): AxiosPromise<InlineResponse2001> {
+        listPlayers(page?: number, options?: any): AxiosPromise<PlayerList> {
             return localVarFp.listPlayers(page, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2576,17 +3420,18 @@ export const RestApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSeasons(page?: number, options?: any): AxiosPromise<InlineResponse2003> {
+        listSeasons(page?: number, options?: any): AxiosPromise<SeasonList> {
             return localVarFp.listSeasons(page, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} [page] A page number within the paginated result set.
+         * @param {string} [id] id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTeams(page?: number, options?: any): AxiosPromise<InlineResponse2002> {
-            return localVarFp.listTeams(page, options).then((request) => request(axios, basePath));
+        listTeams(page?: number, id?: string, options?: any): AxiosPromise<TeamList> {
+            return localVarFp.listTeams(page, id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2594,7 +3439,7 @@ export const RestApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listUsers(page?: number, options?: any): AxiosPromise<InlineResponse200> {
+        listUsers(page?: number, options?: any): AxiosPromise<UserList> {
             return localVarFp.listUsers(page, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2640,12 +3485,13 @@ export const RestApiFactory = function (configuration?: Configuration, basePath?
         /**
          * 
          * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
          * @param {Team} [team] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        partialUpdateTeam(id: string, team?: Team, options?: any): AxiosPromise<Team> {
-            return localVarFp.partialUpdateTeam(id, team, options).then((request) => request(axios, basePath));
+        partialUpdateTeam(id: string, id2?: string, team?: Team, options?: any): AxiosPromise<Team> {
+            return localVarFp.partialUpdateTeam(id, id2, team, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2686,11 +3532,12 @@ export const RestApiFactory = function (configuration?: Configuration, basePath?
         /**
          * 
          * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        retrieveTeam(id: string, options?: any): AxiosPromise<Team> {
-            return localVarFp.retrieveTeam(id, options).then((request) => request(axios, basePath));
+        retrieveTeam(id: string, id2?: string, options?: any): AxiosPromise<Team> {
+            return localVarFp.retrieveTeam(id, id2, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2744,12 +3591,13 @@ export const RestApiFactory = function (configuration?: Configuration, basePath?
         /**
          * 
          * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
          * @param {Team} [team] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateTeam(id: string, team?: Team, options?: any): AxiosPromise<Team> {
-            return localVarFp.updateTeam(id, team, options).then((request) => request(axios, basePath));
+        updateTeam(id: string, id2?: string, team?: Team, options?: any): AxiosPromise<Team> {
+            return localVarFp.updateTeam(id, id2, team, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -2844,11 +3692,12 @@ export interface RestApiInterface {
     /**
      * 
      * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RestApiInterface
      */
-    destroyTeam(id: string, options?: any): AxiosPromise<void>;
+    destroyTeam(id: string, id2?: string, options?: any): AxiosPromise<void>;
 
     /**
      * 
@@ -2857,7 +3706,7 @@ export interface RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApiInterface
      */
-    listLeagues(page?: number, options?: any): AxiosPromise<InlineResponse2004>;
+    listLeagues(page?: number, options?: any): AxiosPromise<LeagueList>;
 
     /**
      * 
@@ -2866,7 +3715,7 @@ export interface RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApiInterface
      */
-    listMatchs(page?: number, options?: any): AxiosPromise<InlineResponse2005>;
+    listMatchs(page?: number, options?: any): AxiosPromise<MatchList>;
 
     /**
      * 
@@ -2875,7 +3724,7 @@ export interface RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApiInterface
      */
-    listPlayers(page?: number, options?: any): AxiosPromise<InlineResponse2001>;
+    listPlayers(page?: number, options?: any): AxiosPromise<PlayerList>;
 
     /**
      * 
@@ -2884,7 +3733,17 @@ export interface RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApiInterface
      */
-    listSeasons(page?: number, options?: any): AxiosPromise<InlineResponse2003>;
+    listSeasons(page?: number, options?: any): AxiosPromise<SeasonList>;
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {string} [id] id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    listTeams(page?: number, id?: string, options?: any): AxiosPromise<TeamList>;
 
     /**
      * 
@@ -2893,16 +3752,7 @@ export interface RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApiInterface
      */
-    listTeams(page?: number, options?: any): AxiosPromise<InlineResponse2002>;
-
-    /**
-     * 
-     * @param {number} [page] A page number within the paginated result set.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RestApiInterface
-     */
-    listUsers(page?: number, options?: any): AxiosPromise<InlineResponse200>;
+    listUsers(page?: number, options?: any): AxiosPromise<UserList>;
 
     /**
      * 
@@ -2947,12 +3797,13 @@ export interface RestApiInterface {
     /**
      * 
      * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
      * @param {Team} [team] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RestApiInterface
      */
-    partialUpdateTeam(id: string, team?: Team, options?: any): AxiosPromise<Team>;
+    partialUpdateTeam(id: string, id2?: string, team?: Team, options?: any): AxiosPromise<Team>;
 
     /**
      * 
@@ -2993,11 +3844,12 @@ export interface RestApiInterface {
     /**
      * 
      * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RestApiInterface
      */
-    retrieveTeam(id: string, options?: any): AxiosPromise<Team>;
+    retrieveTeam(id: string, id2?: string, options?: any): AxiosPromise<Team>;
 
     /**
      * 
@@ -3051,12 +3903,13 @@ export interface RestApiInterface {
     /**
      * 
      * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
      * @param {Team} [team] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RestApiInterface
      */
-    updateTeam(id: string, team?: Team, options?: any): AxiosPromise<Team>;
+    updateTeam(id: string, id2?: string, team?: Team, options?: any): AxiosPromise<Team>;
 
 }
 
@@ -3169,12 +4022,13 @@ export class RestApi extends BaseAPI implements RestApiInterface {
     /**
      * 
      * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public destroyTeam(id: string, options?: any) {
-        return RestApiFp(this.configuration).destroyTeam(id, options).then((request) => request(this.axios, this.basePath));
+    public destroyTeam(id: string, id2?: string, options?: any) {
+        return RestApiFp(this.configuration).destroyTeam(id, id2, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3224,12 +4078,13 @@ export class RestApi extends BaseAPI implements RestApiInterface {
     /**
      * 
      * @param {number} [page] A page number within the paginated result set.
+     * @param {string} [id] id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public listTeams(page?: number, options?: any) {
-        return RestApiFp(this.configuration).listTeams(page, options).then((request) => request(this.axios, this.basePath));
+    public listTeams(page?: number, id?: string, options?: any) {
+        return RestApiFp(this.configuration).listTeams(page, id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3294,13 +4149,14 @@ export class RestApi extends BaseAPI implements RestApiInterface {
     /**
      * 
      * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
      * @param {Team} [team] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public partialUpdateTeam(id: string, team?: Team, options?: any) {
-        return RestApiFp(this.configuration).partialUpdateTeam(id, team, options).then((request) => request(this.axios, this.basePath));
+    public partialUpdateTeam(id: string, id2?: string, team?: Team, options?: any) {
+        return RestApiFp(this.configuration).partialUpdateTeam(id, id2, team, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3350,12 +4206,13 @@ export class RestApi extends BaseAPI implements RestApiInterface {
     /**
      * 
      * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public retrieveTeam(id: string, options?: any) {
-        return RestApiFp(this.configuration).retrieveTeam(id, options).then((request) => request(this.axios, this.basePath));
+    public retrieveTeam(id: string, id2?: string, options?: any) {
+        return RestApiFp(this.configuration).retrieveTeam(id, id2, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3420,13 +4277,14 @@ export class RestApi extends BaseAPI implements RestApiInterface {
     /**
      * 
      * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
      * @param {Team} [team] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public updateTeam(id: string, team?: Team, options?: any) {
-        return RestApiFp(this.configuration).updateTeam(id, team, options).then((request) => request(this.axios, this.basePath));
+    public updateTeam(id: string, id2?: string, team?: Team, options?: any) {
+        return RestApiFp(this.configuration).updateTeam(id, id2, team, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -3715,7 +4573,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listSchedules(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2006>> {
+        async listSchedules(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScheduleList>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listSchedules(page, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3792,7 +4650,7 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSchedules(page?: number, options?: any): AxiosPromise<InlineResponse2006> {
+        listSchedules(page?: number, options?: any): AxiosPromise<ScheduleList> {
             return localVarFp.listSchedules(page, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3863,7 +4721,7 @@ export interface UserApiInterface {
      * @throws {RequiredError}
      * @memberof UserApiInterface
      */
-    listSchedules(page?: number, options?: any): AxiosPromise<InlineResponse2006>;
+    listSchedules(page?: number, options?: any): AxiosPromise<ScheduleList>;
 
     /**
      * 

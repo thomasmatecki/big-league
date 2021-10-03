@@ -13,6 +13,7 @@ pyyaml = "*"
 uritemplate = "*"
 ipython = "*"
 pillow = "*"
+django-filter = "*"
 
 [dev-packages]
 black = "*"

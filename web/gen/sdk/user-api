@@ -1,0 +1,14 @@
+/**
+ * 
+ * @interface IUserApi
+ */
+export interface IUserApi {
+}
+
+/**
+ * 
+ * @class UserApi
+ */
+export class UserApi implements IUserApi{
+}
+

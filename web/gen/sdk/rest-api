@@ -1,0 +1,14 @@
+/**
+ * 
+ * @interface IRestApi
+ */
+export interface IRestApi {
+}
+
+/**
+ * 
+ * @class RestApi
+ */
+export class RestApi implements IRestApi{
+}
+

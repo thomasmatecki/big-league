@@ -6,7 +6,7 @@
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
-    "gen:sdk": "openapi-generator-cli generate -i schema/openapi.yaml -g typescript-axios -o gen/sdk --additional-properties=npmName=restClient,supportsES6=true,npmVersion=6.9.0,withInterfaces=true",
+    "gen:sdk": "openapi-generator-cli generate -i schema/openapi.yaml -g typescript-axios -o gen/sdk -c schema/openapi-codegen-config.yaml",
     "watch:schema": "watch 'npm run gen:sdk' ./schema"
   },
   "dependencies": {
@@ -21,6 +21,7 @@
     "ramda": "^0.27.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-query": "^3.23.2",
     "styled-components": "^5.3.1",
     "swr": "^0.5.6"
   },
