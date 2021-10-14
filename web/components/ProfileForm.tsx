@@ -41,14 +41,12 @@ const ProfileForm = (props: Props) => {
                 placeholder="What should we call you?"
               />
             </FormField>
-
             <FormField label="Interest">
               <Select
                 id="interest-select-id"
                 name="interest"
                 placeholder="Why do you do it?"
                 options={["Social", "Fitness", "Competition"]}
-                onChange={({ option }) => setValue(option)}
               />
             </FormField>
             <FormField name="biography" label="Bio">

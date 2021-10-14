@@ -10,7 +10,16 @@ import {
   List,
   Text,
 } from "grommet";
-import R, { assoc, indexBy, lens, lensProp, path, prop, set, view } from "ramda";
+import R, {
+  assoc,
+  indexBy,
+  lens,
+  lensProp,
+  path,
+  prop,
+  set,
+  view,
+} from "ramda";
 import React, { useState } from "react";
 import { useQuery, UseQueryResult } from "react-query";
 import UserLayout from "../components/UserLayout";
@@ -90,10 +99,14 @@ const MatchBox = ({ scheduleItem }: { scheduleItem: Schedule }) => {
       await restApi.listTeams(1, teamIds?.join(","))
   );
 
-  const { data, isSuccess }: UseQueryResult<AxiosResponse<TeamList>> = queryResult;
+  const { data, isSuccess }: UseQueryResult<AxiosResponse<TeamList>> =
+    queryResult;
 
   if (isSuccess) {
-    const teamsById = indexBy(prop('id'), (data as AxiosResponse<TeamList>).data.results);
+    const teamsById = indexBy(
+      prop("id"),
+      (data as AxiosResponse<TeamList>).data.results
+    );
   }
 
   return (
@@ -196,7 +209,11 @@ const SchedulePage = (props: Props) => {
           </Box>
 
           <Box gridArea="main" margin="small">
-            <MatchBox scheduleItem={selectedItem}></MatchBox>
+            {selectedItem ? (
+              <MatchBox scheduleItem={selectedItem}></MatchBox>
+            ) : (
+              <Box />
+            )}
           </Box>
 
           <Box background="brand" gridArea="footer"></Box>

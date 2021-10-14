@@ -1,7 +1,7 @@
 export default {
   global: {
     font: {
-      family: "Roboto",
+      family: "system-ui",
       size: "20px",
       height: "20px",
     },

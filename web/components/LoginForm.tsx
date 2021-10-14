@@ -1,13 +1,17 @@
 import router from "next/router";
 import { head, map, propOr } from "ramda";
 import { useState } from "react";
-import { Session } from "../gen/sdk";
+import { ISession, Session } from "../gen/sdk";
 import oauth from "../lib/oauth";
 import { userApi } from "../lib/sdk";
 import { Box, Button, Form, FormField, Text, TextInput } from "./lib";
 
-const LoginForm = () => {
-  const [value, setValue] = useState<Session>({
+interface Props {
+
+};
+
+const LoginForm = ({ }:Props) => {
+  const [value, setValue] = useState<ISession>({
     username: "",
     password: "",
   });
@@ -18,7 +22,7 @@ const LoginForm = () => {
 
   return (
     <Box width="medium">
-      <Form<Session>
+      <Form<ISession>
         value={value}
         errors={fieldErrors}
         onChange={setValue}
