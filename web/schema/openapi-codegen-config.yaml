@@ -7,3 +7,5 @@ additionalProperties:
 files:
   modelGeneric.mustache:
     templateType: API 
+  apiInner.mustache:
+    templateType: API 
