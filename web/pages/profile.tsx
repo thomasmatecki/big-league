@@ -19,11 +19,11 @@ export const getServerSideProps = withUserApi(async ({ userApi }: any) => {
   };
 });
 
-const ProfilePage = (props: ProfileProps) => {
+const ProfilePage = ({ profile }: ProfileProps) => {
   return (
     <UserLayout>
       <Box align="center" justify="center" pad="large">
-        <ProfileForm profile={props.profile}></ProfileForm>
+        <ProfileForm profile={profile}></ProfileForm>
       </Box>
     </UserLayout>
   );

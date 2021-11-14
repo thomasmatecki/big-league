@@ -1,14 +1,2769 @@
 /**
- * 
- * @interface IRestApi
+ * RestApi - axios parameter creator
+ * @export
  */
-export interface IRestApi {
+export const RestApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {Attendance} [attendance] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createAttendance: async (attendance?: IAttendance, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/attendance/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(attendance, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {League} [league] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createLeague: async (league?: ILeague, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/leagues/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(league, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Match} [match] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createMatch: async (match?: IMatch, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/matches/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(match, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Player} [player] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createPlayer: async (player?: IPlayer, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/players/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(player, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Season} [season] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSeason: async (season?: ISeason, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/seasons/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(season, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Team} [team] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createTeam: async (team?: ITeam, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/teams/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(team, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this league.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        destroyLeague: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('destroyLeague', 'id', id)
+            const localVarPath = `/rest/leagues/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this match.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        destroyMatch: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('destroyMatch', 'id', id)
+            const localVarPath = `/rest/matches/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this player.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        destroyPlayer: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('destroyPlayer', 'id', id)
+            const localVarPath = `/rest/players/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this season.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        destroySeason: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('destroySeason', 'id', id)
+            const localVarPath = `/rest/seasons/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        destroyTeam: async (id: string, id2?: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('destroyTeam', 'id', id)
+            const localVarPath = `/rest/teams/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (id2 !== undefined) {
+                localVarQueryParameter['id'] = id2;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {string} [matchId] match_id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAttendances: async (page?: number, matchId?: string, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/attendance/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (matchId !== undefined) {
+                localVarQueryParameter['match_id'] = matchId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listLeagues: async (page?: number, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/leagues/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listMatchs: async (page?: number, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/matches/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listPlayers: async (page?: number, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/players/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSeasons: async (page?: number, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/seasons/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {string} [id] id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listTeams: async (page?: number, id?: string, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/teams/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (id !== undefined) {
+                localVarQueryParameter['id'] = id;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listUsers: async (page?: number, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/users/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this league.
+         * @param {League} [league] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        partialUpdateLeague: async (id: string, league?: ILeague, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('partialUpdateLeague', 'id', id)
+            const localVarPath = `/rest/leagues/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(league, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this match.
+         * @param {Match} [match] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        partialUpdateMatch: async (id: string, match?: IMatch, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('partialUpdateMatch', 'id', id)
+            const localVarPath = `/rest/matches/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(match, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this player.
+         * @param {Player} [player] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        partialUpdatePlayer: async (id: string, player?: IPlayer, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('partialUpdatePlayer', 'id', id)
+            const localVarPath = `/rest/players/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(player, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this season.
+         * @param {Season} [season] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        partialUpdateSeason: async (id: string, season?: ISeason, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('partialUpdateSeason', 'id', id)
+            const localVarPath = `/rest/seasons/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(season, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
+         * @param {Team} [team] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        partialUpdateTeam: async (id: string, id2?: string, team?: ITeam, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('partialUpdateTeam', 'id', id)
+            const localVarPath = `/rest/teams/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (id2 !== undefined) {
+                localVarQueryParameter['id'] = id2;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(team, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this league.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveLeague: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('retrieveLeague', 'id', id)
+            const localVarPath = `/rest/leagues/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this match.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveMatch: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('retrieveMatch', 'id', id)
+            const localVarPath = `/rest/matches/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this player.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrievePlayer: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('retrievePlayer', 'id', id)
+            const localVarPath = `/rest/players/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this season.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveSeason: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('retrieveSeason', 'id', id)
+            const localVarPath = `/rest/seasons/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveTeam: async (id: string, id2?: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('retrieveTeam', 'id', id)
+            const localVarPath = `/rest/teams/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (id2 !== undefined) {
+                localVarQueryParameter['id'] = id2;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveUser: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('retrieveUser', 'id', id)
+            const localVarPath = `/rest/users/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this league.
+         * @param {League} [league] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateLeague: async (id: string, league?: ILeague, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('updateLeague', 'id', id)
+            const localVarPath = `/rest/leagues/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(league, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this match.
+         * @param {Match} [match] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateMatch: async (id: string, match?: IMatch, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('updateMatch', 'id', id)
+            const localVarPath = `/rest/matches/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(match, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this player.
+         * @param {Player} [player] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePlayer: async (id: string, player?: IPlayer, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('updatePlayer', 'id', id)
+            const localVarPath = `/rest/players/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(player, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this season.
+         * @param {Season} [season] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSeason: async (id: string, season?: ISeason, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('updateSeason', 'id', id)
+            const localVarPath = `/rest/seasons/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(season, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
+         * @param {Team} [team] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateTeam: async (id: string, id2?: string, team?: ITeam, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('updateTeam', 'id', id)
+            const localVarPath = `/rest/teams/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (id2 !== undefined) {
+                localVarQueryParameter['id'] = id2;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(team, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * RestApi - functional programming interface
+ * @export
+ */
+export const RestApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RestApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {Attendance} [attendance] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createAttendance(attendance?: IAttendance, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Attendance>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createAttendance(attendance, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {League} [league] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createLeague(league?: ILeague, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<League>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createLeague(league, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Match} [match] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createMatch(match?: IMatch, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Match>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createMatch(match, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Player} [player] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createPlayer(player?: IPlayer, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Player>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createPlayer(player, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Season} [season] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createSeason(season?: ISeason, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Season>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createSeason(season, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {Team} [team] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createTeam(team?: ITeam, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createTeam(team, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this league.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async destroyLeague(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.destroyLeague(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this match.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async destroyMatch(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.destroyMatch(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this player.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async destroyPlayer(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.destroyPlayer(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this season.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async destroySeason(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.destroySeason(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async destroyTeam(id: string, id2?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.destroyTeam(id, id2, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {string} [matchId] match_id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAttendances(page?: number, matchId?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AttendanceList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAttendances(page, matchId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listLeagues(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LeagueList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listLeagues(page, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listMatchs(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MatchList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listMatchs(page, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listPlayers(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlayerList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listPlayers(page, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listSeasons(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SeasonList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listSeasons(page, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {string} [id] id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listTeams(page?: number, id?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TeamList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listTeams(page, id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listUsers(page?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listUsers(page, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this league.
+         * @param {League} [league] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async partialUpdateLeague(id: string, league?: ILeague, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<League>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.partialUpdateLeague(id, league, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this match.
+         * @param {Match} [match] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async partialUpdateMatch(id: string, match?: IMatch, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Match>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.partialUpdateMatch(id, match, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this player.
+         * @param {Player} [player] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async partialUpdatePlayer(id: string, player?: IPlayer, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Player>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.partialUpdatePlayer(id, player, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this season.
+         * @param {Season} [season] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async partialUpdateSeason(id: string, season?: ISeason, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Season>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.partialUpdateSeason(id, season, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
+         * @param {Team} [team] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async partialUpdateTeam(id: string, id2?: string, team?: ITeam, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.partialUpdateTeam(id, id2, team, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this league.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async retrieveLeague(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<League>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrieveLeague(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this match.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async retrieveMatch(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Match>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrieveMatch(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this player.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async retrievePlayer(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Player>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrievePlayer(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this season.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async retrieveSeason(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Season>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrieveSeason(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async retrieveTeam(id: string, id2?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrieveTeam(id, id2, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async retrieveUser(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrieveUser(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this league.
+         * @param {League} [league] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateLeague(id: string, league?: ILeague, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<League>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateLeague(id, league, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this match.
+         * @param {Match} [match] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateMatch(id: string, match?: IMatch, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Match>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateMatch(id, match, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this player.
+         * @param {Player} [player] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updatePlayer(id: string, player?: IPlayer, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Player>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePlayer(id, player, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this season.
+         * @param {Season} [season] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateSeason(id: string, season?: ISeason, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Season>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateSeason(id, season, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
+         * @param {Team} [team] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateTeam(id: string, id2?: string, team?: ITeam, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateTeam(id, id2, team, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * RestApi - factory interface
+ * @export
+ */
+export const RestApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RestApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {Attendance} [attendance] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createAttendance(attendance?: Attendance, options?: any): AxiosPromise<Attendance> {
+            return localVarFp.createAttendance(attendance, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {League} [league] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createLeague(league?: League, options?: any): AxiosPromise<League> {
+            return localVarFp.createLeague(league, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Match} [match] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createMatch(match?: Match, options?: any): AxiosPromise<Match> {
+            return localVarFp.createMatch(match, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Player} [player] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createPlayer(player?: Player, options?: any): AxiosPromise<Player> {
+            return localVarFp.createPlayer(player, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Season} [season] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSeason(season?: Season, options?: any): AxiosPromise<Season> {
+            return localVarFp.createSeason(season, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Team} [team] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createTeam(team?: Team, options?: any): AxiosPromise<Team> {
+            return localVarFp.createTeam(team, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this league.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        destroyLeague(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.destroyLeague(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this match.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        destroyMatch(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.destroyMatch(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this player.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        destroyPlayer(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.destroyPlayer(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this season.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        destroySeason(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.destroySeason(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        destroyTeam(id: string, id2?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.destroyTeam(id, id2, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {string} [matchId] match_id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAttendances(page?: number, matchId?: string, options?: any): AxiosPromise<AttendanceList> {
+            return localVarFp.listAttendances(page, matchId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listLeagues(page?: number, options?: any): AxiosPromise<LeagueList> {
+            return localVarFp.listLeagues(page, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listMatchs(page?: number, options?: any): AxiosPromise<MatchList> {
+            return localVarFp.listMatchs(page, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listPlayers(page?: number, options?: any): AxiosPromise<PlayerList> {
+            return localVarFp.listPlayers(page, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSeasons(page?: number, options?: any): AxiosPromise<SeasonList> {
+            return localVarFp.listSeasons(page, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {string} [id] id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listTeams(page?: number, id?: string, options?: any): AxiosPromise<TeamList> {
+            return localVarFp.listTeams(page, id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listUsers(page?: number, options?: any): AxiosPromise<UserList> {
+            return localVarFp.listUsers(page, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this league.
+         * @param {League} [league] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        partialUpdateLeague(id: string, league?: League, options?: any): AxiosPromise<League> {
+            return localVarFp.partialUpdateLeague(id, league, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this match.
+         * @param {Match} [match] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        partialUpdateMatch(id: string, match?: Match, options?: any): AxiosPromise<Match> {
+            return localVarFp.partialUpdateMatch(id, match, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this player.
+         * @param {Player} [player] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        partialUpdatePlayer(id: string, player?: Player, options?: any): AxiosPromise<Player> {
+            return localVarFp.partialUpdatePlayer(id, player, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this season.
+         * @param {Season} [season] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        partialUpdateSeason(id: string, season?: Season, options?: any): AxiosPromise<Season> {
+            return localVarFp.partialUpdateSeason(id, season, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
+         * @param {Team} [team] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        partialUpdateTeam(id: string, id2?: string, team?: Team, options?: any): AxiosPromise<Team> {
+            return localVarFp.partialUpdateTeam(id, id2, team, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this league.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveLeague(id: string, options?: any): AxiosPromise<League> {
+            return localVarFp.retrieveLeague(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this match.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveMatch(id: string, options?: any): AxiosPromise<Match> {
+            return localVarFp.retrieveMatch(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this player.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrievePlayer(id: string, options?: any): AxiosPromise<Player> {
+            return localVarFp.retrievePlayer(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this season.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveSeason(id: string, options?: any): AxiosPromise<Season> {
+            return localVarFp.retrieveSeason(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveTeam(id: string, id2?: string, options?: any): AxiosPromise<Team> {
+            return localVarFp.retrieveTeam(id, id2, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this user.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrieveUser(id: string, options?: any): AxiosPromise<User> {
+            return localVarFp.retrieveUser(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this league.
+         * @param {League} [league] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateLeague(id: string, league?: League, options?: any): AxiosPromise<League> {
+            return localVarFp.updateLeague(id, league, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this match.
+         * @param {Match} [match] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateMatch(id: string, match?: Match, options?: any): AxiosPromise<Match> {
+            return localVarFp.updateMatch(id, match, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this player.
+         * @param {Player} [player] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePlayer(id: string, player?: Player, options?: any): AxiosPromise<Player> {
+            return localVarFp.updatePlayer(id, player, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this season.
+         * @param {Season} [season] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSeason(id: string, season?: Season, options?: any): AxiosPromise<Season> {
+            return localVarFp.updateSeason(id, season, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id A unique integer value identifying this team.
+         * @param {string} [id2] id
+         * @param {Team} [team] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateTeam(id: string, id2?: string, team?: Team, options?: any): AxiosPromise<Team> {
+            return localVarFp.updateTeam(id, id2, team, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * RestApi - interface
+ * @export
+ * @interface RestApi
+ */
+export interface RestApiInterface {
+    /**
+     * 
+     * @param {Attendance} [attendance] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    createAttendance(attendance?: Attendance, options?: any): AxiosPromise<Attendance>;
+
+    /**
+     * 
+     * @param {League} [league] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    createLeague(league?: League, options?: any): AxiosPromise<League>;
+
+    /**
+     * 
+     * @param {Match} [match] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    createMatch(match?: Match, options?: any): AxiosPromise<Match>;
+
+    /**
+     * 
+     * @param {Player} [player] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    createPlayer(player?: Player, options?: any): AxiosPromise<Player>;
+
+    /**
+     * 
+     * @param {Season} [season] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    createSeason(season?: Season, options?: any): AxiosPromise<Season>;
+
+    /**
+     * 
+     * @param {Team} [team] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    createTeam(team?: Team, options?: any): AxiosPromise<Team>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this league.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    destroyLeague(id: string, options?: any): AxiosPromise<void>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this match.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    destroyMatch(id: string, options?: any): AxiosPromise<void>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this player.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    destroyPlayer(id: string, options?: any): AxiosPromise<void>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this season.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    destroySeason(id: string, options?: any): AxiosPromise<void>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    destroyTeam(id: string, id2?: string, options?: any): AxiosPromise<void>;
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {string} [matchId] match_id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    listAttendances(page?: number, matchId?: string, options?: any): AxiosPromise<AttendanceList>;
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    listLeagues(page?: number, options?: any): AxiosPromise<LeagueList>;
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    listMatchs(page?: number, options?: any): AxiosPromise<MatchList>;
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    listPlayers(page?: number, options?: any): AxiosPromise<PlayerList>;
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    listSeasons(page?: number, options?: any): AxiosPromise<SeasonList>;
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {string} [id] id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    listTeams(page?: number, id?: string, options?: any): AxiosPromise<TeamList>;
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    listUsers(page?: number, options?: any): AxiosPromise<UserList>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this league.
+     * @param {League} [league] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    partialUpdateLeague(id: string, league?: League, options?: any): AxiosPromise<League>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this match.
+     * @param {Match} [match] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    partialUpdateMatch(id: string, match?: Match, options?: any): AxiosPromise<Match>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this player.
+     * @param {Player} [player] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    partialUpdatePlayer(id: string, player?: Player, options?: any): AxiosPromise<Player>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this season.
+     * @param {Season} [season] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    partialUpdateSeason(id: string, season?: Season, options?: any): AxiosPromise<Season>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
+     * @param {Team} [team] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    partialUpdateTeam(id: string, id2?: string, team?: Team, options?: any): AxiosPromise<Team>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this league.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    retrieveLeague(id: string, options?: any): AxiosPromise<League>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this match.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    retrieveMatch(id: string, options?: any): AxiosPromise<Match>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this player.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    retrievePlayer(id: string, options?: any): AxiosPromise<Player>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this season.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    retrieveSeason(id: string, options?: any): AxiosPromise<Season>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    retrieveTeam(id: string, id2?: string, options?: any): AxiosPromise<Team>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this user.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    retrieveUser(id: string, options?: any): AxiosPromise<User>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this league.
+     * @param {League} [league] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    updateLeague(id: string, league?: League, options?: any): AxiosPromise<League>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this match.
+     * @param {Match} [match] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    updateMatch(id: string, match?: Match, options?: any): AxiosPromise<Match>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this player.
+     * @param {Player} [player] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    updatePlayer(id: string, player?: Player, options?: any): AxiosPromise<Player>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this season.
+     * @param {Season} [season] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    updateSeason(id: string, season?: Season, options?: any): AxiosPromise<Season>;
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
+     * @param {Team} [team] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    updateTeam(id: string, id2?: string, team?: Team, options?: any): AxiosPromise<Team>;
+
 }
 
 /**
- * 
+ * RestApi - object-oriented interface
+ * @export
  * @class RestApi
+ * @extends {BaseAPI}
  */
-export class RestApi implements IRestApi{
-}
+export class RestApi extends BaseAPI implements RestApiInterface {
+    /**
+     * 
+     * @param {Attendance} [attendance] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public createAttendance(attendance?: IAttendance, options?: any) {
+        return RestApiFp(this.configuration).createAttendance(attendance, options).then((request) => request(this.axios, this.basePath));
+    }
 
+    /**
+     * 
+     * @param {League} [league] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public createLeague(league?: ILeague, options?: any) {
+        return RestApiFp(this.configuration).createLeague(league, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Match} [match] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public createMatch(match?: IMatch, options?: any) {
+        return RestApiFp(this.configuration).createMatch(match, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Player} [player] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public createPlayer(player?: IPlayer, options?: any) {
+        return RestApiFp(this.configuration).createPlayer(player, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Season} [season] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public createSeason(season?: ISeason, options?: any) {
+        return RestApiFp(this.configuration).createSeason(season, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Team} [team] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public createTeam(team?: ITeam, options?: any) {
+        return RestApiFp(this.configuration).createTeam(team, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this league.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public destroyLeague(id: string, options?: any) {
+        return RestApiFp(this.configuration).destroyLeague(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this match.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public destroyMatch(id: string, options?: any) {
+        return RestApiFp(this.configuration).destroyMatch(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this player.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public destroyPlayer(id: string, options?: any) {
+        return RestApiFp(this.configuration).destroyPlayer(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this season.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public destroySeason(id: string, options?: any) {
+        return RestApiFp(this.configuration).destroySeason(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public destroyTeam(id: string, id2?: string, options?: any) {
+        return RestApiFp(this.configuration).destroyTeam(id, id2, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {string} [matchId] match_id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public listAttendances(page?: number, matchId?: string, options?: any) {
+        return RestApiFp(this.configuration).listAttendances(page, matchId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public listLeagues(page?: number, options?: any) {
+        return RestApiFp(this.configuration).listLeagues(page, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public listMatchs(page?: number, options?: any) {
+        return RestApiFp(this.configuration).listMatchs(page, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public listPlayers(page?: number, options?: any) {
+        return RestApiFp(this.configuration).listPlayers(page, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public listSeasons(page?: number, options?: any) {
+        return RestApiFp(this.configuration).listSeasons(page, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {string} [id] id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public listTeams(page?: number, id?: string, options?: any) {
+        return RestApiFp(this.configuration).listTeams(page, id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public listUsers(page?: number, options?: any) {
+        return RestApiFp(this.configuration).listUsers(page, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this league.
+     * @param {League} [league] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public partialUpdateLeague(id: string, league?: ILeague, options?: any) {
+        return RestApiFp(this.configuration).partialUpdateLeague(id, league, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this match.
+     * @param {Match} [match] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public partialUpdateMatch(id: string, match?: IMatch, options?: any) {
+        return RestApiFp(this.configuration).partialUpdateMatch(id, match, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this player.
+     * @param {Player} [player] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public partialUpdatePlayer(id: string, player?: IPlayer, options?: any) {
+        return RestApiFp(this.configuration).partialUpdatePlayer(id, player, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this season.
+     * @param {Season} [season] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public partialUpdateSeason(id: string, season?: ISeason, options?: any) {
+        return RestApiFp(this.configuration).partialUpdateSeason(id, season, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
+     * @param {Team} [team] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public partialUpdateTeam(id: string, id2?: string, team?: ITeam, options?: any) {
+        return RestApiFp(this.configuration).partialUpdateTeam(id, id2, team, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this league.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public retrieveLeague(id: string, options?: any) {
+        return RestApiFp(this.configuration).retrieveLeague(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this match.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public retrieveMatch(id: string, options?: any) {
+        return RestApiFp(this.configuration).retrieveMatch(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this player.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public retrievePlayer(id: string, options?: any) {
+        return RestApiFp(this.configuration).retrievePlayer(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this season.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public retrieveSeason(id: string, options?: any) {
+        return RestApiFp(this.configuration).retrieveSeason(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public retrieveTeam(id: string, id2?: string, options?: any) {
+        return RestApiFp(this.configuration).retrieveTeam(id, id2, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this user.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public retrieveUser(id: string, options?: any) {
+        return RestApiFp(this.configuration).retrieveUser(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this league.
+     * @param {League} [league] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public updateLeague(id: string, league?: ILeague, options?: any) {
+        return RestApiFp(this.configuration).updateLeague(id, league, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this match.
+     * @param {Match} [match] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public updateMatch(id: string, match?: IMatch, options?: any) {
+        return RestApiFp(this.configuration).updateMatch(id, match, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this player.
+     * @param {Player} [player] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public updatePlayer(id: string, player?: IPlayer, options?: any) {
+        return RestApiFp(this.configuration).updatePlayer(id, player, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this season.
+     * @param {Season} [season] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public updateSeason(id: string, season?: ISeason, options?: any) {
+        return RestApiFp(this.configuration).updateSeason(id, season, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id A unique integer value identifying this team.
+     * @param {string} [id2] id
+     * @param {Team} [team] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public updateTeam(id: string, id2?: string, team?: ITeam, options?: any) {
+        return RestApiFp(this.configuration).updateTeam(id, id2, team, options).then((request) => request(this.axios, this.basePath));
+    }
+}

@@ -5,8 +5,8 @@ from api.core.rest import CreateOnlyValidator
 from api.core.serializers import HyperLinkedObjectSerializer
 from api.leagues import models
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import AbstractBaseUser
-from rest_framework import serializers, validators
+from django.contrib.auth.models import AbstractBaseUser, User
+from rest_framework import exceptions, serializers, validators
 
 
 class LeagueSerializer(serializers.HyperlinkedModelSerializer):
@@ -55,7 +55,7 @@ class TeamSerializer(serializers.HyperlinkedModelSerializer):
 
 def create_user_for_player(user_data: dict):
 
-    user_model = get_user_model()
+    user_model: User = get_user_model()
 
     # In case a user exists that is not yet associated with a player.
     user = user_model.objects.filter(
@@ -219,3 +219,37 @@ class ScheduleSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Schedule
         exclude = []
+
+
+class AttendanceSerializer(serializers.ModelSerializer):
+    match_id = serializers.PrimaryKeyRelatedField(
+        source="match",
+        queryset=models.Match.objects.all(),
+    )
+
+    player_id = serializers.PrimaryKeyRelatedField(
+        source="player",
+        queryset=models.Player.objects.all(),
+    )
+
+    attending = serializers.BooleanField(allow_null=True)
+
+    class Meta:
+        model = models.Attendance
+        fields = ["player_id", "match_id", "attending"]
+
+    def validate(self, attrs):
+
+        if not attrs["match"].teams.filter(players=attrs["player"].id).exists():
+            raise exceptions.ValidationError(
+                f"Player {attrs['player'].id} not playing in match {attrs['match'].id}"
+            )
+        return attrs
+
+    def create(self, validated_data):
+        attending = validated_data.pop("attending")
+        attendance, _ = models.Attendance.objects.update_or_create(
+            **validated_data, defaults={"attending": attending}
+        )
+
+        return attendance

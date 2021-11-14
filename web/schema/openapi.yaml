@@ -708,6 +708,56 @@ paths:
           description: ''
       tags:
       - rest
+  /rest/attendance/:
+    get:
+      operationId: listAttendances
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: match_id
+        required: false
+        in: query
+        description: match_id
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttendanceList'
+          description: ''
+      tags:
+      - rest
+    post:
+      operationId: createAttendance
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attendance'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attendance'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttendanceError'
+          description: ''
+      tags:
+      - rest
   /user/profile/:
     get:
       operationId: retrieveProfile
@@ -836,6 +886,49 @@ paths:
       - user
 components:
   schemas:
+    Attendance:
+      type: object
+      properties:
+        player_id:
+          type: integer
+        match_id:
+          type: integer
+        attending:
+          type: boolean
+          nullable: true
+      required:
+      - player_id
+      - match_id
+      - attending
+    AttendanceError:
+      type: object
+      properties:
+        player_id:
+          $ref: '#/components/schemas/FieldError'
+        match_id:
+          $ref: '#/components/schemas/FieldError'
+        attending:
+          $ref: '#/components/schemas/FieldError'
+    AttendanceList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://localhost.test/rest/attendance/?page=3
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://localhost.test/rest/attendance/?page=1
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attendance'
     FieldError:
       type: array
       items:

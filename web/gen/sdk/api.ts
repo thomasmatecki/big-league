@@ -23,6 +23,161 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 
 /**
  * 
+ * @interface IAttendance
+ */
+export interface IAttendance {
+    /**
+     * 
+     * @type {number}
+     * @memberof Attendance
+     */
+    player_id: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Attendance
+     */
+    match_id: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Attendance
+     */
+    attending: boolean | null;
+}
+
+/**
+ * 
+ * @class Attendance
+ */
+export class Attendance implements IAttendance{
+        /**
+         * @type {number}
+         * @memberof Attendance
+         */
+        player_id: number;
+        /**
+         * @type {number}
+         * @memberof Attendance
+         */
+        match_id: number;
+        /**
+         * @type {boolean}
+         * @memberof Attendance
+         */
+        attending: boolean | null;
+}
+
+
+/**
+ * 
+ * @interface IAttendanceError
+ */
+export interface IAttendanceError {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof AttendanceError
+     */
+    player_id?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof AttendanceError
+     */
+    match_id?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof AttendanceError
+     */
+    attending?: Array<string>;
+}
+
+/**
+ * 
+ * @class AttendanceError
+ */
+export class AttendanceError implements IAttendanceError{
+        /**
+         * @type {Array<string>}
+         * @memberof AttendanceError
+         */
+        player_id: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof AttendanceError
+         */
+        match_id: Array<string>;
+        /**
+         * @type {Array<string>}
+         * @memberof AttendanceError
+         */
+        attending: Array<string>;
+}
+
+
+/**
+ * 
+ * @interface IAttendanceList
+ */
+export interface IAttendanceList {
+    /**
+     * 
+     * @type {number}
+     * @memberof AttendanceList
+     */
+    count?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AttendanceList
+     */
+    next?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AttendanceList
+     */
+    previous?: string | null;
+    /**
+     * 
+     * @type {Array<Attendance>}
+     * @memberof AttendanceList
+     */
+    results?: Array<Attendance>;
+}
+
+/**
+ * 
+ * @class AttendanceList
+ */
+export class AttendanceList implements IAttendanceList{
+        /**
+         * @type {number}
+         * @memberof AttendanceList
+         */
+        count: number;
+        /**
+         * @type {string}
+         * @memberof AttendanceList
+         */
+        next: string | null;
+        /**
+         * @type {string}
+         * @memberof AttendanceList
+         */
+        previous: string | null;
+        /**
+         * @type {Array<Attendance>}
+         * @memberof AttendanceList
+         */
+        results: Array<Attendance>;
+}
+
+
+/**
+ * 
  * @interface ILeague
  */
 export interface ILeague {
@@ -1688,11 +1843,48 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
     return {
         /**
          * 
+         * @param {Attendance} [attendance] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createAttendance: async (attendance?: IAttendance, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/attendance/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(attendance, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {League} [league] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createLeague: async (league?: League, options: any = {}): Promise<RequestArgs> => {
+        createLeague: async (league?: ILeague, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/rest/leagues/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1729,7 +1921,7 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createMatch: async (match?: Match, options: any = {}): Promise<RequestArgs> => {
+        createMatch: async (match?: IMatch, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/rest/matches/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1766,7 +1958,7 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createPlayer: async (player?: Player, options: any = {}): Promise<RequestArgs> => {
+        createPlayer: async (player?: IPlayer, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/rest/players/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1803,7 +1995,7 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createSeason: async (season?: Season, options: any = {}): Promise<RequestArgs> => {
+        createSeason: async (season?: ISeason, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/rest/seasons/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1840,7 +2032,7 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createTeam: async (team?: Team, options: any = {}): Promise<RequestArgs> => {
+        createTeam: async (team?: ITeam, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/rest/teams/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -2048,6 +2240,49 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
 
             if (id2 !== undefined) {
                 localVarQueryParameter['id'] = id2;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {string} [matchId] match_id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAttendances: async (page?: number, matchId?: string, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/rest/attendance/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (matchId !== undefined) {
+                localVarQueryParameter['match_id'] = matchId;
             }
 
 
@@ -2301,7 +2536,7 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        partialUpdateLeague: async (id: string, league?: League, options: any = {}): Promise<RequestArgs> => {
+        partialUpdateLeague: async (id: string, league?: ILeague, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('partialUpdateLeague', 'id', id)
             const localVarPath = `/rest/leagues/{id}/`
@@ -2342,7 +2577,7 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        partialUpdateMatch: async (id: string, match?: Match, options: any = {}): Promise<RequestArgs> => {
+        partialUpdateMatch: async (id: string, match?: IMatch, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('partialUpdateMatch', 'id', id)
             const localVarPath = `/rest/matches/{id}/`
@@ -2383,7 +2618,7 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        partialUpdatePlayer: async (id: string, player?: Player, options: any = {}): Promise<RequestArgs> => {
+        partialUpdatePlayer: async (id: string, player?: IPlayer, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('partialUpdatePlayer', 'id', id)
             const localVarPath = `/rest/players/{id}/`
@@ -2424,7 +2659,7 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        partialUpdateSeason: async (id: string, season?: Season, options: any = {}): Promise<RequestArgs> => {
+        partialUpdateSeason: async (id: string, season?: ISeason, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('partialUpdateSeason', 'id', id)
             const localVarPath = `/rest/seasons/{id}/`
@@ -2466,7 +2701,7 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        partialUpdateTeam: async (id: string, id2?: string, team?: Team, options: any = {}): Promise<RequestArgs> => {
+        partialUpdateTeam: async (id: string, id2?: string, team?: ITeam, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('partialUpdateTeam', 'id', id)
             const localVarPath = `/rest/teams/{id}/`
@@ -2738,7 +2973,7 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateLeague: async (id: string, league?: League, options: any = {}): Promise<RequestArgs> => {
+        updateLeague: async (id: string, league?: ILeague, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('updateLeague', 'id', id)
             const localVarPath = `/rest/leagues/{id}/`
@@ -2779,7 +3014,7 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateMatch: async (id: string, match?: Match, options: any = {}): Promise<RequestArgs> => {
+        updateMatch: async (id: string, match?: IMatch, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('updateMatch', 'id', id)
             const localVarPath = `/rest/matches/{id}/`
@@ -2820,7 +3055,7 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatePlayer: async (id: string, player?: Player, options: any = {}): Promise<RequestArgs> => {
+        updatePlayer: async (id: string, player?: IPlayer, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('updatePlayer', 'id', id)
             const localVarPath = `/rest/players/{id}/`
@@ -2861,7 +3096,7 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateSeason: async (id: string, season?: Season, options: any = {}): Promise<RequestArgs> => {
+        updateSeason: async (id: string, season?: ISeason, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('updateSeason', 'id', id)
             const localVarPath = `/rest/seasons/{id}/`
@@ -2903,7 +3138,7 @@ export const RestApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateTeam: async (id: string, id2?: string, team?: Team, options: any = {}): Promise<RequestArgs> => {
+        updateTeam: async (id: string, id2?: string, team?: ITeam, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('updateTeam', 'id', id)
             const localVarPath = `/rest/teams/{id}/`
@@ -2953,11 +3188,21 @@ export const RestApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {Attendance} [attendance] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createAttendance(attendance?: IAttendance, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Attendance>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createAttendance(attendance, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {League} [league] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createLeague(league?: League, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<League>> {
+        async createLeague(league?: ILeague, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<League>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createLeague(league, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2967,7 +3212,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createMatch(match?: Match, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Match>> {
+        async createMatch(match?: IMatch, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Match>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createMatch(match, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2977,7 +3222,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createPlayer(player?: Player, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Player>> {
+        async createPlayer(player?: IPlayer, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Player>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createPlayer(player, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2987,7 +3232,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createSeason(season?: Season, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Season>> {
+        async createSeason(season?: ISeason, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Season>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createSeason(season, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2997,7 +3242,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createTeam(team?: Team, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
+        async createTeam(team?: ITeam, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createTeam(team, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3050,6 +3295,17 @@ export const RestApiFp = function(configuration?: Configuration) {
          */
         async destroyTeam(id: string, id2?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.destroyTeam(id, id2, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {string} [matchId] match_id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAttendances(page?: number, matchId?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AttendanceList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAttendances(page, matchId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -3120,7 +3376,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async partialUpdateLeague(id: string, league?: League, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<League>> {
+        async partialUpdateLeague(id: string, league?: ILeague, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<League>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.partialUpdateLeague(id, league, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3131,7 +3387,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async partialUpdateMatch(id: string, match?: Match, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Match>> {
+        async partialUpdateMatch(id: string, match?: IMatch, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Match>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.partialUpdateMatch(id, match, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3142,7 +3398,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async partialUpdatePlayer(id: string, player?: Player, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Player>> {
+        async partialUpdatePlayer(id: string, player?: IPlayer, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Player>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.partialUpdatePlayer(id, player, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3153,7 +3409,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async partialUpdateSeason(id: string, season?: Season, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Season>> {
+        async partialUpdateSeason(id: string, season?: ISeason, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Season>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.partialUpdateSeason(id, season, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3165,7 +3421,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async partialUpdateTeam(id: string, id2?: string, team?: Team, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
+        async partialUpdateTeam(id: string, id2?: string, team?: ITeam, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.partialUpdateTeam(id, id2, team, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3237,7 +3493,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateLeague(id: string, league?: League, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<League>> {
+        async updateLeague(id: string, league?: ILeague, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<League>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateLeague(id, league, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3248,7 +3504,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateMatch(id: string, match?: Match, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Match>> {
+        async updateMatch(id: string, match?: IMatch, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Match>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateMatch(id, match, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3259,7 +3515,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updatePlayer(id: string, player?: Player, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Player>> {
+        async updatePlayer(id: string, player?: IPlayer, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Player>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updatePlayer(id, player, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3270,7 +3526,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateSeason(id: string, season?: Season, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Season>> {
+        async updateSeason(id: string, season?: ISeason, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Season>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateSeason(id, season, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3282,7 +3538,7 @@ export const RestApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateTeam(id: string, id2?: string, team?: Team, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
+        async updateTeam(id: string, id2?: string, team?: ITeam, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Team>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateTeam(id, id2, team, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -3296,6 +3552,15 @@ export const RestApiFp = function(configuration?: Configuration) {
 export const RestApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = RestApiFp(configuration)
     return {
+        /**
+         * 
+         * @param {Attendance} [attendance] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createAttendance(attendance?: Attendance, options?: any): AxiosPromise<Attendance> {
+            return localVarFp.createAttendance(attendance, options).then((request) => request(axios, basePath));
+        },
         /**
          * 
          * @param {League} [league] 
@@ -3386,6 +3651,16 @@ export const RestApiFactory = function (configuration?: Configuration, basePath?
          */
         destroyTeam(id: string, id2?: string, options?: any): AxiosPromise<void> {
             return localVarFp.destroyTeam(id, id2, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [page] A page number within the paginated result set.
+         * @param {string} [matchId] match_id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAttendances(page?: number, matchId?: string, options?: any): AxiosPromise<AttendanceList> {
+            return localVarFp.listAttendances(page, matchId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3610,6 +3885,15 @@ export const RestApiFactory = function (configuration?: Configuration, basePath?
 export interface RestApiInterface {
     /**
      * 
+     * @param {Attendance} [attendance] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    createAttendance(attendance?: Attendance, options?: any): AxiosPromise<Attendance>;
+
+    /**
+     * 
      * @param {League} [league] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -3698,6 +3982,16 @@ export interface RestApiInterface {
      * @memberof RestApiInterface
      */
     destroyTeam(id: string, id2?: string, options?: any): AxiosPromise<void>;
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {string} [matchId] match_id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApiInterface
+     */
+    listAttendances(page?: number, matchId?: string, options?: any): AxiosPromise<AttendanceList>;
 
     /**
      * 
@@ -3922,12 +4216,23 @@ export interface RestApiInterface {
 export class RestApi extends BaseAPI implements RestApiInterface {
     /**
      * 
+     * @param {Attendance} [attendance] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public createAttendance(attendance?: IAttendance, options?: any) {
+        return RestApiFp(this.configuration).createAttendance(attendance, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {League} [league] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public createLeague(league?: League, options?: any) {
+    public createLeague(league?: ILeague, options?: any) {
         return RestApiFp(this.configuration).createLeague(league, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3938,7 +4243,7 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public createMatch(match?: Match, options?: any) {
+    public createMatch(match?: IMatch, options?: any) {
         return RestApiFp(this.configuration).createMatch(match, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3949,7 +4254,7 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public createPlayer(player?: Player, options?: any) {
+    public createPlayer(player?: IPlayer, options?: any) {
         return RestApiFp(this.configuration).createPlayer(player, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3960,7 +4265,7 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public createSeason(season?: Season, options?: any) {
+    public createSeason(season?: ISeason, options?: any) {
         return RestApiFp(this.configuration).createSeason(season, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3971,7 +4276,7 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public createTeam(team?: Team, options?: any) {
+    public createTeam(team?: ITeam, options?: any) {
         return RestApiFp(this.configuration).createTeam(team, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4029,6 +4334,18 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      */
     public destroyTeam(id: string, id2?: string, options?: any) {
         return RestApiFp(this.configuration).destroyTeam(id, id2, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [page] A page number within the paginated result set.
+     * @param {string} [matchId] match_id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RestApi
+     */
+    public listAttendances(page?: number, matchId?: string, options?: any) {
+        return RestApiFp(this.configuration).listAttendances(page, matchId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4106,7 +4423,7 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public partialUpdateLeague(id: string, league?: League, options?: any) {
+    public partialUpdateLeague(id: string, league?: ILeague, options?: any) {
         return RestApiFp(this.configuration).partialUpdateLeague(id, league, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4118,7 +4435,7 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public partialUpdateMatch(id: string, match?: Match, options?: any) {
+    public partialUpdateMatch(id: string, match?: IMatch, options?: any) {
         return RestApiFp(this.configuration).partialUpdateMatch(id, match, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4130,7 +4447,7 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public partialUpdatePlayer(id: string, player?: Player, options?: any) {
+    public partialUpdatePlayer(id: string, player?: IPlayer, options?: any) {
         return RestApiFp(this.configuration).partialUpdatePlayer(id, player, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4142,7 +4459,7 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public partialUpdateSeason(id: string, season?: Season, options?: any) {
+    public partialUpdateSeason(id: string, season?: ISeason, options?: any) {
         return RestApiFp(this.configuration).partialUpdateSeason(id, season, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4155,7 +4472,7 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public partialUpdateTeam(id: string, id2?: string, team?: Team, options?: any) {
+    public partialUpdateTeam(id: string, id2?: string, team?: ITeam, options?: any) {
         return RestApiFp(this.configuration).partialUpdateTeam(id, id2, team, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4234,7 +4551,7 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public updateLeague(id: string, league?: League, options?: any) {
+    public updateLeague(id: string, league?: ILeague, options?: any) {
         return RestApiFp(this.configuration).updateLeague(id, league, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4246,7 +4563,7 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public updateMatch(id: string, match?: Match, options?: any) {
+    public updateMatch(id: string, match?: IMatch, options?: any) {
         return RestApiFp(this.configuration).updateMatch(id, match, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4258,7 +4575,7 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public updatePlayer(id: string, player?: Player, options?: any) {
+    public updatePlayer(id: string, player?: IPlayer, options?: any) {
         return RestApiFp(this.configuration).updatePlayer(id, player, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4270,7 +4587,7 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public updateSeason(id: string, season?: Season, options?: any) {
+    public updateSeason(id: string, season?: ISeason, options?: any) {
         return RestApiFp(this.configuration).updateSeason(id, season, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4283,7 +4600,7 @@ export class RestApi extends BaseAPI implements RestApiInterface {
      * @throws {RequiredError}
      * @memberof RestApi
      */
-    public updateTeam(id: string, id2?: string, team?: Team, options?: any) {
+    public updateTeam(id: string, id2?: string, team?: ITeam, options?: any) {
         return RestApiFp(this.configuration).updateTeam(id, id2, team, options).then((request) => request(this.axios, this.basePath));
     }
 }
@@ -4301,7 +4618,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createProfile: async (profile?: Profile, options: any = {}): Promise<RequestArgs> => {
+        createProfile: async (profile?: IProfile, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/user/profile/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4376,7 +4693,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        partialUpdateProfile: async (profile?: Profile, options: any = {}): Promise<RequestArgs> => {
+        partialUpdateProfile: async (profile?: IProfile, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/user/profile/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4479,7 +4796,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateProfile: async (profile?: Profile, options: any = {}): Promise<RequestArgs> => {
+        updateProfile: async (profile?: IProfile, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/user/profile/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4516,7 +4833,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateSession: async (session?: Session, options: any = {}): Promise<RequestArgs> => {
+        updateSession: async (session?: ISession, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/user/session/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4563,7 +4880,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createProfile(profile?: Profile, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Profile>> {
+        async createProfile(profile?: IProfile, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Profile>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createProfile(profile, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4583,7 +4900,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async partialUpdateProfile(profile?: Profile, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Profile>> {
+        async partialUpdateProfile(profile?: IProfile, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Profile>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.partialUpdateProfile(profile, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4611,7 +4928,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateProfile(profile?: Profile, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Profile>> {
+        async updateProfile(profile?: IProfile, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Profile>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateProfile(profile, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4621,7 +4938,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateSession(session?: Session, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Session>> {
+        async updateSession(session?: ISession, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Session>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateSession(session, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -4782,7 +5099,7 @@ export class UserApi extends BaseAPI implements UserApiInterface {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public createProfile(profile?: Profile, options?: any) {
+    public createProfile(profile?: IProfile, options?: any) {
         return UserApiFp(this.configuration).createProfile(profile, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4804,7 +5121,7 @@ export class UserApi extends BaseAPI implements UserApiInterface {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public partialUpdateProfile(profile?: Profile, options?: any) {
+    public partialUpdateProfile(profile?: IProfile, options?: any) {
         return UserApiFp(this.configuration).partialUpdateProfile(profile, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4835,7 +5152,7 @@ export class UserApi extends BaseAPI implements UserApiInterface {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public updateProfile(profile?: Profile, options?: any) {
+    public updateProfile(profile?: IProfile, options?: any) {
         return UserApiFp(this.configuration).updateProfile(profile, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -4846,7 +5163,7 @@ export class UserApi extends BaseAPI implements UserApiInterface {
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public updateSession(session?: Session, options?: any) {
+    public updateSession(session?: ISession, options?: any) {
         return UserApiFp(this.configuration).updateSession(session, options).then((request) => request(this.axios, this.basePath));
     }
 }

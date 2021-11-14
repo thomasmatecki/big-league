@@ -85,3 +85,12 @@ class Match(models.Model):
     @property
     def name(self) -> str:
         return "{0} vs {1}".format(*self.teams.values_list("name", flat=True))
+
+
+class Attendance(models.Model):
+    match = models.ForeignKey(to="leagues.Match", on_delete=models.CASCADE)
+    player = models.ForeignKey(to="leagues.Player", on_delete=models.CASCADE)
+    attending = models.BooleanField(null=False)
+
+    class Meta:
+        constraints = []

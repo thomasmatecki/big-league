@@ -24,6 +24,7 @@ from rest_framework.schemas import get_schema_view
 from api.core.rest import DefaultSchemaGenerator
 from api.core.views import SessionViewSet, UserViewSet
 from api.leagues.views import (
+    AttendanceViewSet,
     LeagueViewSet,
     MatchViewSet,
     PlayerViewSet,
@@ -42,6 +43,8 @@ router.register("seasons", SeasonViewSet)
 router.register("leagues", LeagueViewSet)
 # router.register("sessions", SessionViewSet)
 router.register("matches", MatchViewSet)
+router.register("attendance", AttendanceViewSet, basename="attendance")
+
 
 schema_view = get_schema_view(
     title="API", url="", generator_class=DefaultSchemaGenerator
@@ -55,7 +58,7 @@ urlpatterns = [
     path(
         "user/profile/",
         ProfileViewSet.as_view(
-            {
+            actions={
                 "get": "retrieve",
                 "put": "update",
                 "patch": "partial_update",

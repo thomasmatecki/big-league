@@ -6,7 +6,7 @@ class NumberInFilter(filters.BaseInFilter, filters.NumberFilter):
     pass
 
 
-class F(filterset.FilterSet):
+class DefaultFilterSet(filterset.FilterSet):
     id = NumberInFilter(field_name="id", lookup_expr="in")
 
     class Meta:

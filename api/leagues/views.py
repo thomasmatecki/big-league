@@ -1,7 +1,9 @@
 from api.core.rest import IsAuthenticatedOrCreateOnly
 from api.leagues import filters, models, serializers
+from django.db.models import F
 from django.shortcuts import get_object_or_404
-from rest_framework import generics, viewsets
+from django_filters import FilterSet
+from rest_framework import generics, mixins, viewsets
 
 
 class PlayerViewSet(viewsets.ModelViewSet):
@@ -12,7 +14,7 @@ class PlayerViewSet(viewsets.ModelViewSet):
 class TeamViewSet(viewsets.ModelViewSet):
     queryset = models.Team.objects.all()
     serializer_class = serializers.TeamSerializer
-    filterset_class = filters.F
+    filterset_class = filters.DefaultFilterSet
 
 
 class SeasonViewSet(viewsets.ModelViewSet):
@@ -62,3 +64,39 @@ class ScheduleViewSet(viewsets.ModelViewSet):
         .all()
     )
     serializer_class = serializers.ScheduleSerializer
+
+
+class AttendanceViewSet(
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
+    serializer_class = serializers.AttendanceSerializer
+
+    class filterset_class(FilterSet):
+        match_id = filters.NumberInFilter(field_name="match_id", lookup_expr="in")
+
+        class Meta:
+            model = models.Attendance
+            fields = ("match_id",)
+
+    def get_queryset(self):
+        queryset = (
+            models.Player.objects.filter(teams__match__isnull=False)
+            .values(
+                player_id=F("id"),
+                match_id=F("teams__match"),
+                attending=F("attendance__attending"),
+            )
+            .order_by("player_id")
+        )
+
+        queryset.model = models.Attendance
+
+        return queryset
+
+    def get_serializer(self, *args, **kwargs):
+        if args:
+            args = ((models.Attendance(**kwargs) for kwargs in args[0]), *args[1:])
+
+        return super().get_serializer(*args, **kwargs)

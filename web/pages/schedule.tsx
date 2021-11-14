@@ -10,20 +10,18 @@ import {
   List,
   Text,
 } from "grommet";
-import R, {
-  assoc,
-  indexBy,
-  lens,
-  lensProp,
-  path,
-  prop,
-  set,
-  view,
-} from "ramda";
+import { indexBy, map, prop } from "ramda";
 import React, { useState } from "react";
 import { useQuery, UseQueryResult } from "react-query";
+import RosterTable from "../components/RosterTable";
 import UserLayout from "../components/UserLayout";
-import { Schedule, Team, TeamList, UserApi } from "../gen/sdk";
+import {
+  AttendanceList,
+  MatchTeams,
+  Schedule,
+  TeamList,
+  UserApi,
+} from "../gen/sdk";
 import { restApi } from "../lib/sdk";
 import { withUserApi } from "../lib/session";
 
@@ -93,71 +91,112 @@ const MatchBox = ({ scheduleItem }: { scheduleItem: Schedule }) => {
   const teamIds = [scheduleItem.team.id, scheduleItem.opponent.id];
 
   // Retrieve the teams for the user and their opponent
-  const queryResult: UseQueryResult<AxiosResponse<TeamList>> = useQuery(
+  const teamsResult: UseQueryResult<AxiosResponse<TeamList>> = useQuery(
     ["teams", teamIds],
     async (): Promise<AxiosResponse<TeamList>> =>
       await restApi.listTeams(1, teamIds?.join(","))
   );
 
-  const { data, isSuccess }: UseQueryResult<AxiosResponse<TeamList>> =
-    queryResult;
+  // Retrieve the teams for the user and their opponent
+  const attendanceResult: UseQueryResult<AxiosResponse<AttendanceList>> =
+    useQuery(
+      ["attendance", scheduleItem.match.id],
+      async (): Promise<AxiosResponse<AttendanceList>> =>
+        await restApi.listAttendances(1, `${scheduleItem.match.id}`)
+    );
 
-  if (isSuccess) {
+  const { data: teamsData, isSuccess: teamSuccess } = teamsResult;
+  const { data: attendanceData, isSuccess: attendanceSuccess } =
+    attendanceResult;
+
+  if (teamSuccess && attendanceSuccess) {
     const teamsById = indexBy(
       prop("id"),
-      (data as AxiosResponse<TeamList>).data.results
+      (teamsData as AxiosResponse<TeamList>).data.results
     );
+
+    const attendanceByPlayerId = indexBy(
+      prop("player_id"),
+      (attendanceData as AxiosResponse<AttendanceList>).data.results
+    );
+
+    // Huh? type MatchTeams?
+    const playerToAttendance = (player: MatchTeams) => ({
+      display_name: player.name,
+      attending: attendanceByPlayerId[player.id].attending,
+    });
+
+    console.log();
+
+    return (
+      <Card background="light-1">
+        <CardHeader pad="medium" background="white">
+          <Grid
+            fill
+            columns={["flex", "xsmall", "medium", "xsmall", "flex"]}
+            rows={["flex"]}
+            areas={[
+              ["team", "team-logo", "faceoff", "opponent-logo", "opponent"],
+            ]}
+            gap="small"
+          >
+            <Box gridArea="team" align="end">
+              {teamsById[scheduleItem.team.id].name}
+            </Box>
+
+            <Box gridArea="team-logo" align="end">
+              team-logo
+            </Box>
+
+            <Box gridArea="faceoff" align="center">
+              <Text weight="bold">Long Branch Park -- Field 1</Text>
+              <Text>Monday, August 1</Text>
+            </Box>
+            <Box gridArea="opponent-logo" align="start">
+              opplogo
+            </Box>
+
+            <Box gridArea="opponent" align="start">
+              {teamsById[scheduleItem.opponent.id].name}
+            </Box>
+          </Grid>
+        </CardHeader>
+
+        <CardBody pad="medium">
+          <Grid
+            fill
+            columns={["1/3", "1/3", "1/3"]}
+            rows={["flex"]}
+            areas={[["team-roster", "opponent-roster", "location"]]}
+            gap="small"
+          >
+            <Box gridArea="team-roster" align="end">
+              <RosterTable
+                attendance={map(
+                  playerToAttendance,
+                  teamsById[scheduleItem.team.id].players
+                )}
+              />
+            </Box>
+            <Box gridArea="opponent-roster" align="end">
+              <RosterTable
+                attendance={map(
+                  playerToAttendance,
+                  teamsById[scheduleItem.opponent.id].players
+                )}
+              />
+            </Box>
+          </Grid>
+        </CardBody>
+
+        <CardFooter pad={{ horizontal: "small" }} background="white">
+          Game {scheduleItem?.match.id}
+        </CardFooter>
+      </Card>
+    );
+  } else {
+    return <Box />;
   }
-
-  return (
-    <Card background="light-1">
-      <CardHeader pad="medium" background="white">
-        <Grid
-          fill
-          columns={["flex", "xsmall", "medium", "xsmall", "flex"]}
-          rows={["flex"]}
-          areas={[
-            ["team", "team-logo", "faceoff", "opponent-logo", "opponent"],
-          ]}
-          gap="small"
-        >
-          <Box gridArea="team" align="end">
-            eam
-          </Box>
-
-          <Box gridArea="team-logo" align="end">
-            team-logo
-          </Box>
-
-          <Box gridArea="faceoff" align="center">
-            <Text weight="bold">Long Branch Park -- Field 1</Text>
-            <Text>Monday, August 1</Text>
-          </Box>
-          <Box gridArea="opponent-logo" align="start">
-            opplogo
-          </Box>
-
-          <Box gridArea="opponent" align="start">
-            Opp
-          </Box>
-        </Grid>
-      </CardHeader>
-
-      <CardBody pad="medium">
-        <Grid
-          fill
-          columns={["1/3", "1/3", "1/3"]}
-          rows={["flex"]}
-          areas={[["team-roster", "opponent-roster", "location"]]}
-          gap="small"
-        ></Grid>
-      </CardBody>
-
-      <CardFooter pad={{ horizontal: "small" }} background="white">
-        Game {scheduleItem?.match.id}
-      </CardFooter>
-    </Card>
-  );
 };
 
 const SchedulePage = (props: Props) => {
@@ -200,6 +239,7 @@ const SchedulePage = (props: Props) => {
                       color: selectedItem.id === item.id ? "white" : "light-1",
                     }}
                     onClick={() => setSelected(item)}
+                    hoverIndicator="white"
                   >
                     <ScheduleItem item={item} />
                   </Box>
