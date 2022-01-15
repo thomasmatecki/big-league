@@ -69,5 +69,5 @@ urlpatterns = [
     path("user/schedule/", ScheduleViewSet.as_view({"get": "list"})),
     path("user/session/", SessionViewSet.as_view({"get": "retrieve", "put": "update"})),
     path("schema/", schema_view),
-    path("o/", include("oauth2_provider.urls", namespace="oauth2_provider")),
+#    path("o/", include("oauth2_provider.urls", namespace="oauth2_provider")),
 ]

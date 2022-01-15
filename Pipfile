@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 django = "*"
 dj-database-url = "*"
-psycopg2 = "*"
 django-rest-framework = "*"
 uvicorn = "*"
 pyyaml = "*"
@@ -14,9 +13,11 @@ uritemplate = "*"
 ipython = "*"
 pillow = "*"
 django-filter = "*"
+django-oauth-toolkit = "*"
+django-cors-headers = "*"
+psycopg2 = "*"
 
 [dev-packages]
-black = "*"
 pylint = "*"
 mypy = "*"
 flake8 = "*"
@@ -29,7 +30,7 @@ debugpy = "*"
 vulture = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.10"
 
 [pipenv]
 allow_prereleases = true

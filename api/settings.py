@@ -84,8 +84,9 @@ WSGI_APPLICATION = "api.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {
-    "default": dj_database_url.parse(
-        "postgres://postgres:password@localhost:5432/postgres", conn_max_age=600
+    "default": dj_database_url.config(
+        default="postgres://postgres:password@localhost:5432/postgres", 
+        conn_max_age=600
     )
 }
 
@@ -139,7 +140,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
-        "oauth2_provider.contrib.rest_framework.OAuth2Authentication",
+#        "oauth2_provider.contrib.rest_framework.OAuth2Authentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
