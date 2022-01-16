@@ -1,6 +1,3 @@
-web: npm --prefix web/ run dev
 api: pipenv run python -m debugpy --listen 5678 ./manage.py runserver
 svc: docker-compose up
 api-schema: pipenv run ./manage.py liveschema --file web/schema/openapi.yaml --generator_class=api.core.rest.DefaultSchemaGenerator
-web-sdk: npm --prefix web/ run watch:schema
-storybook: npm --prefix web/ run storybook

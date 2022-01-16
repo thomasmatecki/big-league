@@ -16,6 +16,9 @@ class Season(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
 
+    class Meta:
+        ordering = ["id"]
+
 
 class Player(models.Model):
     display_name = models.CharField(max_length=100)
