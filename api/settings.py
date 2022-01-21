@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "api.core",
     "api.leagues",
+    "api.iframes",
 ]
 
 
@@ -85,8 +86,7 @@ WSGI_APPLICATION = "api.wsgi.application"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {
     "default": dj_database_url.config(
-        default="postgres://postgres:password@localhost:5432/postgres", 
-        conn_max_age=600
+        default="postgres://postgres:password@localhost:5432/postgres", conn_max_age=600
     )
 }
 
@@ -121,6 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = "/static/"
+STATICFILES_DIRS = [BASE_DIR / "tailwind/dist/"]
 
 LOGIN_URL = "http://localhost:3000/login"
 # LOGIN_URL = "http://localhost:8000/auth/login"
@@ -140,7 +141,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
-#        "oauth2_provider.contrib.rest_framework.OAuth2Authentication",
+        #        "oauth2_provider.contrib.rest_framework.OAuth2Authentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",

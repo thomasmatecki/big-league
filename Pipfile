@@ -28,6 +28,7 @@ pytest-factoryboy = "*"
 pylint-django = "*"
 debugpy = "*"
 vulture = "*"
+pycodestyle = "*"
 
 [requires]
 python_version = "3.10"
