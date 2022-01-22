@@ -5,9 +5,24 @@ from django.db import models
 
 class League(models.Model):
     name = models.CharField(max_length=100)
+    sport = models.CharField(
+        max_length=30,
+        choices=[
+            ("soccer", "Soccer"),
+            ("football", "Flag Football"),
+            ("kickball", "Kickball"),
+        ],
+    )
+
+    def __str__(self):
+        return self.name
 
 
 class Season(models.Model):
+    """
+    A season
+    """
+
     name = models.CharField(max_length=100)
     league = models.ForeignKey(to="leagues.League", on_delete=models.DO_NOTHING)
     released = models.BooleanField(
@@ -16,8 +31,17 @@ class Season(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
 
+    locations = models.ManyToManyField(to="leagues.Location", blank=True)
+
     class Meta:
         ordering = ["id"]
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def game_locations(self):
+        return " / ".join(map(str, self.locations.all()))
 
 
 class Player(models.Model):
@@ -44,27 +68,24 @@ class Team(models.Model):
     )
     players = models.ManyToManyField(to="leagues.Player", related_name="teams")
 
-    def __str__(self):
-        return f"{self.name} ({self.pk})"
-
     class Meta:
         ordering = ["id"]
+
+    def __str__(self):
+        return f"{self.name} ({self.pk})"
 
 
 class Location(models.Model):
     name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 
 class Schedule(models.Model):
     team = models.ForeignKey(to="leagues.Team", on_delete=models.CASCADE)
     match = models.ForeignKey(to="leagues.Match", on_delete=models.CASCADE)
     away = models.BooleanField()
-
-    @property
-    def opponent(self) -> Team | None:
-        if self.pk:
-            # TODO: Is this executing add'l SQL even in prefetching in the view?
-            return self.match.teams.exclude(pk=self.pk).first()
 
     class Meta:
         constraints = [
@@ -77,6 +98,12 @@ class Schedule(models.Model):
                 name="vs_other_team",
             ),
         ]
+
+    @property
+    def opponent(self) -> Team | None:
+        if self.pk:
+            # TODO: Is this executing add'l SQL even in prefetching in the view?
+            return self.match.teams.exclude(pk=self.pk).first()
 
 
 class Match(models.Model):

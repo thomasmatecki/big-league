@@ -4,6 +4,7 @@ from django.db.models import F
 from django.shortcuts import get_object_or_404
 from django_filters import FilterSet
 from rest_framework import generics, mixins, viewsets
+from rest_framework.renderers import TemplateHTMLRenderer
 
 
 class PlayerViewSet(viewsets.ModelViewSet):
@@ -20,7 +21,8 @@ class TeamViewSet(viewsets.ModelViewSet):
 class SeasonViewSet(viewsets.ModelViewSet):
     queryset = models.Season.objects.all()
     serializer_class = serializers.SeasonSerializer
-
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = "season-list.html"
 
 class LeagueViewSet(viewsets.ModelViewSet):
     queryset = models.League.objects.all()
