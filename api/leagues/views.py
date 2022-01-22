@@ -1,5 +1,6 @@
 from api.core.rest import IsAuthenticatedOrCreateOnly
 from api.leagues import filters, models, serializers
+from api.leagues.filters import SeasonFilter
 from django.db.models import F
 from django.shortcuts import get_object_or_404
 from django_filters import FilterSet
@@ -23,6 +24,7 @@ class SeasonViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.SeasonSerializer
     renderer_classes = [TemplateHTMLRenderer]
     template_name = "season-list.html"
+    filterset_class = SeasonFilter
 
 class LeagueViewSet(viewsets.ModelViewSet):
     queryset = models.League.objects.all()
