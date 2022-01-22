@@ -22,7 +22,7 @@ class SeasonViewSet(viewsets.ModelViewSet):
     queryset = models.Season.objects.all()
     serializer_class = serializers.SeasonSerializer
     renderer_classes = [TemplateHTMLRenderer]
-
+    template_name = "season-list.html"
 
 class LeagueViewSet(viewsets.ModelViewSet):
     queryset = models.League.objects.all()

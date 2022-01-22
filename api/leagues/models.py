@@ -31,7 +31,7 @@ class Season(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
 
-    locations = models.ManyToManyField(to="leagues.Location")
+    locations = models.ManyToManyField(to="leagues.Location", blank=True)
 
     class Meta:
         ordering = ["id"]
