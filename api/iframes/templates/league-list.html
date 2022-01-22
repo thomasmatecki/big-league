@@ -1,17 +1,16 @@
 {% extends 'base.html' %}} {% block body %}
 
-<div id="league-table" class="flex flex-col m-4">
+<div class="flex flex-col m-4">
   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
         <form
           method="GET"
           class="w-full max-w-lg"
           hx-trigger="change"
-          hx-get="/iframe/seasons"
-          hx-target="#league-table"
-          hx-swap="outerHTML">
+          hx-get="/rest/seasons/"
+          hx-target="#league-table">
           <div class="grid grid-cols-3 gap-6">
-            {% for field in filter.form %}
+            {% for field in form %}
             <div>
               <label
                 class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -23,7 +22,7 @@
           </div>
         </form>
 
-      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+      <div id="league-table" class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
@@ -40,7 +39,7 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-            {% for season in filter.qs %}
+            {% for season in results %}
             <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center">
                   <div class="flex-shrink-0 h-10 w-10">

@@ -2,6 +2,7 @@ from cProfile import label
 
 import django_filters
 from api.leagues.models import League, Location, Schedule, Season
+from api.leagues.views import SeasonViewSet
 from django.forms.widgets import Select
 from django.views.generic import TemplateView
 
@@ -40,9 +41,18 @@ class SeasonFilter(django_filters.FilterSet):
 
 
 class SeasonListView(TemplateView):
+    def __init__(self, **kwargs) -> None:
+        self.rest_view = SeasonViewSet()
+        super().__init__(**kwargs)
+
     template_name = "league-list.html"
 
     @property
     def extra_context(self):
         filter_ = SeasonFilter(self.request.GET, queryset=Season.objects.all())
-        return {"filter": filter_}
+        result_list = self.rest_view.list(self.request)
+        return {
+            "form": filter_.form,
+            "results": filter_.qs,
+            "list_template": self.rest_view.template_name
+        }
