@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     "corsheaders",
     "api.core",
     "api.leagues",
-    "api.iframes",
 ]
 
 
@@ -65,6 +64,10 @@ ROOT_URLCONF = "api.urls"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.jinja2.Jinja2",
+        "APP_DIRS": True,
+    },
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [],
@@ -132,6 +135,11 @@ LOGOUT_REDIRECT_URL = "http://localhost:3000/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",
+        "rest_framework.renderers.TemplateHTMLRenderer",
+    ],
     "DEFAULT_PAGINATION_CLASS": "api.core.rest.DefaultPagination",
     "DEFAULT_SCHEMA_CLASS": "api.core.rest.DefaultSchema",
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],

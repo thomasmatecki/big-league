@@ -17,12 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
+from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.routers import DefaultRouter
 from rest_framework.schemas import get_schema_view
 
 from api.core.rest import DefaultSchemaGenerator
 from api.core.views import SessionViewSet, UserViewSet
-from api.iframes.views import ScheduleView, SeasonListView
 from api.leagues.views import (
     AttendanceViewSet,
     LeagueViewSet,
@@ -41,7 +41,6 @@ router.register("players", PlayerViewSet)
 router.register("teams", TeamViewSet)
 router.register("seasons", SeasonViewSet)
 router.register("leagues", LeagueViewSet)
-# router.register("sessions", SessionViewSet)
 router.register("matches", MatchViewSet)
 router.register("attendance", AttendanceViewSet, basename="attendance")
 
@@ -54,8 +53,12 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("django.contrib.auth.urls")),
-    path("iframe/schedule", ScheduleView.as_view()),
-    path("iframe/seasons", SeasonListView.as_view()),
+    path(
+        "iframe/seasons",
+        SeasonViewSet.as_view(
+            {"get": "iframe"}, renderer_classes=[TemplateHTMLRenderer]
+        ),
+    ),
     path("rest/", include((router.urls))),
     path(
         "user/profile/",

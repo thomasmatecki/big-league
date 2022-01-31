@@ -5,7 +5,8 @@ from django.db.models import F
 from django.shortcuts import get_object_or_404
 from django_filters import FilterSet
 from rest_framework import generics, mixins, viewsets
-from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
 
 
 class PlayerViewSet(viewsets.ModelViewSet):
@@ -22,9 +23,19 @@ class TeamViewSet(viewsets.ModelViewSet):
 class SeasonViewSet(viewsets.ModelViewSet):
     queryset = models.Season.objects.all()
     serializer_class = serializers.SeasonSerializer
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = "season-list.html"
+    template_name = "season-list.jinja"
     filterset_class = SeasonFilter
+
+    def iframe(self, request, format=None):
+        filter_ = self.filterset_class(self.request.GET, queryset=self.queryset)
+        data = {
+            "form": filter_.form,
+            "results": filter_.qs,
+            "form_url": reverse("season-list", format="html"),
+            "list_template": self.template_name,
+        }
+        return Response(data, template_name="table-iframe.jinja")
+
 
 class LeagueViewSet(viewsets.ModelViewSet):
     queryset = models.League.objects.all()

@@ -21,7 +21,7 @@ class SeasonSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = models.Season
-        fields = ["id", "url", "name", "league", "start_date", "end_date", "teams"]
+        fields = ["id", "url", "name", "league", "start_date", "end_date", "teams", "game_locations"]
 
 
 class TeamSerializer(serializers.HyperlinkedModelSerializer):

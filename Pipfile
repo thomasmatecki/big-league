@@ -16,6 +16,7 @@ django-filter = "*"
 django-oauth-toolkit = "*"
 django-cors-headers = "*"
 psycopg2 = "*"
+jinja2 = "*"
 
 [dev-packages]
 pylint = "*"
