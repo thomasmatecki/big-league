@@ -11,6 +11,10 @@
         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
         Location(s)
       </th>
+      <th
+        scope="col"
+        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+      </th>
     </tr>
   </thead>
   <tbody class="bg-white divide-y divide-gray-200">
@@ -32,6 +36,26 @@
       </td>
       <td class="px-6 py-4 whitespace-nowrap">
         <div class="text-sm text-gray-900">{{ season.game_locations }}</div>
+      </td>
+      <td>
+          <div class="
+              m-2
+              rounded-md 
+              shadow">
+            <a href="#" class="
+              flex items-center justify-between
+              px-8 py-3 
+              border border-transparent 
+              rounded-md 
+              text-white text-sm
+              bg-indigo-600 
+              hover:bg-indigo-700">
+              Call to Action!
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                </svg>
+            </a>
+          </div>
       </td>
     </tr>
     {% endfor %}

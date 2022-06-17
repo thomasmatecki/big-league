@@ -1,7 +1,7 @@
 module.exports = {
   content: [
     "./src/**/*.{html,js}",
-    "../api/iframes/templates/*.html"
+    "../api/leagues/jinja2/*.jinja"
   ],
   plugins: [],
   important: true,
